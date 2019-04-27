@@ -21,7 +21,7 @@ from model_def import *
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 
 
-def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args):
+def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, device):
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
@@ -69,7 +69,7 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args):
 
 
 
-def validate(val_loader, model, criterion, args):
+def validate(val_loader, model, criterion, args,device):
     batch_time = AverageMeter('Time', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
@@ -127,7 +127,7 @@ def train_and_val(args):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/scratch/sk7685/dl_competition',32)
+    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/scratch/sk7685/dl_competition/ssl_data_96',32)
 
 
     global best_acc1
@@ -166,10 +166,10 @@ def train_and_val(args):
     for epoch in range(args.start_epoch, args.epochs):
         #adjust_learning_rate(optimizer, epoch, args)
         # train for one epoch
-        train(data_loader_sup_train, data_loader_unsup, model, criterion, optimizer, epoch, args)
+        train(data_loader_sup_train, data_loader_unsup, model, criterion, optimizer, epoch, args, device)
 
         # evaluate on validation set
-        acc1 = validate(data_loader_sup_val, model, criterion, args)
+        acc1 = validate(data_loader_sup_val, model, criterion, args, device)
 
         # remember best acc@1 and save checkpoint
         is_best = acc1 > best_acc1
