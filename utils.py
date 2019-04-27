@@ -1,3 +1,5 @@
+import os
+from os.path import isfile, join
 import numpy as np
 import torch
 import torch.nn as nn
@@ -10,8 +12,66 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import shutil
 
-# reference
+# references
 # https://github.com/pytorch/examples/blob/master/imagenet/main.py
+
+
+
+def safe_mkdir(path):
+    "Creates a directory if there isn't one already."
+    try:
+        os.mkdir(path)
+    except OSError:
+        pass
+
+
+def write_to_log(log_path,str_to_log):
+    with open(log_path ,'a') as lgfile:
+        lgfile.write(str_to_log + '\n')
+        lgfile.flush()
+
+
+def image_loader(path, batch_size, num_workers=1, pin_memory = True):
+    transform_train = transforms.Compose(
+        [
+            transforms.RandomResizedCrop(84),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(), 
+            transforms.Normalize((0.5011, 0.4727, 0.4229), (0.2269, 0.2223, 0.2258))
+        ]
+    )
+    transform_valid = transforms.Compose(
+        [
+            transforms.CenterCrop(84),
+            transforms.ToTensor(), 
+            transforms.Normalize((0.5011, 0.4727, 0.4229), (0.2269, 0.2223, 0.2258))
+        ]
+    )
+    sup_train_data = datasets.ImageFolder('{}/{}/train'.format(path, 'supervised'), transform=transform_train)
+    sup_val_data = datasets.ImageFolder('{}/{}/val'.format(path, 'supervised'), transform=transform_valid)
+    unsup_data = datasets.ImageFolder('{}/{}/'.format(path, 'unsupervised'), transform=transform_train)
+    data_loader_sup_train = torch.utils.data.DataLoader(
+        sup_train_data,
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
+        pin_memory=pin_memory
+    )
+    data_loader_sup_val = torch.utils.data.DataLoader(
+        sup_val_data,
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
+        pin_memory=pin_memory
+    )
+    data_loader_unsup = torch.utils.data.DataLoader(
+        unsup_data,
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
+        pin_memory=pin_memory
+    )
+    return data_loader_sup_train, data_loader_sup_val, data_loader_unsup
 
 
 def find_mean_and_variance(data_loaders):
@@ -22,7 +82,7 @@ def find_mean_and_variance(data_loaders):
     mean = 0.
     std = 0.
     nb_samples = 0.
-    for dl in data_loaders
+    for dl in data_loaders:
         for data,y in dl:
             batch_samples = data.size(0)
             data = data.view(batch_samples, data.size(1), -1)
@@ -36,13 +96,13 @@ def find_mean_and_variance(data_loaders):
     return(mean,std)
 
 
-
-
-
-def save_checkpoint(state, is_best, filename='checkpoint.pth.tar'):
-    torch.save(state, filename)
+def save_checkpoint(state, is_best, cpoint_folder_path, version = 'v0'):
+    torch.save(state, join(cpoint_folder_path,f'checkpoint_{version}.pth.tar'))
     if is_best:
-        shutil.copyfile(filename, 'model_best.pth.tar')
+        shutil.copyfile(
+            join(cpoint_folder_path,f'checkpoint_{version}.pth.tar'), 
+            join(cpoint_folder_path,f'model_best_{version}.pth.tar')
+        )
 
 class AverageMeter(object):
     """Computes and stores the average and current value"""
@@ -74,10 +134,10 @@ class ProgressMeter(object):
         self.meters = meters
         self.prefix = prefix
 
-    def print(self, batch):
+    def print(self, batch,log_path):
         entries = [self.prefix + self.batch_fmtstr.format(batch)]
         entries += [str(meter) for meter in self.meters]
-        print('\t'.join(entries))
+        write_to_log(log_path,'\t'.join(entries))
 
     def _get_batch_fmtstr(self, num_batches):
         num_digits = len(str(num_batches // 1))
