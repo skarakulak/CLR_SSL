@@ -31,7 +31,7 @@ def write_to_log(log_path,str_to_log):
         lgfile.flush()
 
 
-def image_loader(path, batch_size, num_workers=1, pin_memory = True):
+def image_loader(path, batch_size, num_workers=3, pin_memory = True):
     transform_train = transforms.Compose(
         [
             transforms.RandomResizedCrop(84),

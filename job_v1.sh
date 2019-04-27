@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=CITY_V20
+#SBATCH --job-name=CITY_V2
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v20.out
+#SBATCH --output=output_v2.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v20.err
+#SBATCH --error=error_v2.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -27,8 +27,8 @@
 #SBATCH --nodes=1
 #################
 #memory per node; default is 4000 MB per CPU
-#SBATCH --mem=12000
-#SBATCH --cpus-per-task=3
+#SBATCH --mem=24000
+#SBATCH --cpus-per-task=4
 #################
 # Have SLURM send you an email when the job ends or fails, careful, the email could end up in your clutter folder
 #SBATCH --mail-type=END,FAIL # notifications for job done & fail
@@ -38,4 +38,8 @@ module load python3/intel/3.6.3
 module load cuda/10.0.130
 #virtualenv ~/pytorch_10
 source ~/pytorch_10/bin/activate pytorch_10
-srun python3 train.py -s 0 -e 25 -a resnet18 -v v1 -w wv1 -x wv1 -o adam -l 0.01 -d 0.3 -m 1 -c 1 -p 500
+srun python3 train.py -s 0 -e 5 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.00001 -d 0.3 -m 1 -c 1 -p 500
+srun python3 train.py -s 0 -e 5 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.0001 -d 0.3 -m 1 -c 1 -p 500
+srun python3 train.py -s 0 -e 5 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.001 -d 0.3 -m 1 -c 1 -p 500
+srun python3 train.py -s 0 -e 30 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.01 -d 0.3 -m 1 -c 1 -p 500
+srun python3 train.py -s 0 -e 30 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.001 -d 0.3 -m 1 -c 1 -p 500

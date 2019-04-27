@@ -127,7 +127,7 @@ def train_and_val(args):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/scratch/sk7685/dl_competition/ssl_data_96',32)
+    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/home/sk7685/dl_competition/ssl_data_96',32)
 
 
     global best_acc1
