@@ -139,7 +139,7 @@ def train_and_val(args):
     safe_mkdir(cpoint_folder_path)
 
     safe_mkdir('./logs')
-    log_path = f'.logs/log_{args.version}.txt'
+    log_path = f'logs/log_{args.version}.txt'
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
