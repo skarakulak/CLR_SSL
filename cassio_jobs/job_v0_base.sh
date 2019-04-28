@@ -28,7 +28,7 @@
 #################
 #memory per node; default is 4000 MB per CPU
 #SBATCH --mem=12000
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=4
 #################
 # Have SLURM send you an email when the job ends or fails, careful, the email could end up in your clutter folder
 #SBATCH --mail-type=END,FAIL # notifications for job done & fail
@@ -37,6 +37,6 @@
 module load python-3.6
 module load cuda-10.0
 source /data/sk7685/pytorch_10/bin/activate pytorch_10
-srun python3 ../train.py -s 0 -e 300 -a resnet18 -v v0 -w wv0 -x wv0 -o adam -l 0.003 -d 0.3 -m 0 -c 0 -p 2000 -n 2 -h cassio -u sk7685
-srun python3 ../train.py -s 0 -e 3000 -a resnet18 -v v0 -w wv0 -x wv0 -o adam -l 0.001 -d 0.3 -m 0 -c 0 -p 2000 -n 2 -h cassio -u sk7685
+srun python3 ../train.py -s 0 -e 300 -a resnet18 -v v0_c -w wv0 -x wv0 -o adam -l 0.003 -d 0.3 -m 0 -c 0 -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train.py -s 0 -e 3000 -a resnet18 -v v0_c -w wv0 -x wv0 -o adam -l 0.001 -d 0.3 -m 0 -c 0 -p 2000 -n 4 -C cassio -u sk7685
 

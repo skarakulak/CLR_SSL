@@ -135,9 +135,12 @@ def train_and_val(args):
     if args.hpc == 'prince':
         safe_mkdir(f'/scratch/{args.user}/dl_competition/')
         cpoint_folder_path = f'/scratch/{args.user}/dl_competition/checkpoints/'
+        data_path = f'/home/{args.user}/unsupervised_learning_competition/ssl_data_96'
     else:
         safe_mkdir(f'/data/{args.user}/dl_competition/')
         cpoint_folder_path = f'/data/{args.user}/dl_competition/checkpoints/'
+       	data_path = f'/data/{args.user}/ssl_data_96'
+
     safe_mkdir(cpoint_folder_path)
     
     load_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}.pth.tar')
@@ -151,7 +154,7 @@ def train_and_val(args):
 
 
     data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader(
-        '/home/sk7685/unsupervised_learning_competition/ssl_data_96',32,num_workers=args.num_of_workers
+        data_path,32,num_workers=args.num_of_workers
     )
 
     write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
