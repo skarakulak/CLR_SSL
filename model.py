@@ -30,8 +30,11 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
     loss_ent_meter = AverageMeter('Loss_ent', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
-    progress = ProgressMeter(len(sup_loader), batch_time, data_time, losses, top1,
-                             top5, prefix="Epoch: [{}]".format(epoch))
+    progress = ProgressMeter(
+        len(sup_loader), batch_time, data_time, 
+        losses, loss_cse_meter,loss_uncertainty_meter,loss_ent_meter,
+        top1,top5, prefix="Epoch: [{}]".format(epoch)
+    )
 
     # switch to train mode
     model.train()
@@ -53,14 +56,14 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         
         
         loss_cse = criterion(output_sup, target_sup)
-        loss_uncertainty = torch.abs(unlabeled_var.mean() -output_var.mean() )
-        loss_ent = torch.distributions.Categorical(F.softmax(output_unlabeled,dim=1)).entropy().mean() 
+        loss_uncertainty = torch.abs(output_unsup_var.sum() - output_sup_var.sum() )
+        loss_ent = torch.distributions.Categorical(F.softmax(output_unsup,dim=1)).entropy().mean() 
         loss = loss_cse + args.coef_uncertainty_loss*loss_uncertainty + args.coef_unsup_ent_loss*loss_ent
 
         # measure accuracy and record loss
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
         losses.update(loss.item(), input_sup.size(0))
-        loss_acc_meter.update(loss_cse.item(), input_sup.size(0))
+        loss_cse_meter.update(loss_cse.item(), input_sup.size(0))
         loss_uncertainty_meter.update(loss_uncertainty.item(), input_sup.size(0))
         loss_ent_meter.update(loss_ent.item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))
@@ -75,7 +78,7 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         batch_time.update(time.time() - end)
         end = time.time()
 
-        if i % args.print_freq == 0:
+        if (i+1) % args.print_freq == 0:
             progress.print(i,f'log_{args.version}.txt')
 
 
@@ -85,8 +88,9 @@ def validate(val_loader, model, criterion, args,device):
     losses = AverageMeter('Loss', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
-    progress = ProgressMeter(len(val_loader), batch_time, losses, top1, top5,
-                             prefix='Test: ')
+    progress = ProgressMeter(
+        len(val_loader), batch_time, losses,top1, top5, prefix='Test: '
+    )
     log_path = f'log_{args.version}.txt'
 
     # switch to evaluate mode
@@ -112,7 +116,7 @@ def validate(val_loader, model, criterion, args,device):
             batch_time.update(time.time() - end)
             end = time.time()
 
-            if i % args.print_freq == 0:
+            if (i+1) % args.print_freq == 0:
                 progress.print(i,log_path)
 
         # TODO: this should also be done with the ProgressMeter
@@ -140,7 +144,7 @@ def train_and_val(args):
 
     data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/home/sk7685/dl_competition/ssl_data_96',32)
 
-    write_to_log(log_path, '\t'.join([f'{key}: {value}' for key,value in vars(args).items()]))
+    write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
 
     global best_acc1
     # create model

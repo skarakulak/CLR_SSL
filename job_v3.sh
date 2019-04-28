@@ -38,8 +38,10 @@ module load python3/intel/3.6.3
 module load cuda/10.0.130
 #virtualenv ~/pytorch_10
 source ~/pytorch_10/bin/activate pytorch_10
-srun python3 train.py -s 0 -e 5 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.00001 -d 0.3 -m 1 -c 1 -p 500
-srun python3 train.py -s 0 -e 5 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.0001 -d 0.3 -m 1 -c 1 -p 500
-srun python3 train.py -s 0 -e 5 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.001 -d 0.3 -m 1 -c 1 -p 500
-srun python3 train.py -s 0 -e 30 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.01 -d 0.3 -m 1 -c 1 -p 500
-srun python3 train.py -s 0 -e 30 -a resnet18 -v v2 -w wv2 -x wv2 -o adam -l 0.001 -d 0.3 -m 1 -c 1 -p 500
+srun python3 train.py -s 0 -e 10 -a resnet18 -v v3 -w wv3 -x wv3 -o adam -l 0.00001 -d 0.3 -m 0 -c 0 -p 2000
+srun python3 train.py -s 0 -e 25 -a resnet18 -v v3 -w wv3 -x wv3 -o adam -l 0.0001 -d 0.3 -m 500 -c 0.05 -p 2000
+srun python3 train.py -s 0 -e 25 -a resnet18 -v v3 -w wv3 -x wv3 -o adam -l 0.001 -d 0.3 -m 2000 -c .08 -p 2000
+srun python3 train.py -s 0 -e 30 -a resnet18 -v v3 -w wv3 -x wv3 -o adam -l 0.01 -d 0.3 -m 2500 -c .15 -p 2000
+srun python3 train.py -s 0 -e 30 -a resnet18 -v v3 -w wv3 -x wv3 -o adam -l 0.001 -d 0.3 -m 2500 -c .15 -p 2000
+srun python3 train.py -s 0 -e 35 -a resnet18 -v v3 -w wv3 -x wv3 -o adam -l 0.0001 -d 0.3 -m 2500 -c .15 -p 2000
+
