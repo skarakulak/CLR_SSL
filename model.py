@@ -138,11 +138,12 @@ def train_and_val(args):
     load_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}.pth.tar')
     save_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}.pth.tar')
     safe_mkdir(cpoint_folder_path)
+    safe_mkdir('.logs/')
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/home/sk7685/dl_competition/ssl_data_96',32)
+    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/home/sk7685/unsupervised_learning_competition/ssl_data_96',32)
 
     write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
 
