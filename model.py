@@ -25,6 +25,9 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
+    loss_cse_meter = AverageMeter('Loss_cse', ':.4e')
+    loss_uncertainty_meter = AverageMeter('Loss_var', ':.4e')
+    loss_ent_meter = AverageMeter('Loss_ent', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
     progress = ProgressMeter(len(sup_loader), batch_time, data_time, losses, top1,
@@ -45,13 +48,21 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         
 
         # compute output
-        output_sup = model(input_sup)
-        #output_unsup = model(input_unsup)
-        loss = criterion(output_sup, target_sup)
+        output_sup, output_sup_var = model(input_sup, drop=True)
+        output_unsup, output_unsup_var = model(input_unsup, drop=True)
+        
+        
+        loss_cse = criterion(output_sup, target_sup)
+        loss_uncertainty = torch.abs(unlabeled_var.mean() -output_var.mean() )
+        loss_ent = torch.distributions.Categorical(F.softmax(output_unlabeled,dim=1)).entropy().mean() 
+        loss = loss_cse + args.coef_uncertainty_loss*loss_uncertainty + args.coef_unsup_ent_loss*loss_ent
 
         # measure accuracy and record loss
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
         losses.update(loss.item(), input_sup.size(0))
+        loss_acc_meter.update(loss_cse.item(), input_sup.size(0))
+        loss_uncertainty_meter.update(loss_uncertainty.item(), input_sup.size(0))
+        loss_ent_meter.update(loss_ent.item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))
         top5.update(acc5[0], input_sup.size(0))
 
@@ -129,6 +140,7 @@ def train_and_val(args):
 
     data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/home/sk7685/dl_competition/ssl_data_96',32)
 
+    write_to_log(log_path, '\t'.join([f'{key}: {value}' for key,value in vars(args).iteritems()]))
 
     global best_acc1
     # create model
@@ -150,7 +162,7 @@ def train_and_val(args):
         write_to_log(log_path,f' => loading checkpoint {args.weights_version_load}')
         checkpoint = torch.load(load_cpoint_path)
         if checkpoint['arch'] != args.arch:
-            write_to_log(log_path,f' ==> model architecture saved at checkpoint {args.weights_version_load} is different.')
+            write_to_log(log_path,f' ===> model architecture saved at checkpoint {args.weights_version_load} is different.')
             return
         args.start_epoch = checkpoint['epoch']
         best_acc1 = checkpoint['best_acc1']
@@ -158,12 +170,12 @@ def train_and_val(args):
         model.load_state_dict(checkpoint['state_dict'])
         if checkpoint['optimizer_name'] == args.set_optimizer:
             optimizer.load_state_dict(checkpoint['optimizer'])
-            write_to_log(log_path,f' ==> loaded optimizer state for {args.set_optimizer}')
+            write_to_log(log_path,f' ===> loaded optimizer state for {args.set_optimizer}')
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}')
     else:
         best_acc1 = -1
 
-    for epoch in range(args.start_epoch, args.epochs):
+    for epoch in range(args.start_epoch, args.start_epoch+args.epochs):
         #adjust_learning_rate(optimizer, epoch, args)
         # train for one epoch
         train(data_loader_sup_train, data_loader_unsup, model, criterion, optimizer, epoch, args, device)

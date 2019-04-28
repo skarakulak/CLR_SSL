@@ -124,7 +124,7 @@ class ResNet(nn.Module):
 
         return nn.Sequential(*layers)
 
-    def forward(self, x):
+    def forward(self, x, drop=False,drop_p=.3,training=True):
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.relu(x)
@@ -137,9 +137,19 @@ class ResNet(nn.Module):
 
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
-        x = self.fc(x)
 
-        return x
+        if drop:
+            x1 = F.softmax(self.fc(F.dropout(x,drop_p,training)), dim=1)
+            x2 = F.softmax(self.fc(F.dropout(x,drop_p,training)), dim=1)
+            x3 = F.softmax(self.fc(F.dropout(x,drop_p,training)), dim=1)
+            x_cat=torch.cat((x1.unsqueeze(-1),x2.unsqueeze(-1),x3.unsqueeze(-1)),dim=-1)
+            x_var = torch.mean(torch.var(x_cat,dim=-1),dim=1)
+
+            x = self.fc(x)
+            return x, x_var
+        else:
+            x = self.fc(x)
+            return x
 
 
 def resnet18(pretrained=False, **kwargs):
