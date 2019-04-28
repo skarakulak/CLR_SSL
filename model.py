@@ -140,7 +140,7 @@ def train_and_val(args):
 
     data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/home/sk7685/dl_competition/ssl_data_96',32)
 
-    write_to_log(log_path, '\t'.join([f'{key}: {value}' for key,value in vars(args).iteritems()]))
+    write_to_log(log_path, '\t'.join([f'{key}: {value}' for key,value in vars(args).items()]))
 
     global best_acc1
     # create model
