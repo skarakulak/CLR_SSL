@@ -21,7 +21,7 @@ from model_def import *
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 
 
-def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, device):
+def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, device, log_path):
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
@@ -79,11 +79,11 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         end = time.time()
 
         if (i+1) % args.print_freq == 0:
-            progress.print(i,f'log_{args.version}.txt')
+            progress.print(i,log_path)
 
 
 
-def validate(val_loader, model, criterion, args,device):
+def validate(val_loader, model, criterion, args,device, log_path):
     batch_time = AverageMeter('Time', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
@@ -91,7 +91,6 @@ def validate(val_loader, model, criterion, args,device):
     progress = ProgressMeter(
         len(val_loader), batch_time, losses,top1, top5, prefix='Test: '
     )
-    log_path = f'log_{args.version}.txt'
 
     # switch to evaluate mode
     model.eval()
@@ -138,8 +137,8 @@ def train_and_val(args):
     save_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}.pth.tar')
     safe_mkdir(cpoint_folder_path)
 
-    safe_mkdir('./logs')
-    log_path = f'logs/log_{args.version}.txt'
+    safe_mkdir('../logs')
+    log_path = f'../logs/log_{args.version}.txt'
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -186,10 +185,10 @@ def train_and_val(args):
     for epoch in range(args.start_epoch, args.start_epoch+args.epochs):
         #adjust_learning_rate(optimizer, epoch, args)
         # train for one epoch
-        train(data_loader_sup_train, data_loader_unsup, model, criterion, optimizer, epoch, args, device)
+        train(data_loader_sup_train, data_loader_unsup, model, criterion, optimizer, epoch, args, device, log_path)
 
         # evaluate on validation set
-        acc1 = validate(data_loader_sup_val, model, criterion, args, device)
+        acc1 = validate(data_loader_sup_val, model, criterion, args, device, log_path)
 
         # remember best acc@1 and save checkpoint
         is_best = acc1 > best_acc1
@@ -208,5 +207,6 @@ def train_and_val(args):
             cpoint_folder_path,
             args.weights_version_save
         )
+
 
 
