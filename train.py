@@ -15,6 +15,7 @@ parser.add_argument('-d','--dropout', type=float, default=0.2, help='dropout pro
 parser.add_argument('-m','--coef-uncertainty-loss', type=float, default=1, help='multiplier for the  uncertainty loss')
 parser.add_argument('-c','--coef-unsup-ent-loss', type=float, default=1, help='multiplier for the entropy loss')
 parser.add_argument('-p','--print-freq', type=int, default=100, help='multiplier for the variance loss')
+parser.add_argument('-n','--num-of-workers', type=int, default=3, help='number of workers for the dataprep')
 
 args = parser.parse_args()
 print('\nversion name: ' + args.version +'\n')

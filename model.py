@@ -144,7 +144,9 @@ def train_and_val(args):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader('/home/sk7685/unsupervised_learning_competition/ssl_data_96',32)
+    data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader(
+        '/home/sk7685/unsupervised_learning_competition/ssl_data_96',32,num_workers=args.num_of_workers
+    )
 
     write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
 
