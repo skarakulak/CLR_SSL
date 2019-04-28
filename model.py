@@ -133,11 +133,12 @@ def train_and_val(args):
     seed = 42
     np.random.seed(seed)
     torch.manual_seed(seed)
-    log_path = f'log_{args.version}.txt'
     cpoint_folder_path = '/scratch/sk7685/dl_competition/checkpoints/'
     load_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}.pth.tar')
     save_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}.pth.tar')
     safe_mkdir(cpoint_folder_path)
+    safe_mkdir('./logs')
+    log_path = f'.logs/log_{args.version}.txt'
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
