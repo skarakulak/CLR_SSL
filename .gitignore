@@ -1,3 +1,6 @@
+ssl_data_96/
+*.err
+*.out
 .ipynb_checkpoints/
 __pycache__/
 data/
