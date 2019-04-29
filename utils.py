@@ -101,7 +101,7 @@ def save_checkpoint(state, is_best, cpoint_folder_path, version = 'v0'):
     if is_best:
         shutil.copyfile(
             join(cpoint_folder_path,f'checkpoint_{version}.pth.tar'), 
-            join(cpoint_folder_path,f'model_best_{version}.pth.tar')
+            join(cpoint_folder_path,f'checkpoint_{version}_best.pth.tar')
         )
 
 class AverageMeter(object):
