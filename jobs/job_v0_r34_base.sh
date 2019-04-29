@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=CITY_V0_BASE
+#SBATCH --job-name=CITY_V0_r34_BASE
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v0_BASE.out
+#SBATCH --output=output_v0_r34_BASE.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v0_BASE.err
+#SBATCH --error=error_v0_r34_BASE.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -38,5 +38,5 @@ module load python3/intel/3.6.3
 module load cuda/10.0.130
 #virtualenv ~/pytorch_10
 source ~/pytorch_10/bin/activate pytorch_10
-srun python3 ../train.py -s 0 -e 300 -a resnet18 -v v0 -w wv0 -x wv0 -o adam -l 0.003 -d 0.3 -m 0 -c 0 -p 2000 -n 2
-srun python3 ../train.py -s 0 -e 3000 -a resnet18 -v v0 -w wv0 -x wv0 -o adam -l 0.001 -d 0.3 -m 0 -c 0 -p 2000 -n 2
+srun python3 ../train.py -s 0 -e 300  -a resnet34 -v v0_r34 -w wv0_r34 -x wv0_r34 -o adam -l 0.003 -d 0.3 -m 0 -c 0 -p 2000 -n 2
+srun python3 ../train.py -s 0 -e 3000 -a resnet34 -v v0_r34 -w wv0_r34 -x wv0_r34 -o adam -l 0.001 -d 0.3 -m 0 -c 0 -p 2000 -n 2
