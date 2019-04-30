@@ -37,6 +37,6 @@
 module load python-3.6
 module load cuda-10.0
 source /data/sk7685/pytorch_10/bin/activate pytorch_10
-srun python3 ../train6.py -s 0 -e 300  -a resnet18 -v 3v8_r18_c -w wv8_r18_best -x w3v8_r18 -o adam -l 0.003 -d 0.3 -c 2. -p 2000 -n 4 -C cassio -u sk7685
-srun python3 ../train6.py -s 0 -e 3000 -a resnet18 -v 3v8_r18_c -w w3v8_r18      -x w3v8_r18 -o adam -l 0.001 -d 0.3 -c 2. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train6.py -s 0 -e 300  -a resnet18 -v 3v8_r18_c -w wv8_r18_best -x w3v8_r18 -o adam -l 0.003 -d 0.3 -c 10. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train6.py -s 0 -e 3000 -a resnet18 -v 3v8_r18_c -w w3v8_r18      -x w3v8_r18 -o adam -l 0.001 -d 0.3 -c 10. -p 2000 -n 4 -C cassio -u sk7685
 

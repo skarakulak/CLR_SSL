@@ -1,0 +1,24 @@
+
+start_epoch: 0
+epochs: 300
+arch: resnet34
+version: v9_r34_c
+weights_version_load: wv9_r34
+weights_version_save: wv9_r34
+set_optimizer: adam
+lr: 0.003
+dropout: 0.3
+coef_unsup_cdist_loss: 60.0
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 1250
+
+
+Epoch: [0][1999/2000]	Time  0.047 ( 0.220)	Data  0.000 ( 0.170)	Loss 6.8811e+00 (7.0218e+00)	Loss_cse 6.8811e+00 (7.0218e+00)	Loss_cdist_unsup 1.6181e+02 (3.3594e+02)	Loss_cdist_sup 1.6181e+02 (3.3594e+02)	Acc@1   0.00 (  0.12)	Acc@5   0.00 (  0.59)
+Test: [1999/2000]	Time  0.666 ( 0.165)	Loss 6.6996e+00 (6.8098e+00)	Acc@1   0.00 (  0.28)	Acc@5   0.00 (  1.16)
+ * Acc@1 0.283 Acc@5 1.161
+Epoch: [1][1999/2000]	Time  0.044 ( 0.135)	Data  0.000 ( 0.087)	Loss 6.6072e+00 (6.7461e+00)	Loss_cse 6.6072e+00 (6.7461e+00)	Loss_cdist_unsup 4.7151e+01 (9.4322e+01)	Loss_cdist_sup 4.7151e+01 (9.4322e+01)	Acc@1   0.00 (  0.27)	Acc@5   0.00 (  1.23)
+Test: [1999/2000]	Time  0.015 ( 0.031)	Loss 6.6110e+00 (6.6499e+00)	Acc@1   0.00 (  0.36)	Acc@5   0.00 (  1.67)
+ * Acc@1 0.361 Acc@5 1.672

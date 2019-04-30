@@ -143,7 +143,8 @@ class ResNet(nn.Module):
         if return_c_dist:
             x_k = x.unsqueeze(1).expand(x.size(0),self.cl_centers.size(0),512)
             c_k = self.cl_centers.unsqueeze(0).expand(x.size(0),self.cl_centers.size(0),512)
-            c_dist = torch.min(((x_k-c_k)**2).sum(2), dim=1)[0].mean()
+            c_dist = ((x_k-c_k)**2).sum(2) 
+            c_dist = torch.min(c_dist, dim=1)[0].mean() + 0.005 * c_dist.mean()
 
             x = self.fc(x)
             return x, c_dist
