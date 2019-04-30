@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=V8_r18_c
+#SBATCH --job-name=3V8_r18_c
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v8_r18.out
+#SBATCH --output=3output_v8_r18.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v8_r18.err
+#SBATCH --error=3error_v8_r18.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -37,6 +37,6 @@
 module load python-3.6
 module load cuda-10.0
 source /data/sk7685/pytorch_10/bin/activate pytorch_10
-srun python3 ../train5.py -s 0 -e 300  -a resnet18 -v v8_r18_c -w wv8_r18      -x wv8_r18 -o adam -l 0.003 -d 0.3 -c 2. -p 2000 -n 4 -C cassio -u sk7685
-srun python3 ../train5.py -s 0 -e 3000 -a resnet18 -v v8_r18_c -w wv8_r18_best -x wv8_r18 -o adam -l 0.001 -d 0.3 -c 2. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train6.py -s 0 -e 300  -a resnet18 -v 3v8_r18_c -w wv8_r18_best -x w3v8_r18 -o adam -l 0.003 -d 0.3 -c 2. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train6.py -s 0 -e 3000 -a resnet18 -v 3v8_r18_c -w w3v8_r18      -x w3v8_r18 -o adam -l 0.001 -d 0.3 -c 2. -p 2000 -n 4 -C cassio -u sk7685
 

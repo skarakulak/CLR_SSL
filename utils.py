@@ -31,7 +31,7 @@ def write_to_log(log_path,str_to_log):
         lgfile.flush()
 
 
-def image_loader(path, batch_size, num_workers=3, pin_memory = True):
+def image_loader(path, batch_size, num_workers=3, pin_memory = True, valid_crop = 84):
     transform_train = transforms.Compose(
         [
             transforms.RandomResizedCrop(84),
@@ -40,13 +40,22 @@ def image_loader(path, batch_size, num_workers=3, pin_memory = True):
             transforms.Normalize((0.5011, 0.4727, 0.4229), (0.2269, 0.2223, 0.2258))
         ]
     )
-    transform_valid = transforms.Compose(
-        [
-            transforms.CenterCrop(84),
-            transforms.ToTensor(), 
-            transforms.Normalize((0.5011, 0.4727, 0.4229), (0.2269, 0.2223, 0.2258))
-        ]
-    )
+    if valid_crop:
+        transform_valid = transforms.Compose(
+            [
+                transforms.CenterCrop(valid_crop),
+                transforms.ToTensor(), 
+                transforms.Normalize((0.5011, 0.4727, 0.4229), (0.2269, 0.2223, 0.2258))
+            ]
+        )
+    else:
+        transform_valid = transforms.Compose(
+            [
+                transforms.ToTensor(),
+                transforms.Normalize((0.5011, 0.4727, 0.4229), (0.2269, 0.2223, 0.2258))
+            ]
+        )
+
     sup_train_data = datasets.ImageFolder('{}/{}/train'.format(path, 'supervised'), transform=transform_train)
     sup_val_data = datasets.ImageFolder('{}/{}/val'.format(path, 'supervised'), transform=transform_valid)
     unsup_data = datasets.ImageFolder('{}/{}/'.format(path, 'unsupervised'), transform=transform_train)

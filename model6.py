@@ -153,7 +153,7 @@ def train_and_val(args):
 
 
     data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader(
-        data_path,32,num_workers=args.num_of_workers
+        data_path,32,num_workers=args.num_of_workers, valid_crop = None
     )
 
     write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
