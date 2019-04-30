@@ -27,11 +27,12 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
     losses = AverageMeter('Loss', ':.4e')
     loss_cse_meter = AverageMeter('Loss_cse', ':.4e')
     loss_cdist_meter = AverageMeter('Loss_cdist', ':.4e')
+    loss_cdist_meter2 = AverageMeter('Loss_cdist2', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
     progress = ProgressMeter(
         len(sup_loader), batch_time, data_time, 
-        losses, loss_cse_meter,loss_cdist_meter,
+        losses, loss_cse_meter,loss_cdist_meter,loss_cdist_meter2,
         top1,top5, prefix="Epoch: [{}]".format(epoch)
     )
 
@@ -63,6 +64,7 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         losses.update(loss.item(), input_sup.size(0))
         loss_cse_meter.update(loss_cse.item(), input_sup.size(0))
         loss_cdist_meter.update(loss_unsup_cdist.item(), input_sup.size(0))
+        loss_cdist_meter2.update((cdist_multiplier * loss_unsup_cdist).item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))
         top5.update(acc5[0], input_sup.size(0))
 
