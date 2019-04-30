@@ -98,7 +98,7 @@ class ResNet(nn.Module):
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
         self.avgpool = nn.AdaptiveMaxPool2d(1)
         self.fc = nn.Linear(512 * block.expansion, num_classes)
-        self.cl_centers = nn.parameter.Parameter(nn.torch.Tensor(num_classes*2, 512))
+        self.cl_centers = nn.parameter.Parameter(torch.Tensor(num_classes*2, 512))
         nn.init.normal_(self.cl_centers)
 
         for m in self.modules():
@@ -143,7 +143,7 @@ class ResNet(nn.Module):
         if return_c_dist:
             x_k = x.unsqueeze(1).expand(x.size(0),self.cl_centers.size(0),512)
             c_k = self.cl_centers.unsqueeze(0).expand(x.size(0),self.cl_centers.size(0),512)
-            c_dist = torch.min(((xk-xl)**2).sum(2), dim=1)[0].mean()
+            c_dist = torch.min(((x_k-c_k)**2).sum(2), dim=1)[0].mean()
 
             x = self.fc(x)
             return x, c_dist

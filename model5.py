@@ -54,7 +54,7 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         output_unsup, loss_unsup_cdist = model(input_unsup, return_c_dist=True)
         
         
-        loss_cse = criterion(output_sup, target_sup)\
+        loss_cse = criterion(output_sup, target_sup)
         cdist_multiplier = args.coef_unsup_cdist_loss if i > 21 else args.coef_unsup_cdist_loss * (10**(-11+i//2))
         loss = loss_cse + cdist_multiplier * loss_unsup_cdist 
 
