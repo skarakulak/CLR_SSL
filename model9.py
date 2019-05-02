@@ -56,8 +56,13 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         
         
         loss_cse = criterion(output_sup, target_sup)
-        cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 50 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
-        loss = loss_cse + cdist_multiplier * (loss_unsup_cdist + loss_sup_cdist)/2
+        if epoch < 25: cdist_multiplier = 0
+        elif epoch < 30: cdist_multiplier = 1e-4
+        elif epoch < 35: cdist_multiplier = 1e-2
+        elif epoch < 40: cdist_multiplier = .1
+        else: cdist_multiplier = args.coef_unsup_cdist_loss
+        # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
+        loss = loss_cse + cdist_multiplier * (loss_unsup_cdist+loss_sup_cdist)/2
 
         # measure accuracy and record loss
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
@@ -160,7 +165,10 @@ def train_and_val(args):
 
     global best_acc1
     # create model
-    model = resnet34(num_clust = args.num_of_clusters) if args.arch=='resnet32' else resnet18(num_clust = args.num_of_clusters)
+    if args.arch=='resnet32':
+        model = resnet34(num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d) 
+    else:
+        model = resnet18(num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d)
     model = model.to(device)
     # define loss function (criterion) and optimizer
     criterion = nn.CrossEntropyLoss()

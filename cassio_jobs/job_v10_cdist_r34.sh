@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=V9_r34_c
+#SBATCH --job-name=V10_r34
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v9_r34.out
+#SBATCH --output=output_v10_r34.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v9_r34.err
+#SBATCH --error=error_v10_r34.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -37,6 +37,6 @@
 module load python-3.6
 module load cuda-10.0
 source /data/sk7685/pytorch_10/bin/activate pytorch_10
-srun python3 ../train8.py -s 0 -e 300  -a resnet34 -v v9_r34_c -w wv9_r34 -x wv9_r34 -o adam -l 0.003 -d 0.3 -c 150. -p 2000 -n 4 -N 1250 -C cassio -u sk7685
-srun python3 ../train8.py -s 0 -e 3000 -a resnet34 -v v9_r34_c -w wv9_r34 -x wv9_r34 -o adam -l 0.001 -d 0.3 -c 150. -p 2000 -n 4 -N 1250 -C cassio -u sk7685 
+srun python3 ../train8.py -s 0 -e 300  -a resnet34 -v v10_r34_c -w wv10_r34 -x wv10_r34 -o adam -l 0.003 -d 0.3 -c 30. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
+srun python3 ../train8.py -s 0 -e 3000 -a resnet34 -v v10_r34_c -w wv10_r34 -x wv10_r34 -o adam -l 0.001 -d 0.3 -c 30. -p 2000 -n 4 -N 2000 -C cassio -u sk7685 
 
