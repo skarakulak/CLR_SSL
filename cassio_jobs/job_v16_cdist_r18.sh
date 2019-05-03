@@ -40,6 +40,12 @@ source /data/sk7685/pytorch_10/bin/activate pytorch_10
 #srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v16_r18 -w wv11_r18_best -x wv16_r18 -o adam -l 0.003 -T 0.33 -d 0.3 -c 1. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
 #srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v16_r18 -w wv16_r18      -x wv16_r18 -o adam -l 0.001 -T 0.33 -d 0.3 -c 1. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
 
-srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v16_r18 -w wv16_r18_best -x wv16_r18 -o adam -l 0.003 -T 0.1 -d 0.3 -c 10. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
-srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v16_r18 -w wv16_r18      -x wv16_r18 -o adam -l 0.001 -T 0.1 -d 0.3 -c 10. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
+#srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v16_r18 -w wv16_r18_best -x wv16_r18 -o adam -l 0.003 -T 0.1 -d 0.3 -c 10. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
+#srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v16_r18 -w wv16_r18      -x wv16_r18 -o adam -l 0.001 -T 0.1 -d 0.3 -c 10. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
+
+#srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v16_r18 -w wv16_r18_best -x wv16_r18 -o adam -l 0.003 -T 0.1 -d 0.3 -c 50. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
+#srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v16_r18 -w wv16_r18      -x wv16_r18 -o adam -l 0.001 -T 0.1 -d 0.3 -c 50. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
+
+srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v16_r18 -w wv16_r18_best -x wv16_r18 -o adam -l 0.003 -T 0.1 -d 0.3 -c 200. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
+srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v16_r18 -w wv16_r18      -x wv16_r18 -o adam -l 0.001 -T 0.1 -d 0.3 -c 200. -p 2000 -n 4 -N 2000 -C cassio -u sk7685
 
