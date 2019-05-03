@@ -166,9 +166,9 @@ def train_and_val(args):
     global best_acc1
     # create model
     if args.arch=='resnet32':
-        model = resnet34(num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d) 
+        model = resnet34(num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d, interm_clust =args.inter_layer_cluster) 
     else:
-        model = resnet18(num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d)
+        model = resnet18(num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d, interm_clust =args.inter_layer_cluster)
     model = model.to(device)
     # define loss function (criterion) and optimizer
     criterion = nn.CrossEntropyLoss()
