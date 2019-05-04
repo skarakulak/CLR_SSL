@@ -22,8 +22,8 @@ from model_def10 import *
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 
 
-def train(    
-    data_loader_sup_train, data_loader_unsup,
+def train(
+    sup_loader, unsup_loader,
     model, criterion, optimizer,
     gan_criterion, netG, optimizerG, netD, optimizerD,
     epoch, args, device, log_path
@@ -69,16 +69,16 @@ def train(
         batch_size = input_unsup.size(0)
         label = torch.full((batch_size,), 1, device=device) #real label
         output = netD(input_unsup)
-        errD_real = criterion(output, label)
+        errD_real = gan_criterion(output, label)
         errD_real.backward()
         D_x = output.mean().item()
 
         # train the discriminator with the generated data
         z = model.cl_centers[x_clus] + torch.randn(32,512, device=device)
-        fake = netG(z)
+        fake = netG(z[:,:,None,None])
         label.fill_(0)
         output = netD(fake.detach())
-        errD_fake = criterion(output, label)
+        errD_fake = gan_criterion(output, label)
         errD_fake.backward()
         D_G_z1 = output.mean().item()
         errD = errD_real + errD_fake
@@ -88,8 +88,8 @@ def train(
         netG.zero_grad()
         label.fill_(1)  # fake labels are real for generator cost
         output = netD(fake)
-        errG = criterion(output, label)
-        errG.backward()
+        errG = gan_criterion(output, label)
+        errG.backward(retain_graph=True)
         D_G_z2 = output.mean()
         optimizerG.step()
 
