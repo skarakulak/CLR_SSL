@@ -21,6 +21,8 @@ parser.add_argument('-N','--num-of-clusters', type=int, default=2000, help='numb
 parser.add_argument('-M','--inter-layer-cluster', type=int, default=0, help='clusters in the intermediate layer (1/0)')
 parser.add_argument('-D','--drop-fc', type=float, default=-1.0, help='dropout rate before the fc layer')
 parser.add_argument('-T','--drop-2d', type=float, default=-1.0, help='dropout rate before the average pooling')
+parser.add_argument('-R','--noise', type=int, default=0, help='noise before the FC layer (1/0)')
+
 
 
 args = parser.parse_args()

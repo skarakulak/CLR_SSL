@@ -84,9 +84,10 @@ class Bottleneck(nn.Module):
 
 class ResNet(nn.Module):
 
-    def __init__(self, block, layers, num_classes=1000, num_clust=2000,drop_fc=None,drop_2d=None,interm_clust=0):
+    def __init__(self, block, layers, num_classes=1000, num_clust=2000,drop_fc=None,drop_2d=None,interm_clust=0,noise=0):
         self.inplanes = 64
         self.interm_clust = interm_clust
+        self.noise = noise
         super(ResNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
                                bias=False)
@@ -160,32 +161,51 @@ class ResNet(nn.Module):
             x_k = x.unsqueeze(1).expand(x.size(0),self.cl_centers.size(0),512)
             c_k = self.cl_centers.unsqueeze(0).expand(x.size(0),self.cl_centers.size(0),512)
             c_dist += torch.min(((x_k-c_k)**2).sum(2), dim=1)[0].mean()
-
+            if self.training and self.noise>0: x += torch.randn_like(x)
             x = self.fc(x)
             return x, c_dist
         else:
+            if self.training and self.noise>0: x += torch.randn_like(x)
             x = self.fc(x)
             return x
 
 
-def resnet18(pretrained=False, num_clust=2000, drop_fc=None,drop_2d=None,interm_clust=0, **kwargs):
+def resnet18(pretrained=False, num_clust=2000, drop_fc=None,drop_2d=None,interm_clust=0, noise=0,**kwargs):
     """Constructs a ResNet-18 model.
 
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
-    model = ResNet(BasicBlock, [2, 2, 2, 2], num_clust=num_clust,drop_fc=drop_fc, drop_2d=drop_2d,interm_clust=interm_clust, **kwargs)
+    model = ResNet(
+        BasicBlock, 
+        [2, 2, 2, 2],
+        num_clust=num_clust,
+        drop_fc=drop_fc,
+        drop_2d=drop_2d,
+        interm_clust=interm_clust,
+        noise=noise, 
+        **kwargs
+    )
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet18']))
     return model
 
-def resnet34(pretrained=False, num_clust=2000, drop_fc=None, drop_2d=None, interm_clust=0,**kwargs):
+def resnet34(pretrained=False, num_clust=2000, drop_fc=None, drop_2d=None, interm_clust=0,noise=0,**kwargs):
     """Constructs a ResNet-34 model.
 
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
-    model = ResNet(BasicBlock, [3, 4, 6, 3], num_clust=num_clust, drop_fc=drop_fc, drop_2d=drop_2d,interm_clust=interm_clust, **kwargs)
+    model = ResNet(
+        BasicBlock, 
+        [3, 4, 6, 3], 
+        num_clust=num_clust, 
+        drop_fc=drop_fc, 
+        drop_2d=drop_2d,
+        interm_clust=interm_clust,
+        noise=noise,
+        **kwargs
+    )
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet34']))
     return model
