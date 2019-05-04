@@ -62,7 +62,7 @@ def train(sup_loader, unsup_loader, model, criterion, optimizer, epoch, args, de
         elif epoch < 40: cdist_multiplier = .1
         else: cdist_multiplier = args.coef_unsup_cdist_loss
         # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
-        loss = loss_cse + cdist_multiplier * (loss_unsup_cdist+loss_sup_cdist)/2
+        loss = loss_cse + cdist_multiplier * ((8/9)*loss_unsup_cdist+(1/9)*loss_sup_cdist)
 
         # measure accuracy and record loss
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
