@@ -255,23 +255,45 @@ class Discriminator(nn.Module):
             # input is (nc) x 84 x 84
             nn.Conv2d(3, 64, 4, 2, 1, bias=False),
             nn.LeakyReLU(0.2, inplace=True),
-            # state size. (ndf) x 42 x 42
+            # state size. 64 x 42 x 42
             nn.Conv2d(64, 128, 4, 2, 1, bias=False),
             nn.BatchNorm2d(128),
             nn.LeakyReLU(0.2, inplace=True),
-            # state size. (ndf*2) x 21 x 21
+            # state size. 128 x 21 x 21
             nn.Conv2d(128, 256, 4, 2, 1, bias=False),
             nn.BatchNorm2d(256),
             nn.LeakyReLU(0.2, inplace=True),
-            # state size. (ndf*4) x 10 x 10
+            # state size. 256 x 10 x 10
             nn.Conv2d(256, 512, 4, 2, 1, bias=False),
             nn.BatchNorm2d(512),
             nn.LeakyReLU(0.2, inplace=True),
-            # state size. (ndf*8) x 5 x 5
-            nn.Conv2d(512, 1, 5, 1, 0, bias=False),
+            # state size. 512 x 5 x 5
+            nn.Conv2d(512, 512, 5, 1, 0, bias=False)#,
+            #nn.Sigmoid()
+            # state size. 512 x 1 x 1
+        )
+        self.latent_space_func = nn.Sequential(
+            nn.Linear(512,256),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Linear(256,256)
+        )
+        self.final_disc = nn.Sequential(
+            nn.Linear(768,256),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Linear(256,256)
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Linear(256,1),
             nn.Sigmoid()
         )
 
-    def forward(self, input):
-        output = self.main(input)
-        return output.view(-1, 1).squeeze(1)
+    def forward(self, input, cl_centers):
+        output = self.main(input).view(-1,512)
+        output = torch.cat(
+            (
+                output,
+                latent_space_func(cl_centers)
+            ),
+            dim=1
+        )
+        output = final_disc(output)
+        return output

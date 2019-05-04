@@ -70,16 +70,16 @@ def train(
         netD.zero_grad()
         batch_size = input_unsup.size(0)
         label = torch.full((batch_size,), 1, device=device) #real label
-        output = netD(input_unsup)
+        output = netD(input_unsup, model.cl_centers[x_clus_unsup].detach())
         errD_real = gan_criterion(output, label)
         errD_real.backward()
         D_x = output.mean().item()
 
         # train the discriminator with the generated data
-        z = model.cl_centers[x_clus_unsup] + torch.randn(32,512, device=device)
+        z = model.cl_centers[x_clus_unsup].detach() + torch.randn(32,512, device=device)
         fake = netG(z[:,:,None,None])
         label.fill_(0)
-        output = netD(fake.detach())
+        output = netD(fake.detach(),model.cl_centers[x_clus_unsup].detach())
         errD_fake = gan_criterion(output, label)
         errD_fake.backward()
         D_G_z1 = output.mean().item()
@@ -89,16 +89,16 @@ def train(
         # update the generator
         netG.zero_grad()
         label.fill_(1)  # fake labels are real for generator cost
-        output = netD(fake)
+        output = netD(fake,model.cl_centers[x_clus_unsup].detach())
         errG = gan_criterion(output, label)
         errG.backward(retain_graph=True)
         D_G_z2 = output.mean()
         optimizerG.step()
 
         # generate examples for the resnet model
-        with torch.no_grad():
-	        z = model.cl_centers[x_clus] + torch.randn(32,512, device=device)
-	        input_fake = netG(z[:,:,None,None]).detach()
+        #with torch.no_grad():
+        z = model.cl_centers[x_clus_sup].detach() + torch.randn(32,512, device=device)
+        input_fake = netG(z[:,:,None,None]).detach()
         output_fake = model(input_fake, return_c_dist=False)
         
 
@@ -111,7 +111,7 @@ def train(
         elif epoch < 40: cdist_multiplier = .1
         else: cdist_multiplier = args.coef_unsup_cdist_loss
         # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
-        loss = loss_cse + args.fake_cse_multiplier * loss_cse_fake + cdist_multiplier * ((8/9)*loss_unsup_cdist+(1/9)*loss_sup_cdist) + args.loss_g_multiplier*D_G_z2
+        loss = loss_cse + args.fake_cse_multiplier * loss_cse_fake + cdist_multiplier * ((8/9)*loss_unsup_cdist+(1/9)*loss_sup_cdist)
 
         # measure accuracy and record loss
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
