@@ -32,6 +32,7 @@ def train(
     data_time = AverageMeter('Data', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
     loss_cse_meter = AverageMeter('Loss_cse', ':.4e')
+    loss_cse_fake_meter = AverageMeter('Loss_cse_fake', ':.4e')
     loss_cdist_meter = AverageMeter('Loss_cdist_unsup', ':.4e')
     loss_cdist_meter2 = AverageMeter('Loss_cdist_sup', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
@@ -41,7 +42,8 @@ def train(
     loss_g_z = AverageMeter('g_z', ':.4e')
     progress = ProgressMeter(
         len(sup_loader), batch_time, data_time, 
-        losses, loss_cse_meter,loss_cdist_meter,loss_cdist_meter2,
+        losses, loss_cse_meter,loss_cse_fake_meter, 
+        loss_cdist_meter,loss_cdist_meter2,
         top1,top5, loss_d_x, loss_d_z, loss_g_z, 
         prefix="Epoch: [{}]".format(epoch)
     )
@@ -61,8 +63,8 @@ def train(
         
 
         # compute output
-        output_sup, latent_sup, loss_sup_cdist, x_clus = model(input_sup, return_c_dist=True)
-        output_unsup, latent_unsup, loss_unsup_cdist, x_clus = model(input_unsup, return_c_dist=True)
+        output_sup, latent_sup, loss_sup_cdist, x_clus_sup = model(input_sup, return_c_dist=True)
+        output_unsup, latent_unsup, loss_unsup_cdist, x_clus_unsup = model(input_unsup, return_c_dist=True)
         
         # train the discriminator with the real data
         netD.zero_grad()
@@ -74,7 +76,7 @@ def train(
         D_x = output.mean().item()
 
         # train the discriminator with the generated data
-        z = model.cl_centers[x_clus] + torch.randn(32,512, device=device)
+        z = model.cl_centers[x_clus_unsup] + torch.randn(32,512, device=device)
         fake = netG(z[:,:,None,None])
         label.fill_(0)
         output = netD(fake.detach())
@@ -93,20 +95,29 @@ def train(
         D_G_z2 = output.mean()
         optimizerG.step()
 
+        # generate examples for the resnet model
+        with torch.no_grad():
+	        z = model.cl_centers[x_clus] + torch.randn(32,512, device=device)
+	        input_fake = netG(z[:,:,None,None]).detach()
+        output_fake = model(input_fake, return_c_dist=False)
+        
+
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
+        loss_cse_fake = criterion(output_fake, target_sup)
         if epoch < 25: cdist_multiplier = 0
         elif epoch < 30: cdist_multiplier = 1e-4
         elif epoch < 35: cdist_multiplier = 1e-2
         elif epoch < 40: cdist_multiplier = .1
         else: cdist_multiplier = args.coef_unsup_cdist_loss
         # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
-        loss = loss_cse + cdist_multiplier * ((8/9)*loss_unsup_cdist+(1/9)*loss_sup_cdist) + args.loss_g_multiplier*D_G_z2
+        loss = loss_cse + args.fake_cse_multiplier * loss_cse_fake + cdist_multiplier * ((8/9)*loss_unsup_cdist+(1/9)*loss_sup_cdist) + args.loss_g_multiplier*D_G_z2
 
         # measure accuracy and record loss
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
         losses.update(loss.item(), input_sup.size(0))
         loss_cse_meter.update(loss_cse.item(), input_sup.size(0))
+        loss_cse_fake_meter.update(loss_cse_fake.item(), input_sup.size(0))
         loss_cdist_meter.update(loss_unsup_cdist.item(), input_sup.size(0))
         loss_cdist_meter2.update(loss_sup_cdist.item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))

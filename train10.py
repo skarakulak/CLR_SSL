@@ -23,6 +23,7 @@ parser.add_argument('-D','--drop-fc', type=float, default=-1.0, help='dropout ra
 parser.add_argument('-T','--drop-2d', type=float, default=-1.0, help='dropout rate before the average pooling')
 parser.add_argument('-R','--noise', type=int, default=-1, help='noise before the FC layer (applied when it is positive)')
 parser.add_argument('-g','--loss-g-multiplier', type=float, default=1.0, help='multiplier of generator loss for the resnet model')
+parser.add_argument('-f','--fake-cse-multiplier', type=float, default=1.0, help='multiplier of cse loss for the fake examples')
 
 
 args = parser.parse_args()
