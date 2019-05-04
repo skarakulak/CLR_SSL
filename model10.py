@@ -17,7 +17,7 @@ import time
 import random
 from collections import defaultdict
 from utils import *
-from model_def8 import *
+from model_def10 import *
 
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 
@@ -226,8 +226,8 @@ def train_and_val(args):
     # define loss function (criterion) and optimizer
     criterion = nn.CrossEntropyLoss()
     gan_criterion = nn.BCELoss()
-    optimizerD = optim.Adam(netD.parameters(), lr=opt.lr, betas=(opt.beta1, 0.999))
-    optimizerG = optim.Adam(netG.parameters(), lr=opt.lr, betas=(opt.beta1, 0.999))
+    optimizerD = optim.Adam(netD.parameters(), lr=0.0002, betas=(.5, 0.999))
+    optimizerG = optim.Adam(netG.parameters(), lr=0.0002, betas=(.5, 0.999))
 
 
     if args.set_optimizer == 'adam':
