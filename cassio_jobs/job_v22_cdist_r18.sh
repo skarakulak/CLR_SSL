@@ -47,6 +47,6 @@ source /data/sk7685/pytorch_10/bin/activate pytorch_10
 #srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v22_r18 -w wv22_r18     -x wv22_r18 -o sgd -l 0.00001 -d 0.3 -R 1 -c 20. -p 2000 -n 4 -C cassio -u sk7685
 
 
-srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v22_r18 -w wv22_r18 -x wv22_r18 -o sgd -l 0.00003 -d 0.3 -R 2 -c 1. -p 2000 -n 4 -C cassio -u sk7685
-srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v22_r18 -w wv22_r18 -x wv22_r18 -o sgd -l 0.00001 -d 0.3 -R 2 -c 1. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v22_r18 -w wv22_r18 -x wv22_r18 -o sgd -l 0.0001 -d 0.3 -R 2 -c 1. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v22_r18 -w wv22_r18 -x wv22_r18 -o sgd -l 0.00003 -d 0.3 -R 2 -c 1. -p 2000 -n 4 -C cassio -u sk7685
 

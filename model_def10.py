@@ -280,7 +280,7 @@ class Discriminator(nn.Module):
         self.final_disc = nn.Sequential(
             nn.Linear(768,256),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(256,256)
+            nn.Linear(256,256),
             nn.LeakyReLU(0.2, inplace=True),
             nn.Linear(256,1),
             nn.Sigmoid()
@@ -291,9 +291,9 @@ class Discriminator(nn.Module):
         output = torch.cat(
             (
                 output,
-                latent_space_func(cl_centers)
+                self.latent_space_func(cl_centers)
             ),
             dim=1
         )
-        output = final_disc(output)
+        output = self.final_disc(output)
         return output
