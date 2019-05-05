@@ -69,7 +69,7 @@ def train(
         # train the discriminator with the real data
         netD.zero_grad()
         batch_size = input_unsup.size(0)
-        label = torch.full((batch_size,), 1, device=device) #real label
+        label = torch.full((batch_size,1), 1, device=device) #real label
         output = netD(input_unsup, model.cl_centers[x_clus_unsup].detach())
         errD_real = gan_criterion(output, label)
         errD_real.backward()
@@ -105,10 +105,10 @@ def train(
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
         loss_cse_fake = criterion(output_fake, target_sup)
-        if epoch < 25: cdist_multiplier = 0
-        elif epoch < 30: cdist_multiplier = 1e-4
-        elif epoch < 35: cdist_multiplier = 1e-2
-        elif epoch < 40: cdist_multiplier = .1
+        if epoch < 40: cdist_multiplier = 0
+        elif epoch < 55: cdist_multiplier = 1e-4
+       # elif epoch < 35: cdist_multiplier = 1e-2
+       # elif epoch < 40: cdist_multiplier = .1
         else: cdist_multiplier = args.coef_unsup_cdist_loss
         # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
         loss = loss_cse + args.fake_cse_multiplier * loss_cse_fake + cdist_multiplier * ((8/9)*loss_unsup_cdist+(1/9)*loss_sup_cdist)
