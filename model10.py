@@ -38,13 +38,14 @@ def train(
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
     loss_d_x = AverageMeter('d_x', ':.4e')
+    loss_d_xr = AverageMeter('d_xr', ':.4e')
     loss_d_z = AverageMeter('d_z', ':.4e')
     loss_g_z = AverageMeter('g_z', ':.4e')
     progress = ProgressMeter(
         len(sup_loader), batch_time, data_time, 
         losses, loss_cse_meter,loss_cse_fake_meter, 
         loss_cdist_meter,loss_cdist_meter2,
-        top1,top5, loss_d_x, loss_d_z, loss_g_z, 
+        top1,top5, loss_d_x, loss_d_xr, loss_d_z, loss_g_z, 
         prefix="Epoch: [{}]".format(epoch)
     )
 
@@ -52,11 +53,15 @@ def train(
 
 
     if epoch < 40: cdist_multiplier = 0
-    elif epoch < 55: cdist_multiplier = 1e-4
-   # elif epoch < 35: cdist_multiplier = 1e-2
-   # elif epoch < 40: cdist_multiplier = .1
+    elif epoch < 75: cdist_multiplier = 1e-4 * args.coef_unsup_cdist_loss
+    elif epoch < 100: cdist_multiplier = 3e-4 * args.coef_unsup_cdist_loss
+    elif epoch < 125: cdist_multiplier = 1e-3 * args.coef_unsup_cdist_loss
+    elif epoch < 170: cdist_multiplier = 1e-2 * args.coef_unsup_cdist_loss
+    elif epoch < 200: cdist_multiplier = 1e-1 * args.coef_unsup_cdist_loss
     else: cdist_multiplier = args.coef_unsup_cdist_loss
+
     # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
+    #cdist_multiplier = args.coef_unsup_cdist_loss
 
     # at epoch 40, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
@@ -68,7 +73,7 @@ def train(
             with torch.no_grad():
                 output_sup, latent_sup, loss_sup_cdist, x_clus_sup = model(input_sup, return_c_dist=True)
             for (z,label) in zip(latent_sup,y):
-                if latent_reps_count[int(label)]<=torch.mean(latent_reps_count):
+                if latent_reps_count[int(label)] <= torch.mean(latent_reps_count) + 1e-10:
                     model.cl_centers[idx_cl,:] = z.detach().data.clone()
                     idx_cl += 1
                     latent_reps_count[int(label)] += 1
@@ -103,16 +108,25 @@ def train(
         errD_real.backward()
         D_x = output.mean().item()
 
+        # train the discriminator with the real data and random cluster IDs
+        label.fill_(0)
+        rand_cl_idx = torch.randint(high=args.num_of_clusters,size=(batch_size,))
+        output = netD(input_unsup, model.cl_centers[rand_cl_idx].detach())
+        errD_real = gan_criterion(output, label)
+        errD_real.backward()
+        D_xr = output.mean().item()
+
+
         # train the discriminator with the generated data
         z = model.cl_centers[x_clus_unsup].detach() + torch.randn(32,512, device=device)
         fake = netG(z[:,:,None,None])
-        label.fill_(0)
         output = netD(fake.detach(),model.cl_centers[x_clus_unsup].detach())
         errD_fake = gan_criterion(output, label)
         errD_fake.backward()
         D_G_z1 = output.mean().item()
         errD = errD_real + errD_fake
         optimizerD.step()
+
 
         # update the generator
         netG.zero_grad()
@@ -145,6 +159,7 @@ def train(
         top1.update(acc1[0], input_sup.size(0))
         top5.update(acc5[0], input_sup.size(0))
         loss_d_x.update(D_x, input_sup.size(0))
+        loss_d_xr.update(D_xr, input_sup.size(0))
         loss_d_z.update(D_G_z1, input_sup.size(0))
         loss_g_z.update(D_G_z2.item(), input_sup.size(0))
 

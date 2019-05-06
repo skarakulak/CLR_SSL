@@ -18,7 +18,6 @@ parser.add_argument('-n','--num-of-workers', type=int, default=3, help='number o
 parser.add_argument('-C','--hpc', type=str, default='prince', help='prince/cassio/bigpurple')
 parser.add_argument('-u','--user', type=str, default='sk7685', help='hpc username to be used when determining paths')
 parser.add_argument('-N','--num-of-clusters', type=int, default=2000, help='number of clusters')
-parser.add_argument('-M','--inter-layer-cluster', type=int, default=0, help='clusters in the intermediate layer (1/0)')
 parser.add_argument('-D','--drop-fc', type=float, default=-1.0, help='dropout rate before the fc layer')
 parser.add_argument('-T','--drop-2d', type=float, default=-1.0, help='dropout rate before the average pooling')
 parser.add_argument('-R','--noise', type=int, default=-1, help='noise before the FC layer (applied when it is positive)')
