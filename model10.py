@@ -74,6 +74,7 @@ def train(
                     latent_reps_count[int(label)] += 1
                     if idx_cl>=args.num_of_clusters: break
             if idx_cl>=args.num_of_clusters: break
+        model.cl_centers = nn.parameter.Parameter(model.cl_centers.data)
 
 
     model.train()
