@@ -60,7 +60,7 @@ def train(
 
     # at epoch 40, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
-    if (epoch == 40):
+    if (epoch <= 40):
         latent_reps_count = torch.zeros(1000)
         idx_cl=0
         for input_sup,y in sup_loader:
