@@ -17,7 +17,7 @@ import time
 import random
 from collections import defaultdict
 from utils import *
-from model_def10 import *
+from model_def11 import *
 
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 

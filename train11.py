@@ -1,5 +1,5 @@
 import argparse
-from model10 import *
+from model11 import *
 
 
 parser = argparse.ArgumentParser(description='Trains semi-supervised model on the given dataset')
