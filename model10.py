@@ -64,10 +64,12 @@ def train(
         latent_reps_count = torch.zeros(1000)
         idx_cl=0
         for input_sup,y in sup_loader:
-            output_sup, latent_sup, loss_sup_cdist, x_clus_sup = model(input_sup, return_c_dist=True)
+            input_sup = input_sup.to(device)
+            with torch.no_grad():
+                output_sup, latent_sup, loss_sup_cdist, x_clus_sup = model(input_sup, return_c_dist=True)
             for (z,label) in zip(latent_sup,y):
                 if latent_reps_count[int(label)]<=torch.mean(latent_reps_count):
-                    model.cl_centers[idx_cl] = z
+                    model.cl_centers[idx_cl,:] = z.detach().data.clone()
                     idx_cl += 1
                     latent_reps_count[int(label)] += 1
                     if idx_cl>=args.num_of_clusters: break
@@ -123,7 +125,7 @@ def train(
         # generate examples for the resnet model
         with torch.no_grad():
             z = model.cl_centers[x_clus_sup].detach() + torch.randn(32,512, device=device)
-            input_fake = netG(z[:,:,None,None]).detach()
+        input_fake = netG(z[:,:,None,None]).detach()
         output_fake = model(input_fake, return_c_dist=False)
         
 

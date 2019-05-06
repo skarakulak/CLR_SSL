@@ -43,7 +43,7 @@ source /data/sk7685/pytorch_10/bin/activate pytorch_10
 #srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v8_r18_c -w wv8_r18_best -x wv8_r18 -o sgd -l 0.0003 -d 0.3 -c 20. -p 2000 -n 4 -C cassio -u sk7685
 #srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v8_r18_c -w wv8_r18_best -x wv8_r18 -o sgd -l 0.0001 -d 0.3 -c 20. -p 2000 -n 4 -C cassio -u sk7685
 
-srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v8_r18_c -w wv8_r18_best -x wv8_r18 -o sgd -l 0.00003 -d 0.3 -c 20. -p 2000 -n 4 -C cassio -u sk7685
-srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v8_r18_c -w wv8_r18_best -x wv8_r18 -o sgd -l 0.00001 -d 0.3 -c 20. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train9.py -s 0 -e 300  -a resnet18 -v v8_r18_c -w wv8_r18_best -x wv8_r18 -o sgd -l 0.000003 -d 0.3 -c 20. -p 2000 -n 4 -C cassio -u sk7685
+srun python3 ../train9.py -s 0 -e 3000 -a resnet18 -v v8_r18_c -w wv8_r18_best -x wv8_r18 -o sgd -l 0.000001 -d 0.3 -c 20. -p 2000 -n 4 -C cassio -u sk7685
 
 

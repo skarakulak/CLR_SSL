@@ -1062,3 +1062,569 @@ Test: [1999/2000]	Time  0.069 ( 0.026)	Loss 4.6287e+00 (4.8456e+00)	Acc@1  18.75
 Epoch: [24][1999/2000]	Time  0.126 ( 0.135)	Data  0.000 ( 0.000)	Loss 4.6415e+00 (5.7253e+00)	Loss_cse 3.8164e+00 (4.9345e+00)	Loss_cse_fake 8.2508e+00 (7.9089e+00)	Loss_cdist_unsup 7.6847e+02 (7.8198e+02)	Loss_cdist_sup 7.6847e+02 (7.8198e+02)	Acc@1  21.88 ( 12.91)	Acc@5  43.75 ( 30.22)	d_x 8.7837e-01 (8.8596e-01)	d_z 9.2560e-02 (1.1429e-01)	g_z 4.9906e-02 (4.7935e-02)
 Test: [1999/2000]	Time  0.007 ( 0.030)	Loss 4.6878e+00 (4.8741e+00)	Acc@1  25.00 ( 14.10)	Acc@5  34.38 ( 32.67)
  * Acc@1 14.102 Acc@5 32.670
+Epoch: [25][1999/2000]	Time  0.134 ( 0.135)	Data  0.000 ( 0.000)	Loss 6.1309e+00 (5.7001e+00)	Loss_cse 5.3038e+00 (4.9006e+00)	Loss_cse_fake 8.2716e+00 (7.9952e+00)	Loss_cdist_unsup 7.5508e+02 (7.8292e+02)	Loss_cdist_sup 7.5508e+02 (7.8292e+02)	Acc@1  12.50 ( 13.38)	Acc@5  31.25 ( 30.55)	d_x 9.9389e-01 (8.8746e-01)	d_z 8.4850e-02 (1.1283e-01)	g_z 1.1864e-02 (4.6705e-02)
+Test: [1999/2000]	Time  0.007 ( 0.026)	Loss 4.4680e+00 (4.7295e+00)	Acc@1  15.62 ( 14.58)	Acc@5  43.75 ( 33.78)
+ * Acc@1 14.581 Acc@5 33.777
+Epoch: [26][1999/2000]	Time  0.133 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.4543e+00 (5.6489e+00)	Loss_cse 4.6255e+00 (4.8508e+00)	Loss_cse_fake 8.2883e+00 (7.9806e+00)	Loss_cdist_unsup 7.3713e+02 (7.9022e+02)	Loss_cdist_sup 7.3713e+02 (7.9022e+02)	Acc@1  15.62 ( 13.88)	Acc@5  34.38 ( 31.84)	d_x 9.3097e-01 (8.9145e-01)	d_z 1.3777e-01 (1.0895e-01)	g_z 1.6010e-02 (4.5062e-02)
+Test: [1999/2000]	Time  0.008 ( 0.031)	Loss 5.2565e+00 (4.8763e+00)	Acc@1   6.25 ( 14.37)	Acc@5  21.88 ( 32.44)
+ * Acc@1 14.373 Acc@5 32.438
+Epoch: [27][1999/2000]	Time  0.136 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.9576e+00 (5.6053e+00)	Loss_cse 5.1834e+00 (4.8067e+00)	Loss_cse_fake 7.7415e+00 (7.9861e+00)	Loss_cdist_unsup 7.8883e+02 (8.0006e+02)	Loss_cdist_sup 7.8883e+02 (8.0006e+02)	Acc@1  12.50 ( 14.38)	Acc@5  31.25 ( 32.65)	d_x 9.1537e-01 (8.9546e-01)	d_z 1.1384e-01 (1.0486e-01)	g_z 1.6772e-02 (4.3875e-02)
+Test: [1999/2000]	Time  0.007 ( 0.026)	Loss 4.0819e+00 (4.7786e+00)	Acc@1  15.62 ( 14.65)	Acc@5  53.12 ( 33.35)
+ * Acc@1 14.653 Acc@5 33.345
+Epoch: [28][1999/2000]	Time  0.139 ( 0.142)	Data  0.000 ( 0.007)	Loss 5.0945e+00 (5.5697e+00)	Loss_cse 4.3280e+00 (4.7730e+00)	Loss_cse_fake 7.6653e+00 (7.9669e+00)	Loss_cdist_unsup 8.3553e+02 (8.0563e+02)	Loss_cdist_sup 8.3553e+02 (8.0563e+02)	Acc@1  15.62 ( 14.88)	Acc@5  25.00 ( 33.11)	d_x 8.5859e-01 (8.9874e-01)	d_z 7.5950e-02 (1.0131e-01)	g_z 2.3332e-02 (4.1624e-02)
+Test: [1999/2000]	Time  0.067 ( 0.026)	Loss 4.6116e+00 (4.9917e+00)	Acc@1  15.62 ( 13.89)	Acc@5  34.38 ( 32.14)
+ * Acc@1 13.888 Acc@5 32.141
+Epoch: [29][1999/2000]	Time  0.133 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.8717e+00 (5.5417e+00)	Loss_cse 5.0781e+00 (4.7406e+00)	Loss_cse_fake 7.9359e+00 (8.0102e+00)	Loss_cdist_unsup 7.7264e+02 (8.1124e+02)	Loss_cdist_sup 7.7264e+02 (8.1124e+02)	Acc@1  18.75 ( 15.36)	Acc@5  40.62 ( 33.96)	d_x 9.0455e-01 (8.9815e-01)	d_z 1.2657e-02 (1.0237e-01)	g_z 2.6641e-02 (4.3014e-02)
+Test: [1999/2000]	Time  0.009 ( 0.029)	Loss 5.1155e+00 (4.9232e+00)	Acc@1   9.38 ( 14.37)	Acc@5  21.88 ( 33.48)
+ * Acc@1 14.366 Acc@5 33.480
+Epoch: [30][1999/2000]	Time  0.136 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.8317e+00 (5.5148e+00)	Loss_cse 5.0320e+00 (4.7055e+00)	Loss_cse_fake 7.9967e+00 (8.0932e+00)	Loss_cdist_unsup 7.6553e+02 (8.1227e+02)	Loss_cdist_sup 7.6553e+02 (8.1227e+02)	Acc@1  12.50 ( 15.66)	Acc@5  21.88 ( 34.67)	d_x 7.8282e-01 (8.9903e-01)	d_z 2.2063e-02 (1.0130e-01)	g_z 2.0864e-01 (4.1117e-02)
+Test: [1999/2000]	Time  0.007 ( 0.028)	Loss 4.2168e+00 (4.6871e+00)	Acc@1  18.75 ( 15.42)	Acc@5  37.50 ( 34.47)
+ * Acc@1 15.416 Acc@5 34.470
+Epoch: [31][1999/2000]	Time  0.137 ( 0.135)	Data  0.000 ( 0.001)	Loss 4.7793e+00 (5.4516e+00)	Loss_cse 4.0042e+00 (4.6539e+00)	Loss_cse_fake 7.7515e+00 (7.9775e+00)	Loss_cdist_unsup 7.9070e+02 (8.2865e+02)	Loss_cdist_sup 7.9070e+02 (8.2865e+02)	Acc@1  18.75 ( 16.32)	Acc@5  43.75 ( 35.50)	d_x 9.5513e-01 (9.0231e-01)	d_z 1.2474e-01 (9.8061e-02)	g_z 2.8457e-02 (4.0899e-02)
+Test: [1999/2000]	Time  0.008 ( 0.026)	Loss 4.4240e+00 (4.8203e+00)	Acc@1  28.12 ( 14.29)	Acc@5  37.50 ( 32.86)
+ * Acc@1 14.294 Acc@5 32.863
+Epoch: [32][1999/2000]	Time  0.135 ( 0.135)	Data  0.000 ( 0.000)	Loss 4.5327e+00 (5.4159e+00)	Loss_cse 3.7204e+00 (4.6091e+00)	Loss_cse_fake 8.1229e+00 (8.0676e+00)	Loss_cdist_unsup 8.1219e+02 (8.3269e+02)	Loss_cdist_sup 8.1219e+02 (8.3269e+02)	Acc@1  25.00 ( 16.75)	Acc@5  43.75 ( 36.30)	d_x 9.3880e-01 (9.0354e-01)	d_z 7.7777e-02 (9.6910e-02)	g_z 2.0057e-02 (3.8297e-02)
+Test: [1999/2000]	Time  0.048 ( 0.026)	Loss 4.9580e+00 (4.8981e+00)	Acc@1  12.50 ( 15.24)	Acc@5  34.38 ( 34.05)
+ * Acc@1 15.236 Acc@5 34.048
+Epoch: [33][1999/2000]	Time  0.129 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.8375e+00 (5.3939e+00)	Loss_cse 5.0134e+00 (4.5905e+00)	Loss_cse_fake 8.2409e+00 (8.0342e+00)	Loss_cdist_unsup 8.7389e+02 (8.3884e+02)	Loss_cdist_sup 8.7389e+02 (8.3884e+02)	Acc@1  12.50 ( 17.18)	Acc@5  31.25 ( 36.83)	d_x 7.3748e-01 (9.0330e-01)	d_z 8.8130e-03 (9.6888e-02)	g_z 7.3069e-02 (3.8792e-02)
+Test: [1999/2000]	Time  0.008 ( 0.026)	Loss 5.1736e+00 (4.8096e+00)	Acc@1  21.88 ( 15.13)	Acc@5  37.50 ( 34.00)
+ * Acc@1 15.127 Acc@5 34.000
+Epoch: [34][1999/2000]	Time  0.129 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.7350e+00 (5.3552e+00)	Loss_cse 4.9239e+00 (4.5565e+00)	Loss_cse_fake 8.1109e+00 (7.9871e+00)	Loss_cdist_unsup 8.2214e+02 (8.4752e+02)	Loss_cdist_sup 8.2214e+02 (8.4752e+02)	Acc@1  15.62 ( 17.60)	Acc@5  34.38 ( 37.47)	d_x 9.8370e-01 (9.0765e-01)	d_z 1.5587e-01 (9.2759e-02)	g_z 1.3864e-02 (3.6216e-02)
+Test: [1999/2000]	Time  0.025 ( 0.026)	Loss 4.9667e+00 (4.9388e+00)	Acc@1   6.25 ( 14.63)	Acc@5  31.25 ( 33.74)
+ * Acc@1 14.631 Acc@5 33.736
+Epoch: [35][1999/2000]	Time  0.132 ( 0.135)	Data  0.000 ( 0.000)	Loss 4.7899e+00 (5.3137e+00)	Loss_cse 3.9706e+00 (4.5031e+00)	Loss_cse_fake 8.1928e+00 (8.1067e+00)	Loss_cdist_unsup 8.4637e+02 (8.5116e+02)	Loss_cdist_sup 8.4637e+02 (8.5116e+02)	Acc@1  25.00 ( 18.33)	Acc@5  53.12 ( 38.30)	d_x 8.6604e-01 (9.1030e-01)	d_z 3.9817e-02 (8.9962e-02)	g_z 5.6578e-02 (3.5250e-02)
+Test: [1999/2000]	Time  0.065 ( 0.026)	Loss 4.8172e+00 (5.0465e+00)	Acc@1  12.50 ( 14.30)	Acc@5  34.38 ( 32.60)
+ * Acc@1 14.305 Acc@5 32.598
+Epoch: [36][1999/2000]	Time  0.136 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.2943e+00 (5.3082e+00)	Loss_cse 4.5204e+00 (4.5032e+00)	Loss_cse_fake 7.7385e+00 (8.0497e+00)	Loss_cdist_unsup 8.5863e+02 (8.5927e+02)	Loss_cdist_sup 8.5863e+02 (8.5927e+02)	Acc@1  18.75 ( 18.56)	Acc@5  37.50 ( 38.65)	d_x 8.9968e-01 (9.0855e-01)	d_z 4.6520e-02 (9.1875e-02)	g_z 3.2231e-02 (3.6687e-02)
+Test: [1999/2000]	Time  0.008 ( 0.026)	Loss 5.2030e+00 (4.6821e+00)	Acc@1   3.12 ( 16.39)	Acc@5  18.75 ( 35.92)
+ * Acc@1 16.392 Acc@5 35.920
+Epoch: [37][1999/2000]	Time  0.133 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.3352e+00 (5.2713e+00)	Loss_cse 4.5159e+00 (4.4667e+00)	Loss_cse_fake 8.1931e+00 (8.0464e+00)	Loss_cdist_unsup 8.5440e+02 (8.6467e+02)	Loss_cdist_sup 8.5440e+02 (8.6467e+02)	Acc@1  12.50 ( 18.86)	Acc@5  43.75 ( 38.99)	d_x 8.9026e-01 (9.1142e-01)	d_z 5.3966e-02 (8.8751e-02)	g_z 5.5034e-02 (3.4100e-02)
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+Epoch: [37][1999/2000]	Time  0.138 ( 0.135)	Data  0.000 ( 0.000)	Loss 4.6922e+00 (5.2637e+00)	Loss_cse 3.8536e+00 (4.4460e+00)	Loss_cse_fake 8.3863e+00 (8.1775e+00)	Loss_cdist_unsup 8.6446e+02 (8.6394e+02)	Loss_cdist_sup 8.6446e+02 (8.6394e+02)	Acc@1  25.00 ( 19.07)	Acc@5  37.50 ( 39.47)	d_x 7.1224e-01 (7.1151e-01)	d_z 2.4392e-01 (2.8364e-01)	g_z 1.2895e-01 (1.2139e-01)
+Test: [1999/2000]	Time  0.008 ( 0.032)	Loss 4.7867e+00 (4.7711e+00)	Acc@1  18.75 ( 15.37)	Acc@5  31.25 ( 33.90)
+ * Acc@1 15.369 Acc@5 33.895
+Epoch: [38][1999/2000]	Time  0.132 ( 0.135)	Data  0.000 ( 0.000)	Loss 5.7590e+00 (5.1950e+00)	Loss_cse 4.9053e+00 (4.3871e+00)	Loss_cse_fake 8.5368e+00 (8.0794e+00)	Loss_cdist_unsup 8.8199e+02 (8.7356e+02)	Loss_cdist_sup 8.8199e+02 (8.7356e+02)	Acc@1   9.38 ( 19.75)	Acc@5  31.25 ( 40.45)	d_x 5.4518e-01 (7.3089e-01)	d_z 1.1595e-01 (2.6722e-01)	g_z 3.5858e-01 (1.1855e-01)
+Test: [1999/2000]	Time  0.056 ( 0.026)	Loss 4.9898e+00 (4.9285e+00)	Acc@1   9.38 ( 14.68)	Acc@5  34.38 ( 33.49)
+ * Acc@1 14.678 Acc@5 33.491
+Epoch: [39][1999/2000]	Time  0.147 ( 0.136)	Data  0.000 ( 0.000)	Loss 5.1884e+00 (5.1564e+00)	Loss_cse 4.3813e+00 (4.3468e+00)	Loss_cse_fake 8.0718e+00 (8.0963e+00)	Loss_cdist_unsup 8.1872e+02 (8.7978e+02)	Loss_cdist_sup 8.1872e+02 (8.7978e+02)	Acc@1  25.00 ( 20.28)	Acc@5  40.62 ( 41.30)	d_x 6.2131e-01 (7.3291e-01)	d_z 2.5214e-01 (2.6577e-01)	g_z 1.7228e-01 (1.3198e-01)
+Test: [1999/2000]	Time  0.009 ( 0.033)	Loss 5.5501e+00 (5.2373e+00)	Acc@1   9.38 ( 13.67)	Acc@5  31.25 ( 31.70)
+ * Acc@1 13.669 Acc@5 31.698
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.001
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v23_r18
+weights_version_load: wv23_r18
+weights_version_save: wv23_r18
+set_optimizer: adam
+lr: 0.0003
+dropout: 0.3
+coef_unsup_cdist_loss: 0.1
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 1
+loss_g_multiplier: 0.0
+fake_cse_multiplier: 0.1
+
+
+ => loading checkpoint wv23_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv23_r18
