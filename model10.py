@@ -49,6 +49,31 @@ def train(
     )
 
     # switch to train mode
+
+
+    if epoch < 40: cdist_multiplier = 0
+    elif epoch < 55: cdist_multiplier = 1e-4
+   # elif epoch < 35: cdist_multiplier = 1e-2
+   # elif epoch < 40: cdist_multiplier = .1
+    else: cdist_multiplier = args.coef_unsup_cdist_loss
+    # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
+
+    # at epoch 40, we set `model.cl_centers` by sampling latent representations from the training examples
+    # and make sure that we sample evenly among classes.
+    if (epoch == 40):
+        latent_reps_count = torch.zeros(1000)
+        idx_cl=0
+        for input_sup,y in sup_loader:
+            output_sup, latent_sup, loss_sup_cdist, x_clus_sup = model(input_sup, return_c_dist=True)
+            for (z,label) in zip(latent_sup,y):
+                if latent_reps_count[int(label)]<=torch.mean(latent_reps_count):
+                    model.cl_centers[idx_cl] = z
+                    idx_cl += 1
+                    latent_reps_count[int(label)] += 1
+                    if idx_cl>=args.num_of_clusters: break
+            if idx_cl>=args.num_of_clusters: break
+
+
     model.train()
 
     end = time.time()
@@ -96,21 +121,15 @@ def train(
         optimizerG.step()
 
         # generate examples for the resnet model
-        #with torch.no_grad():
-        z = model.cl_centers[x_clus_sup].detach() + torch.randn(32,512, device=device)
-        input_fake = netG(z[:,:,None,None]).detach()
+        with torch.no_grad():
+            z = model.cl_centers[x_clus_sup].detach() + torch.randn(32,512, device=device)
+            input_fake = netG(z[:,:,None,None]).detach()
         output_fake = model(input_fake, return_c_dist=False)
         
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
         loss_cse_fake = criterion(output_fake, target_sup)
-        if epoch < 40: cdist_multiplier = 0
-        elif epoch < 55: cdist_multiplier = 1e-4
-       # elif epoch < 35: cdist_multiplier = 1e-2
-       # elif epoch < 40: cdist_multiplier = .1
-        else: cdist_multiplier = args.coef_unsup_cdist_loss
-        # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
         loss = loss_cse + args.fake_cse_multiplier * loss_cse_fake + cdist_multiplier * ((8/9)*loss_unsup_cdist+(1/9)*loss_sup_cdist)
 
         # measure accuracy and record loss
@@ -197,7 +216,7 @@ def train_and_val(args):
     else:
         safe_mkdir(f'/data/{args.user}/dl_competition/')
         cpoint_folder_path = f'/data/{args.user}/dl_competition/checkpoints/'
-       	data_path = f'/data/{args.user}/ssl_data_96'
+           data_path = f'/data/{args.user}/ssl_data_96'
 
     safe_mkdir(cpoint_folder_path)
     
@@ -224,10 +243,10 @@ def train_and_val(args):
     # create model
     if args.arch=='resnet32':
         model = resnet34(
-            num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d, interm_clust =args.inter_layer_cluster,noise=args.noise) 
+            num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d,noise=args.noise) 
     else:
         model = resnet18(
-            num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d, interm_clust =args.inter_layer_cluster,noise=args.noise)
+            num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d,noise=args.noise)
     model = model.to(device)
     netG = Generator().to(device)
     netD = Discriminator().to(device)

@@ -4,3 +4,4 @@ ssl_data_96/
 .ipynb_checkpoints/
 __pycache__/
 data/
+*.ipynb

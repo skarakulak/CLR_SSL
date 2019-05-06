@@ -84,9 +84,8 @@ class Bottleneck(nn.Module):
 
 class ResNet(nn.Module):
 
-    def __init__(self, block, layers, num_classes=1000, num_clust=2000,drop_fc=None,drop_2d=None,interm_clust=0,noise=0):
+    def __init__(self, block, layers, num_classes=1000, num_clust=2000,drop_fc=None,drop_2d=None,noise=0):
         self.inplanes = 64
-        self.interm_clust = interm_clust
         self.noise = noise
         super(ResNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
@@ -101,9 +100,6 @@ class ResNet(nn.Module):
         self.avgpool = nn.AdaptiveMaxPool2d(1)
         self.fc = nn.Linear(512 * block.expansion, num_classes)
         self.cl_centers = nn.parameter.Parameter(torch.Tensor(num_clust, 512))
-        if interm_clust: 
-            self.intrm_cl_centers = nn.parameter.Parameter(torch.Tensor(interm_clust,256))
-            nn.init.normal_(self.intrm_cl_centers)
         nn.init.normal_(self.cl_centers)
         if drop_fc and 0<drop_fc<1: self.drop_layer = nn.Dropout(p=drop_fc)
         self.drop_fc = drop_fc
@@ -145,12 +141,6 @@ class ResNet(nn.Module):
         x = self.layer1(x)
         x = self.layer2(x)
         x = self.layer3(x)
-        if self.interm_clust:
-            x_n = x.transpose(1,3).reshape(-1,256)[:,None,:]
-            x_n = x_n.expand(x_n.size(0),self.intrm_cl_centers.size(0),256)
-            c_k = self.intrm_cl_centers[None,:,:].expand_as(x_n)
-            c_dist += torch.min(((x_n-c_k)**2).sum(2), dim=1)[0].mean()
-
         x = self.layer4(x)
         if self.drop_2d and 0<self.drop_2d<1: x = self.drop_layer_2d(x)
         
@@ -171,7 +161,7 @@ class ResNet(nn.Module):
             return self.fc(x)
 
 
-def resnet18(pretrained=False, num_clust=2000, drop_fc=None,drop_2d=None,interm_clust=0, noise=0,**kwargs):
+def resnet18(pretrained=False, num_clust=2000, drop_fc=None,drop_2d=None, noise=0,**kwargs):
     """Constructs a ResNet-18 model.
 
     Args:
@@ -183,7 +173,6 @@ def resnet18(pretrained=False, num_clust=2000, drop_fc=None,drop_2d=None,interm_
         num_clust=num_clust,
         drop_fc=drop_fc,
         drop_2d=drop_2d,
-        interm_clust=interm_clust,
         noise=noise, 
         **kwargs
     )
@@ -191,7 +180,7 @@ def resnet18(pretrained=False, num_clust=2000, drop_fc=None,drop_2d=None,interm_
         model.load_state_dict(model_zoo.load_url(model_urls['resnet18']))
     return model
 
-def resnet34(pretrained=False, num_clust=2000, drop_fc=None, drop_2d=None, interm_clust=0,noise=0,**kwargs):
+def resnet34(pretrained=False, num_clust=2000, drop_fc=None, drop_2d=None, noise=0,**kwargs):
     """Constructs a ResNet-34 model.
 
     Args:
@@ -203,7 +192,6 @@ def resnet34(pretrained=False, num_clust=2000, drop_fc=None, drop_2d=None, inter
         num_clust=num_clust, 
         drop_fc=drop_fc, 
         drop_2d=drop_2d,
-        interm_clust=interm_clust,
         noise=noise,
         **kwargs
     )
