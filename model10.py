@@ -216,7 +216,7 @@ def train_and_val(args):
     else:
         safe_mkdir(f'/data/{args.user}/dl_competition/')
         cpoint_folder_path = f'/data/{args.user}/dl_competition/checkpoints/'
-           data_path = f'/data/{args.user}/ssl_data_96'
+        data_path = f'/data/{args.user}/ssl_data_96'
 
     safe_mkdir(cpoint_folder_path)
     
