@@ -50,7 +50,7 @@ def train(
     )
 
     # switch to train mode
-
+    model.train()
 
     if epoch < 30: kld_multiplier = 0
     elif epoch < 40: kld_multiplier = 1e-4 * args.kld_multiplier
@@ -58,13 +58,6 @@ def train(
     elif epoch < 60: kld_multiplier = 1e-1 * args.kld_multiplier
     else: kld_multiplier = args.kld_multiplier
 
-    # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
-    #cdist_multiplier = args.coef_unsup_cdist_loss
-
-
-
-
-    model.train()
 
     end = time.time()
     for i, ((input_sup, target_sup), (input_unsup,target_unsup)) in enumerate(zip(sup_loader,unsup_loader)):
@@ -111,7 +104,7 @@ def train(
 
         # train the discriminator with the real data and random cluster IDs
         label.fill_(0)
-        rand_cl_idx = torch.randint(high=args.num_of_clusters,size=(3,batch_size))
+        rand_cl_idx = torch.randint(high=args.num_of_clusters,size=(3,batch_size),device=device)
         output = netD(input_unsup, model.cl_centers[rand_cl_idx[0,:]].detach())
         errD_real = gan_criterion(output, label)
         errD_real.backward()
