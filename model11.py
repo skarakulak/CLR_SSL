@@ -63,13 +63,13 @@ def train(
 
     # at epoch 40, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
-    if (epoch <= 30):
+    if (epoch <= 40):
         latent_reps_count = torch.zeros(1000)
         idx_cl=0
         for input_sup,y in sup_loader:
             input_sup = input_sup.to(device)
             with torch.no_grad():
-                output_sup, latent_sup, logvar_sup, c_dist_sup, cluster_sup  = model(input_sup, return_c_dist=True)
+                output_sup, latent_sup, logvar_sup, c_dist_sup, cluster_sup  = model(input_sup, add_eps=False, return_c_dist=True)
             for (z,label) in zip(latent_sup,y):
                 if latent_reps_count[int(label)] <= torch.mean(latent_reps_count) + 1e-10:
                     model.cl_centers[idx_cl,:] = z.detach().data.clone()
@@ -94,8 +94,8 @@ def train(
         
 
         # compute output
-        output_sup, mu_sup, logvar_sup, c_dist_sup, cluster_sup = model(input_sup, return_c_dist=True)
-        output_unsup, mu_unsup, logvar_unsup, c_dist_unsup, cluster_unsup  = model(input_unsup, return_c_dist=True)
+        output_sup, mu_sup, logvar_sup, c_dist_sup, cluster_sup = model(input_sup, add_eps=True, return_c_dist=True)
+        output_unsup, mu_unsup, logvar_unsup, c_dist_unsup, cluster_unsup  = model(input_unsup, add_eps=True, return_c_dist=True)
         
         # train the discriminator with the real data
         netD.zero_grad()
@@ -139,14 +139,14 @@ def train(
         with torch.no_grad():
             z = model.cl_centers[cluster_sup].detach() + torch.randn(32,512, device=device)
         input_fake = netG(z[:,:,None,None]).detach()
-        output_fake, mu_fake, logvar_fake = model(input_fake, return_c_dist=False)
-        
+        output_fake, mu_fake, logvar_fake, c_dist_fake, cluster_fake  = model(input_fake, add_eps=True, return_c_dist=True)
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
         loss_cse_fake = criterion(output_fake, target_sup)
         KLD_sup = -0.5 * torch.sum(1 + logvar_sup - c_dist_sup.pow(2) - logvar_sup.exp())
         KLD_unsup = -0.5 * torch.sum(1 + logvar_unsup - c_dist_unsup.pow(2) - logvar_unsup.exp())
+        #KLD_fake = -0.5 * torch.sum(1 + logvar_fake - c_dist_fake.pow(2) - logvar_fake.exp())
         loss = loss_cse + kld_multiplier * ((8/9)*KLD_unsup+(1/9)*KLD_sup) + args.fake_cse_multiplier * loss_cse_fake
 
         # measure accuracy and record loss
@@ -196,7 +196,7 @@ def validate(val_loader, model, criterion, args,device, log_path):
             target_val = target_val.to(device)
 
             # compute output
-            output_val, mu_val, logvar_val = model(input_val)
+            output_val, mu_val, logvar_val = model(input_val, add_eps=False)
             loss = criterion(output_val, target_val)
 
             # measure accuracy and record loss

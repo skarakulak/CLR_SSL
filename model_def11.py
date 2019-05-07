@@ -128,20 +128,21 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def reparameterise(self, mu, logvar, add_eps, return_c):
-        if return_c # there is redundency, in training return_c is always true
+        if return_c or add_eps: 
             x_k = mu.unsqueeze(1).expand(mu.size(0),self.cl_centers.size(0),512)
             c_k = self.cl_centers.unsqueeze(0).expand(mu.size(0),self.cl_centers.size(0),512)
             c_dist,c_min = torch.min(((x_k-c_k)**2).sum(2), dim=1)
-
-            if add_eps:
-                std = logvar.mul(0.5).exp_()
-                eps = std.data.new(std.size()).normal_()
-                mu = eps.mul(std).add_(mu)
+        if add_eps:
+            std = logvar.mul(0.5).exp_()
+            eps = std.data.new(std.size()).normal_()
+            mu = eps.mul(std).add_(mu)
+        
+        if return_c:
             return mu, c_dist, c_min
         else:
             return mu
 
-    def forward(self, x, return_c_dist=False):
+    def forward(self, x, add_eps = True, return_c_dist=False):
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.relu(x)
@@ -156,10 +157,10 @@ class ResNet(nn.Module):
         mu, logvar = x[:,0,:], x[:,1,:]
 
         if return_c_dist: 
-            z, c_dist, c_min = self.reparameterise(mu, logvar, return_c_dist)
+            z, c_dist, c_min = self.reparameterise(mu, logvar, add_eps, return_c_dist)
             return self.fc(z), mu, logvar, c_dist, c_min
         else: 
-            z = self.reparameterise(mu, logvar, return_c_dist)
+            z = self.reparameterise(mu, logvar, add_eps, return_c_dist)
             return self.fc(z), mu, logvar
 
 
