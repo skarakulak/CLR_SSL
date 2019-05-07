@@ -61,23 +61,7 @@ def train(
     # cdist_multiplier = args.coef_unsup_cdist_loss if epoch > 40 else 0 # args.coef_unsup_cdist_loss * (10**(-11+epoch/3))
     #cdist_multiplier = args.coef_unsup_cdist_loss
 
-    # at epoch 40, we set `model.cl_centers` by sampling latent representations from the training examples
-    # and make sure that we sample evenly among classes.
-    if (epoch <= 40):
-        latent_reps_count = torch.zeros(1000)
-        idx_cl=0
-        for input_sup,y in sup_loader:
-            input_sup = input_sup.to(device)
-            with torch.no_grad():
-                output_sup, latent_sup, logvar_sup, c_dist_sup, cluster_sup  = model(input_sup, add_eps=False, return_c_dist=True)
-            for (z,label) in zip(latent_sup,y):
-                if latent_reps_count[int(label)] <= torch.mean(latent_reps_count) + 1e-10:
-                    model.cl_centers[idx_cl,:] = z.detach().data.clone()
-                    idx_cl += 1
-                    latent_reps_count[int(label)] += 1
-                    if idx_cl>=args.num_of_clusters: break
-            if idx_cl>=args.num_of_clusters: break
-        model.cl_centers = nn.parameter.Parameter(model.cl_centers.data)
+
 
 
     model.train()
@@ -92,6 +76,25 @@ def train(
         input_unsup = input_sup.to(device)
         target_unsup = target_sup.to(device)
         
+
+        # until epoch 45, we set `model.cl_centers` by sampling latent representations from the training examples
+        # and make sure that we sample evenly among classes.
+        if (epoch <= 45):
+            latent_reps_count = torch.zeros(1000)
+            idx_cl=0
+            for input_sup,y in sup_loader:
+                input_sup = input_sup.to(device)
+                with torch.no_grad():
+                    output_sup, latent_sup, logvar_sup, c_dist_sup, cluster_sup  = model(input_sup, add_eps=False, return_c_dist=True)
+                for (z,label) in zip(latent_sup,y):
+                    if latent_reps_count[int(label)] <= torch.mean(latent_reps_count) + 1e-10:
+                        model.cl_centers[idx_cl,:] = z.detach().data.clone()
+                        idx_cl += 1
+                        latent_reps_count[int(label)] += 1
+                        if idx_cl>=args.num_of_clusters: break
+                if idx_cl>=args.num_of_clusters: break
+            model.cl_centers = nn.parameter.Parameter(model.cl_centers.data)
+
 
         # compute output
         output_sup, mu_sup, logvar_sup, c_dist_sup, cluster_sup = model(input_sup, add_eps=True, return_c_dist=True)
