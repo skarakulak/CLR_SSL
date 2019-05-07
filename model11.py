@@ -25,8 +25,8 @@ from model_def11 import *
 def train(
     sup_loader, unsup_loader,
     model, criterion, optimizer,
-    gan_criterion, netG, optimizerG, netD, optimizerD,
-    epoch, args, device, log_path
+    epoch, args, device, log_path,
+    gan_criterion=None, netG=None, optimizerG=None, netD=None, optimizerD=None
     ):
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
@@ -37,18 +37,28 @@ def train(
     loss_kld_us_meter = AverageMeter('Loss_kld_unsup', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
-    loss_d_x = AverageMeter('d_x', ':.4e')
-    loss_d_xr = AverageMeter('d_xr', ':.4e')
-    loss_d_z = AverageMeter('d_z', ':.4e')
-    loss_g_z = AverageMeter('g_z', ':.4e')
-    progress = ProgressMeter(
-        len(sup_loader), batch_time, data_time, 
-        losses, loss_cse_meter,loss_cse_fake_meter, 
-        loss_kld_s_meter,loss_kld_us_meter,
-        top1,top5, loss_d_x, loss_d_xr, loss_d_z, loss_g_z, 
-        prefix="Epoch: [{}]".format(epoch)
-    )
 
+    if args.train_generator: 
+        loss_d_x = AverageMeter('d_x', ':.4e')
+        loss_d_xr = AverageMeter('d_xr', ':.4e')
+        loss_d_z = AverageMeter('d_z', ':.4e')
+        loss_g_z = AverageMeter('g_z', ':.4e')
+
+        progress = ProgressMeter(
+            len(sup_loader), batch_time, data_time, 
+            losses, loss_cse_meter,loss_cse_fake_meter, 
+            loss_kld_s_meter,loss_kld_us_meter,
+            top1,top5, loss_d_x, loss_d_xr, loss_d_z, loss_g_z, 
+            prefix="Epoch: [{}]".format(epoch)
+        )
+    else:
+        progress = ProgressMeter(
+            len(sup_loader), batch_time, data_time, 
+            losses, loss_cse_meter,loss_cse_fake_meter, 
+            loss_kld_s_meter,loss_kld_us_meter,
+            top1,top5
+            prefix="Epoch: [{}]".format(epoch)
+        )
 
     # until epoch 45, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
@@ -101,49 +111,50 @@ def train(
         output_sup, mu_sup, logvar_sup, c_dist_sup, cluster_sup = model(input_sup, add_eps=True, return_c_dist=True)
         output_unsup, mu_unsup, logvar_unsup, c_dist_unsup, cluster_unsup  = model(input_unsup, add_eps=True, return_c_dist=True)
         
-        # train the discriminator with the real data
-        netD.zero_grad()
-        batch_size = input_unsup.size(0)
-        label = torch.full((batch_size,1), 1, device=device) #real label
-        output = netD(input_unsup, model.cl_centers[cluster_unsup].detach())
-        errD_real = gan_criterion(output, label)
-        errD_real.backward()
-        D_x = output.mean().item()
+        if args.train_generator:
+            # train the discriminator with the real data
+            netD.zero_grad()
+            batch_size = input_unsup.size(0)
+            label = torch.full((batch_size,1), 1, device=device) #real label
+            output = netD(input_unsup, model.cl_centers[cluster_unsup].detach())
+            errD_real = gan_criterion(output, label)
+            errD_real.backward()
+            D_x = output.mean().item()
 
-        # train the discriminator with the real data and random cluster IDs
-        label.fill_(0)
-        rand_cl_idx = torch.randint(high=args.num_of_clusters,size=(3,batch_size),device=device)
-        output = netD(input_unsup, model.cl_centers[rand_cl_idx[0,:]].detach())
-        errD_real = gan_criterion(output, label)
-        errD_real.backward()
-        D_xr = output.mean().item()
-
-
-        # train the discriminator with the generated data (labels are still zero)
-        z = model.cl_centers[rand_cl_idx[1,:]].detach() + torch.randn(32,512, device=device)
-        fake = netG(z[:,:,None,None])
-        output = netD(fake.detach(),model.cl_centers[rand_cl_idx[1,:]].detach())
-        errD_fake = gan_criterion(output, label)
-        errD_fake.backward()
-        D_G_z1 = output.mean().item()
-        errD = errD_real + errD_fake
-        optimizerD.step()
+            # train the discriminator with the real data and random cluster IDs
+            label.fill_(0)
+            rand_cl_idx = torch.randint(high=args.num_of_clusters,size=(3,batch_size),device=device)
+            output = netD(input_unsup, model.cl_centers[rand_cl_idx[0,:]].detach())
+            errD_real = gan_criterion(output, label)
+            errD_real.backward()
+            D_xr = output.mean().item()
 
 
-        # update the generator
-        netG.zero_grad()
-        label.fill_(1)  # fake labels are real for generator cost
-        output = netD(fake,model.cl_centers[rand_cl_idx[2,:]].detach())
-        errG = gan_criterion(output, label)
-        errG.backward(retain_graph=True)
-        D_G_z2 = output.mean()
-        optimizerG.step()
+            # train the discriminator with the generated data (labels are still zero)
+            z = model.cl_centers[rand_cl_idx[1,:]].detach() + torch.randn(32,512, device=device)
+            fake = netG(z[:,:,None,None])
+            output = netD(fake.detach(),model.cl_centers[rand_cl_idx[1,:]].detach())
+            errD_fake = gan_criterion(output, label)
+            errD_fake.backward()
+            D_G_z1 = output.mean().item()
+            errD = errD_real + errD_fake
+            optimizerD.step()
 
-        # generate examples for the resnet model
-        with torch.no_grad():
-            z = model.cl_centers[cluster_sup].detach() + torch.randn(32,512, device=device)
-        input_fake = netG(z[:,:,None,None]).detach()
-        output_fake, mu_fake, logvar_fake, c_dist_fake, cluster_fake  = model(input_fake, add_eps=True, return_c_dist=True)
+
+            # update the generator
+            netG.zero_grad()
+            label.fill_(1)  # fake labels are real for generator cost
+            output = netD(fake,model.cl_centers[rand_cl_idx[2,:]].detach())
+            errG = gan_criterion(output, label)
+            errG.backward(retain_graph=True)
+            D_G_z2 = output.mean()
+            optimizerG.step()
+
+            # generate examples for the resnet model
+            with torch.no_grad():
+                z = model.cl_centers[cluster_sup].detach() + torch.randn(32,512, device=device)
+            input_fake = netG(z[:,:,None,None]).detach()
+            output_fake, mu_fake, logvar_fake, c_dist_fake, cluster_fake  = model(input_fake, add_eps=True, return_c_dist=True)
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
@@ -151,9 +162,16 @@ def train(
         KLD_sup = -0.5 * torch.sum(1 + logvar_sup - c_dist_sup.pow(2) - logvar_sup.exp())
         KLD_unsup = -0.5 * torch.sum(1 + logvar_unsup - c_dist_unsup.pow(2) - logvar_unsup.exp())
         #KLD_fake = -0.5 * torch.sum(1 + logvar_fake - c_dist_fake.pow(2) - logvar_fake.exp())
-        loss = loss_cse + kld_multiplier * ((8/9)*KLD_unsup+(1/9)*KLD_sup) + args.fake_cse_multiplier * loss_cse_fake
+        loss = loss_cse + kld_multiplier * ((8/9)*KLD_unsup+(1/9)*KLD_sup) 
+        
+        if args.train_generator: 
+            loss += args.fake_cse_multiplier * loss_cse_fake
+            loss_d_x.update(D_x, input_sup.size(0))
+            loss_d_xr.update(D_xr, input_sup.size(0))
+            loss_d_z.update(D_G_z1, input_sup.size(0))
+            loss_g_z.update(D_G_z2.item(), input_sup.size(0))
 
-        # measure accuracy and record loss
+
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
         losses.update(loss.item(), input_sup.size(0))
         loss_cse_meter.update(loss_cse.item(), input_sup.size(0))
@@ -162,10 +180,6 @@ def train(
         loss_kld_us_meter.update(KLD_unsup.item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))
         top5.update(acc5[0], input_sup.size(0))
-        loss_d_x.update(D_x, input_sup.size(0))
-        loss_d_xr.update(D_xr, input_sup.size(0))
-        loss_d_z.update(D_G_z1, input_sup.size(0))
-        loss_g_z.update(D_G_z2.item(), input_sup.size(0))
 
         # compute gradient and do SGD step
         optimizer.zero_grad()
@@ -244,10 +258,13 @@ def train_and_val(args):
     
     load_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}.pth.tar')
     save_cpoint_path = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}.pth.tar')
-    load_cpoint_path_d = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}_d.pth.tar')
-    save_cpoint_path_d = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}_d.pth.tar')
-    load_cpoint_path_g = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}_g.pth.tar')
-    save_cpoint_path_g = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}_g.pth.tar')
+    gan_criterion, netG, optimizerG, netD, optimizerD = None,None,None,None,None
+
+    if args.train_generator:
+        load_cpoint_path_d = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}_d.pth.tar')
+        save_cpoint_path_d = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}_d.pth.tar')
+        load_cpoint_path_g = join(cpoint_folder_path,f'checkpoint_{args.weights_version_load}_g.pth.tar')
+        save_cpoint_path_g = join(cpoint_folder_path,f'checkpoint_{args.weights_version_save}_g.pth.tar')
 
     safe_mkdir('../logs')
     log_path = f'../logs/log_{args.version}.txt'
@@ -270,16 +287,22 @@ def train_and_val(args):
         model = resnet18(
             num_clust = args.num_of_clusters)
     model = model.to(device)
-    netG = Generator().to(device)
-    netD = Discriminator().to(device)
-    netG.apply(gan_weights_init)
-    netD.apply(gan_weights_init)
 
     # define loss function (criterion) and optimizer
     criterion = nn.CrossEntropyLoss()
     gan_criterion = nn.BCELoss()
-    optimizerD = optim.Adam(netD.parameters(), lr=0.0002, betas=(.5, 0.999))
-    optimizerG = optim.Adam(netG.parameters(), lr=0.0002, betas=(.5, 0.999))
+
+    if args.train_generator:
+        netG = Generator().to(device)
+        netD = Discriminator().to(device)
+        netG.apply(gan_weights_init)
+        netD.apply(gan_weights_init)
+        
+        optimizerD = optim.Adam(netD.parameters(), lr=0.0002, betas=(.5, 0.999))
+        optimizerG = optim.Adam(netG.parameters(), lr=0.0002, betas=(.5, 0.999))
+
+
+
 
 
     if args.set_optimizer == 'adam':
@@ -307,13 +330,13 @@ def train_and_val(args):
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}')
     else:
         best_acc1 = -1
-    if isfile(load_cpoint_path_g):
+    if isfile(load_cpoint_path_g) and args.train_generator:
         write_to_log(log_path,f' => loading checkpoint {args.weights_version_load}_g')
         checkpoint = torch.load(load_cpoint_path_g)    
         netG.load_state_dict(checkpoint['state_dict'])
         optimizerG.load_state_dict(checkpoint['optimizer'])
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}_g')
-    if isfile(load_cpoint_path_d):
+    if isfile(load_cpoint_path_d) and args.train_generator:
         write_to_log(log_path,f' => loading checkpoint {args.weights_version_load}_d')
         checkpoint = torch.load(load_cpoint_path_d)    
         netD.load_state_dict(checkpoint['state_dict'])
@@ -326,8 +349,8 @@ def train_and_val(args):
         train(
             data_loader_sup_train, data_loader_unsup,
             model, criterion, optimizer,
-            gan_criterion, netG, optimizerG, netD, optimizerD,
-            epoch, args, device, log_path
+            epoch, args, device, log_path,
+            gan_criterion, netG, optimizerG, netD, optimizerD
         )
 
         # evaluate on validation set
