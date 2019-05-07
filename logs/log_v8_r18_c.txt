@@ -6880,3 +6880,38 @@ Epoch: [1232][1999/2000]	Time  0.047 ( 0.129)	Data  0.000 ( 0.085)	Loss 4.9397e+
 Test: [1999/2000]	Time  0.008 ( 0.026)	Loss 4.2199e+00 (1.0331e+01)	Acc@1  12.50 ( 22.28)	Acc@5  37.50 ( 44.58)
  * Acc@1 22.275 Acc@5 44.584
 Epoch: [1233][1999/2000]	Time  0.043 ( 0.117)	Data  0.000 ( 0.072)	Loss 4.8329e+00 (4.7927e+00)	Loss_cse 3.8945e+00 (3.8324e+00)	Loss_cdist_unsup 4.6919e-02 (4.8012e-02)	Loss_cdist_sup 4.6919e-02 (4.8012e-02)	Acc@1  53.12 ( 38.19)	Acc@5  71.88 ( 62.66)
+Test: [1999/2000]	Time  0.009 ( 0.026)	Loss 3.5941e+00 (5.4918e+00)	Acc@1  37.50 ( 22.17)	Acc@5  56.25 ( 44.55)
+ * Acc@1 22.167 Acc@5 44.547
+Epoch: [1234][1999/2000]	Time  0.192 ( 0.107)	Data  0.153 ( 0.062)	Loss 4.5367e+00 (4.7880e+00)	Loss_cse 3.6011e+00 (3.8261e+00)	Loss_cdist_unsup 4.6780e-02 (4.8096e-02)	Loss_cdist_sup 4.6780e-02 (4.8096e-02)	Acc@1  50.00 ( 38.55)	Acc@5  71.88 ( 62.84)
+Test: [1999/2000]	Time  0.029 ( 0.029)	Loss 4.2927e+00 (4.6766e+00)	Acc@1  31.25 ( 22.14)	Acc@5  53.12 ( 44.51)
+ * Acc@1 22.141 Acc@5 44.509
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v8_r18_c
+weights_version_load: wv8_r18_best
+weights_version_save: wv8_r18
+set_optimizer: sgd
+lr: 3e-05
+dropout: 0.3
+coef_unsup_cdist_loss: 20.0
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+inter_layer_cluster: 0
+drop_fc: -1.0
+drop_2d: -1.0
+noise: 0
+
+
+ => loading checkpoint wv8_r18_best
+ ===> loaded optimizer state for sgd
+ => loaded checkpoint wv8_r18_best
+Epoch: [1230][1999/2000]	Time  0.049 ( 0.068)	Data  0.000 ( 0.019)	Loss 4.8779e+00 (4.6594e+00)	Loss_cse 3.9184e+00 (3.6641e+00)	Loss_cdist_unsup 4.7971e-02 (4.9765e-02)	Loss_cdist_sup 4.7971e-02 (4.9765e-02)	Acc@1  46.88 ( 42.51)	Acc@5  56.25 ( 66.57)
+Test: [1999/2000]	Time  0.008 ( 0.029)	Loss 4.3959e+00 (7.0014e+00)	Acc@1  12.50 ( 22.75)	Acc@5  46.88 ( 45.17)
+ * Acc@1 22.753 Acc@5 45.167
+Epoch: [1231][1999/2000]	Time  0.051 ( 0.067)	Data  0.000 ( 0.018)	Loss 4.7792e+00 (4.6657e+00)	Loss_cse 3.7092e+00 (3.6727e+00)	Loss_cdist_unsup 5.3501e-02 (4.9647e-02)	Loss_cdist_sup 5.3501e-02 (4.9647e-02)	Acc@1  40.62 ( 42.50)	Acc@5  65.62 ( 66.42)
+Test: [1999/2000]	Time  0.007 ( 0.027)	Loss 3.7523e+00 (4.5255e+00)	Acc@1  37.50 ( 22.18)	Acc@5  53.12 ( 44.42)
+ * Acc@1 22.181 Acc@5 44.419
