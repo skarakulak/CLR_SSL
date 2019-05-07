@@ -32,7 +32,6 @@ def train(
     data_time = AverageMeter('Data', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
     loss_cse_meter = AverageMeter('Loss_cse', ':.4e')
-    loss_cse_fake_meter = AverageMeter('Loss_cse_fake', ':.4e')
     loss_kld_s_meter = AverageMeter('Loss_kld_sup', ':.4e')
     loss_kld_us_meter = AverageMeter('Loss_kld_unsup', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
@@ -43,6 +42,7 @@ def train(
         loss_d_xr = AverageMeter('d_xr', ':.4e')
         loss_d_z = AverageMeter('d_z', ':.4e')
         loss_g_z = AverageMeter('g_z', ':.4e')
+        loss_cse_fake_meter = AverageMeter('Loss_cse_fake', ':.4e')
 
         progress = ProgressMeter(
             len(sup_loader), batch_time, data_time, 
@@ -54,9 +54,9 @@ def train(
     else:
         progress = ProgressMeter(
             len(sup_loader), batch_time, data_time, 
-            losses, loss_cse_meter,loss_cse_fake_meter, 
+            losses, loss_cse_meter,
             loss_kld_s_meter,loss_kld_us_meter,
-            top1,top5
+            top1,top5,
             prefix="Epoch: [{}]".format(epoch)
         )
 
@@ -158,24 +158,24 @@ def train(
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
-        loss_cse_fake = criterion(output_fake, target_sup)
         KLD_sup = -0.5 * torch.sum(1 + logvar_sup - c_dist_sup.pow(2) - logvar_sup.exp())
         KLD_unsup = -0.5 * torch.sum(1 + logvar_unsup - c_dist_unsup.pow(2) - logvar_unsup.exp())
         #KLD_fake = -0.5 * torch.sum(1 + logvar_fake - c_dist_fake.pow(2) - logvar_fake.exp())
         loss = loss_cse + kld_multiplier * ((8/9)*KLD_unsup+(1/9)*KLD_sup) 
         
         if args.train_generator: 
+            loss_cse_fake = criterion(output_fake, target_sup)
             loss += args.fake_cse_multiplier * loss_cse_fake
             loss_d_x.update(D_x, input_sup.size(0))
             loss_d_xr.update(D_xr, input_sup.size(0))
             loss_d_z.update(D_G_z1, input_sup.size(0))
             loss_g_z.update(D_G_z2.item(), input_sup.size(0))
+            loss_cse_fake_meter.update(loss_cse_fake.item(), input_sup.size(0))
 
 
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
         losses.update(loss.item(), input_sup.size(0))
         loss_cse_meter.update(loss_cse.item(), input_sup.size(0))
-        loss_cse_fake_meter.update(loss_cse_fake.item(), input_sup.size(0))
         loss_kld_s_meter.update(KLD_sup.item(), input_sup.size(0))
         loss_kld_us_meter.update(KLD_unsup.item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))
@@ -330,13 +330,13 @@ def train_and_val(args):
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}')
     else:
         best_acc1 = -1
-    if isfile(load_cpoint_path_g) and args.train_generator:
+    if args.train_generator and isfile(load_cpoint_path_g):
         write_to_log(log_path,f' => loading checkpoint {args.weights_version_load}_g')
         checkpoint = torch.load(load_cpoint_path_g)    
         netG.load_state_dict(checkpoint['state_dict'])
         optimizerG.load_state_dict(checkpoint['optimizer'])
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}_g')
-    if isfile(load_cpoint_path_d) and args.train_generator:
+    if args.train_generator and isfile(load_cpoint_path_d):
         write_to_log(log_path,f' => loading checkpoint {args.weights_version_load}_d')
         checkpoint = torch.load(load_cpoint_path_d)    
         netD.load_state_dict(checkpoint['state_dict'])

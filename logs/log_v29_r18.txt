@@ -457,3 +457,64 @@ Test: [1999/2000]	Time  0.010 ( 0.030)	Loss 5.4073e+00 (4.6719e+00)	Acc@1   0.00
 Epoch: [16][1999/2000]	Time  0.185 ( 0.185)	Data  0.000 ( 0.007)	Loss 4.4866e+00 (5.2327e+00)	Loss_cse 4.4866e+00 (5.2327e+00)	Loss_cse_fake 9.1103e+00 (9.8457e+00)	Loss_kld_sup 2.8435e+04 (3.1481e+04)	Loss_kld_unsup 2.8435e+04 (3.1481e+04)	Acc@1  21.88 ( 10.12)	Acc@5  43.75 ( 25.41)	d_x 8.7983e-01 (8.8631e-01)	d_xr 4.6636e-02 (9.0383e-02)	d_z 4.5804e-02 (2.2196e-02)	g_z 9.0167e-02 (5.8974e-02)
 Test: [1999/2000]	Time  0.009 ( 0.028)	Loss 5.4364e+00 (4.6084e+00)	Acc@1   6.25 ( 14.16)	Acc@5  15.62 ( 33.55)
  * Acc@1 14.163 Acc@5 33.552
+Epoch: [17][1999/2000]	Time  0.182 ( 0.181)	Data  0.000 ( 0.003)	Loss 5.4224e+00 (5.1806e+00)	Loss_cse 5.4224e+00 (5.1806e+00)	Loss_cse_fake 1.0371e+01 (9.9660e+00)	Loss_kld_sup 3.3773e+04 (3.2688e+04)	Loss_kld_unsup 3.3773e+04 (3.2688e+04)	Acc@1   9.38 ( 10.72)	Acc@5  28.12 ( 26.58)	d_x 8.3381e-01 (8.8465e-01)	d_xr 6.2606e-02 (8.9825e-02)	d_z 3.0390e-02 (2.4583e-02)	g_z 1.0045e-01 (5.9092e-02)
+Test: [1999/2000]	Time  0.011 ( 0.029)	Loss 5.1990e+00 (4.6791e+00)	Acc@1   9.38 ( 14.02)	Acc@5  25.00 ( 33.34)
+ * Acc@1 14.022 Acc@5 33.344
+
+ => loading checkpoint wv29_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv29_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v29_r18
+weights_version_load: wv29_r18
+weights_version_save: wv29_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 4000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+kld_loss_schedule: 1
+train_generator: 0
+
+
+ => loading checkpoint wv29_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv29_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v29_r18
+weights_version_load: wv29_r18
+weights_version_save: wv29_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 4000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+kld_loss_schedule: 1
+train_generator: 0
+
+
+ => loading checkpoint wv29_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv29_r18
+Epoch: [18][1999/2000]	Time  0.074 ( 0.170)	Data  0.000 ( 0.105)	Loss 5.2924e+00 (5.1231e+00)	Loss_cse 5.2924e+00 (5.1231e+00)	Loss_cse_fake 0.0000e+00 (0.0000e+00)	Loss_kld_sup 3.4736e+04 (3.7010e+04)	Loss_kld_unsup 3.4736e+04 (3.7010e+04)	Acc@1  15.62 ( 11.18)	Acc@5  28.12 ( 27.47)
+Test: [1999/2000]	Time  0.009 ( 0.059)	Loss 4.9689e+00 (4.4151e+00)	Acc@1   9.38 ( 15.82)	Acc@5  28.12 ( 36.30)
+ * Acc@1 15.817 Acc@5 36.298
+Epoch: [19][1999/2000]	Time  0.064 ( 0.100)	Data  0.000 ( 0.035)	Loss 5.0496e+00 (5.0643e+00)	Loss_cse 5.0496e+00 (5.0643e+00)	Loss_cse_fake 0.0000e+00 (0.0000e+00)	Loss_kld_sup 3.0490e+04 (3.2030e+04)	Loss_kld_unsup 3.0490e+04 (3.2030e+04)	Acc@1   9.38 ( 12.00)	Acc@5  31.25 ( 28.66)
+Test: [1999/2000]	Time  0.009 ( 0.042)	Loss 3.5186e+00 (4.3185e+00)	Acc@1  28.12 ( 16.89)	Acc@5  65.62 ( 37.93)
+ * Acc@1 16.894 Acc@5 37.934
+Epoch: [20][1999/2000]	Time  0.072 ( 0.074)	Data  0.000 ( 0.006)	Loss 3.9600e+00 (5.0164e+00)	Loss_cse 3.9600e+00 (5.0164e+00)	Loss_cse_fake 0.0000e+00 (0.0000e+00)	Loss_kld_sup 3.1117e+04 (3.4080e+04)	Loss_kld_unsup 3.1117e+04 (3.4080e+04)	Acc@1  21.88 ( 12.45)	Acc@5  46.88 ( 29.53)
+Test: [1999/2000]	Time  0.117 ( 0.046)	Loss 4.2715e+00 (4.3095e+00)	Acc@1  12.50 ( 17.17)	Acc@5  28.12 ( 37.98)
+ * Acc@1 17.170 Acc@5 37.981
+Epoch: [21][1999/2000]	Time  0.067 ( 0.071)	Data  0.000 ( 0.003)	Loss 5.3044e+00 (4.9788e+00)	Loss_cse 5.3044e+00 (4.9788e+00)	Loss_cse_fake 0.0000e+00 (0.0000e+00)	Loss_kld_sup 3.3118e+04 (3.4999e+04)	Loss_kld_unsup 3.3118e+04 (3.4999e+04)	Acc@1   9.38 ( 13.04)	Acc@5  28.12 ( 30.21)
