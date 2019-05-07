@@ -58,3 +58,24 @@ kld_multiplier: 1.0
  => loading checkpoint wv32_r18
  ===> loaded optimizer state for adam
  => loaded checkpoint wv32_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v32_r18
+weights_version_load: wv32_r18
+weights_version_save: wv32_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 8000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+kld_loss_schedule: 1
+
+
+ => loading checkpoint wv32_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv32_r18

@@ -348,3 +348,27 @@ kld_multiplier: 1.0
  => loading checkpoint wv31_r18
  ===> loaded optimizer state for adam
  => loaded checkpoint wv31_r18
+Epoch: [71][1999/2000]	Time  0.176 ( 0.171)	Data  0.000 ( 0.001)	Loss 7.3614e+00 (7.0871e+00)	Loss_cse 7.2846e+00 (6.9859e+00)	Loss_cse_fake 8.0792e+00 (7.9284e+00)	Loss_kld_sup 7.6824e-02 (1.0117e-01)	Loss_kld_unsup 7.6824e-02 (1.0117e-01)	Acc@1   0.00 (  0.54)	Acc@5   3.12 (  2.25)	d_x 9.9979e-01 (9.8983e-01)	d_xr 3.1680e-09 (5.9327e-03)	d_z 1.1247e-15 (3.8558e-03)	g_z 1.4230e-15 (1.7872e-03)
+Test: [1999/2000]	Time  0.057 ( 0.028)	Loss 6.2515e+00 (6.4139e+00)	Acc@1   0.00 (  1.68)	Acc@5   0.00 (  6.30)
+ * Acc@1 1.684 Acc@5 6.295
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v31_r18
+weights_version_load: wv31_r18
+weights_version_save: wv31_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+kld_loss_schedule: 1
+
+
+ => loading checkpoint wv31_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv31_r18

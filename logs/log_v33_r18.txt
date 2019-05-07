@@ -1,0 +1,36 @@
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v33_r18
+weights_version_load: wv33_r18
+weights_version_save: wv33_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 3000
+fake_cse_multiplier: 0.0
+kld_multiplier: 0.1
+kld_loss_schedule: 0
+
+
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v33_r18
+weights_version_load: wv33_r18
+weights_version_save: wv33_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 3000
+fake_cse_multiplier: 0.0
+kld_multiplier: 0.1
+kld_loss_schedule: 0
+
+
