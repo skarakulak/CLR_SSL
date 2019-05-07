@@ -127,18 +127,17 @@ class ResNet(nn.Module):
 
         return nn.Sequential(*layers)
 
-    def reparameterise(self, mu, logvar, return_c):
-        if return_c or self.training: # kinda redundant, in training return_c is always true
-            x_k = x.unsqueeze(1).expand(x.size(0),self.cl_centers.size(0),512)
-            c_k = self.cl_centers.unsqueeze(0).expand(x.size(0),self.cl_centers.size(0),512)
+    def reparameterise(self, mu, logvar, add_eps, return_c):
+        if return_c # there is redundency, in training return_c is always true
+            x_k = mu.unsqueeze(1).expand(mu.size(0),self.cl_centers.size(0),512)
+            c_k = self.cl_centers.unsqueeze(0).expand(mu.size(0),self.cl_centers.size(0),512)
             c_dist,c_min = torch.min(((x_k-c_k)**2).sum(2), dim=1)
 
-            if self.training:
+            if add_eps:
                 std = logvar.mul(0.5).exp_()
                 eps = std.data.new(std.size()).normal_()
-                return eps.mul(std).add_(mu), c_dist, c_min
-            else:
-                return mu, c_dist, c_min
+                mu = eps.mul(std).add_(mu)
+            return mu, c_dist, c_min
         else:
             return mu
 

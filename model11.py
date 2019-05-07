@@ -22,8 +22,6 @@ from model_def11 import *
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 
 
-def multi_vae_loss()
-
 def train(
     sup_loader, unsup_loader,
     model, criterion, optimizer,
@@ -71,7 +69,7 @@ def train(
         for input_sup,y in sup_loader:
             input_sup = input_sup.to(device)
             with torch.no_grad():
-                output_sup, latent_sup, loss_sup_cdist, x_clus_sup = model(input_sup, return_c_dist=True)
+                output_sup, latent_sup, logvar_sup, c_dist_sup, cluster_sup  = model(input_sup, return_c_dist=True)
             for (z,label) in zip(latent_sup,y):
                 if latent_reps_count[int(label)] <= torch.mean(latent_reps_count) + 1e-10:
                     model.cl_centers[idx_cl,:] = z.detach().data.clone()
@@ -110,7 +108,7 @@ def train(
 
         # train the discriminator with the real data and random cluster IDs
         label.fill_(0)
-        rand_cl_idx = torch.randint(high=args.num_of_clusters,size=(batch_size,3))
+        rand_cl_idx = torch.randint(high=args.num_of_clusters,size=(3,batch_size))
         output = netD(input_unsup, model.cl_centers[rand_cl_idx[0,:]].detach())
         errD_real = gan_criterion(output, label)
         errD_real.backward()
@@ -263,10 +261,10 @@ def train_and_val(args):
     # create model
     if args.arch=='resnet32':
         model = resnet34(
-            num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d) 
+            num_clust = args.num_of_clusters) 
     else:
         model = resnet18(
-            num_clust = args.num_of_clusters,drop_fc=args.drop_fc, drop_2d = args.drop_2d)
+            num_clust = args.num_of_clusters)
     model = model.to(device)
     netG = Generator().to(device)
     netD = Discriminator().to(device)
