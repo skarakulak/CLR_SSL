@@ -18,6 +18,7 @@ parser.add_argument('-u','--user', type=str, default='sk7685', help='hpc usernam
 parser.add_argument('-N','--num-of-clusters', type=int, default=2000, help='number of clusters')
 parser.add_argument('-f','--fake-cse-multiplier', type=float, default=0.0, help='multiplier of cse loss for the fake examples')
 parser.add_argument('-k','--kld-multiplier', type=float, default=1.0, help='multiplier for the kl-div')
+parser.add_argument('-S','--kld-loss-schedule', type=int, default=1, help='gradually increase the multiplier of kl-div loss')
 
 
 args = parser.parse_args()

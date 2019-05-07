@@ -497,3 +497,44 @@ kld_multiplier: 0.01
  => loading checkpoint wv28_r18_best
  ===> loaded optimizer state for adam
  => loaded checkpoint wv28_r18_best
+Epoch: [40][1999/2000]	Time  0.166 ( 0.179)	Data  0.000 ( 0.005)	Loss 4.5077e+00 (4.7529e+00)	Loss_cse 4.2081e+00 (4.4830e+00)	Loss_cse_fake 9.8840e+00 (9.9527e+00)	Loss_kld_sup 2.9955e+03 (2.6992e+03)	Loss_kld_unsup 2.9955e+03 (2.6992e+03)	Acc@1  21.88 ( 18.60)	Acc@5  37.50 ( 38.95)	d_x 6.2887e-01 (5.7725e-01)	d_xr 2.3201e-01 (2.8608e-01)	d_z 1.8975e-01 (1.2950e-01)	g_z 2.6607e-01 (1.3899e-01)
+Test: [1999/2000]	Time  0.084 ( 0.088)	Loss 4.3917e+00 (4.2023e+00)	Acc@1  21.88 ( 19.23)	Acc@5  34.38 ( 40.97)
+ * Acc@1 19.230 Acc@5 40.970
+Epoch: [41][1999/2000]	Time  0.169 ( 0.174)	Data  0.000 ( 0.001)	Loss 4.8844e+00 (4.7482e+00)	Loss_cse 4.6471e+00 (4.4764e+00)	Loss_cse_fake 9.3078e+00 (1.0080e+01)	Loss_kld_sup 2.3736e+03 (2.7183e+03)	Loss_kld_unsup 2.3736e+03 (2.7184e+03)	Acc@1  15.62 ( 18.72)	Acc@5  43.75 ( 39.10)	d_x 6.1277e-01 (6.6085e-01)	d_xr 1.8668e-01 (2.1966e-01)	d_z 6.4201e-02 (1.1465e-01)	g_z 1.5549e-01 (1.1243e-01)
+Test: [1999/2000]	Time  0.010 ( 0.029)	Loss 4.9197e+00 (4.1813e+00)	Acc@1  15.62 ( 19.36)	Acc@5  40.62 ( 41.32)
+ * Acc@1 19.359 Acc@5 41.320
+Epoch: [42][1999/2000]	Time  0.167 ( 0.174)	Data  0.000 ( 0.001)	Loss 4.9282e+00 (4.6985e+00)	Loss_cse 4.6602e+00 (4.4277e+00)	Loss_cse_fake 1.0570e+01 (1.0203e+01)	Loss_kld_sup 2.6797e+03 (2.7085e+03)	Loss_kld_unsup 2.6797e+03 (2.7087e+03)	Acc@1  18.75 ( 19.53)	Acc@5  31.25 ( 40.03)	d_x 6.6705e-01 (6.9651e-01)	d_xr 1.4284e-01 (2.0672e-01)	d_z 7.1068e-02 (9.3854e-02)	g_z 2.7266e-02 (9.9296e-02)
+Test: [1999/2000]	Time  0.010 ( 0.028)	Loss 4.4460e+00 (4.2204e+00)	Acc@1  18.75 ( 19.34)	Acc@5  34.38 ( 40.90)
+ * Acc@1 19.339 Acc@5 40.897
+Epoch: [43][1999/2000]	Time  0.169 ( 0.173)	Data  0.000 ( 0.001)	Loss 5.3482e+00 (4.6656e+00)	Loss_cse 5.0707e+00 (4.3923e+00)	Loss_cse_fake 1.0625e+01 (1.0392e+01)	Loss_kld_sup 2.7750e+03 (2.7334e+03)	Loss_kld_unsup 2.7750e+03 (2.7337e+03)	Acc@1  21.88 ( 20.02)	Acc@5  31.25 ( 40.66)	d_x 8.5475e-01 (7.1603e-01)	d_xr 1.7874e-01 (1.9938e-01)	d_z 2.9339e-02 (8.2455e-02)	g_z 1.1231e-02 (9.6173e-02)
+Test: [1999/2000]	Time  0.020 ( 0.027)	Loss 4.3505e+00 (4.1615e+00)	Acc@1  12.50 ( 19.98)	Acc@5  40.62 ( 41.70)
+ * Acc@1 19.980 Acc@5 41.697
+Epoch: [44][1999/2000]	Time  0.168 ( 0.174)	Data  0.000 ( 0.001)	Loss 4.7628e+00 (4.6331e+00)	Loss_cse 4.4963e+00 (4.3571e+00)	Loss_cse_fake 1.0500e+01 (1.0357e+01)	Loss_kld_sup 2.6653e+03 (2.7601e+03)	Loss_kld_unsup 2.6653e+03 (2.7602e+03)	Acc@1  12.50 ( 20.62)	Acc@5  40.62 ( 41.20)	d_x 8.1738e-01 (7.3289e-01)	d_xr 1.9569e-01 (1.8991e-01)	d_z 7.8696e-02 (7.4665e-02)	g_z 8.4236e-03 (7.8422e-02)
+Test: [1999/2000]	Time  0.009 ( 0.030)	Loss 4.0489e+00 (4.1040e+00)	Acc@1  25.00 ( 20.44)	Acc@5  37.50 ( 42.69)
+ * Acc@1 20.436 Acc@5 42.691
+Epoch: [45][1999/2000]	Time  0.165 ( 0.173)	Data  0.000 ( 0.001)	Loss 4.9381e+00 (4.5819e+00)	Loss_cse 4.6859e+00 (4.3075e+00)	Loss_cse_fake 1.0083e+01 (1.0412e+01)	Loss_kld_sup 2.5213e+03 (2.7442e+03)	Loss_kld_unsup 2.5213e+03 (2.7442e+03)	Acc@1  18.75 ( 21.29)	Acc@5  43.75 ( 42.49)	d_x 8.5327e-01 (7.4176e-01)	d_xr 3.1016e-01 (1.8719e-01)	d_z 6.5546e-02 (6.8844e-02)	g_z 5.5845e-02 (7.8546e-02)
+Test: [1999/2000]	Time  0.010 ( 0.031)	Loss 4.4596e+00 (4.2068e+00)	Acc@1   9.38 ( 19.97)	Acc@5  43.75 ( 41.85)
+ * Acc@1 19.970 Acc@5 41.850
+Epoch: [46][1999/2000]	Time  0.169 ( 0.167)	Data  0.000 ( 0.001)	Loss 4.3823e+00 (4.5425e+00)	Loss_cse 4.1318e+00 (4.2680e+00)	Loss_cse_fake 9.6897e+00 (1.0645e+01)	Loss_kld_sup 2.5049e+03 (2.7451e+03)	Loss_kld_unsup 2.5049e+03 (2.7451e+03)	Acc@1  21.88 ( 21.66)	Acc@5  46.88 ( 42.99)	d_x 7.8807e-01 (7.6016e-01)	d_xr 2.1344e-01 (1.7608e-01)	d_z 3.0232e-02 (6.1618e-02)	g_z 4.3587e-02 (8.3585e-02)
+Test: [1999/2000]	Time  0.010 ( 0.028)	Loss 4.6200e+00 (4.1217e+00)	Acc@1  25.00 ( 21.05)	Acc@5  37.50 ( 43.10)
+ * Acc@1 21.053 Acc@5 43.097
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v28_r18
+weights_version_load: wv28_r18_best
+weights_version_save: wv28_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 0.01
+
+
+ => loading checkpoint wv28_r18_best
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv28_r18_best

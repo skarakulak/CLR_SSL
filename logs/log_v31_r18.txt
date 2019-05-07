@@ -284,3 +284,67 @@ Epoch: [62][1999/2000]	Time  0.175 ( 0.166)	Data  0.000 ( 0.001)	Loss 7.6884e+00
 Test: [1999/2000]	Time  0.010 ( 0.027)	Loss 6.6729e+00 (6.7357e+00)	Acc@1   0.00 (  0.40)	Acc@5   3.12 (  1.88)
  * Acc@1 0.397 Acc@5 1.881
 Epoch: [63][1999/2000]	Time  0.170 ( 0.166)	Data  0.000 ( 0.001)	Loss 7.7797e+00 (7.6485e+00)	Loss_cse 7.7399e+00 (7.5859e+00)	Loss_cse_fake 8.2474e+00 (7.8267e+00)	Loss_kld_sup 3.9770e-02 (6.2579e-02)	Loss_kld_unsup 3.9770e-02 (6.2579e-02)	Acc@1   0.00 (  0.18)	Acc@5   0.00 (  0.92)	d_x 9.9606e-01 (9.9839e-01)	d_xr 2.3901e-09 (9.8729e-04)	d_z 7.6337e-07 (5.3984e-04)	g_z 1.3017e-06 (5.4402e-04)
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v31_r18
+weights_version_load: wv31_r18
+weights_version_save: wv31_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+
+
+ => loading checkpoint wv31_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv31_r18
+Epoch: [63][1999/2000]	Time  0.168 ( 0.167)	Data  0.000 ( 0.001)	Loss 7.4346e+00 (7.5595e+00)	Loss_cse 7.3837e+00 (7.5007e+00)	Loss_cse_fake 7.8706e+00 (7.8141e+00)	Loss_kld_sup 5.0852e-02 (5.8797e-02)	Loss_kld_unsup 5.0852e-02 (5.8797e-02)	Acc@1   0.00 (  0.21)	Acc@5   0.00 (  0.93)	d_x 9.9991e-01 (9.8795e-01)	d_xr 1.2670e-04 (7.7298e-03)	d_z 4.8534e-03 (4.5929e-03)	g_z 2.0812e-10 (2.1267e-03)
+Test: [1999/2000]	Time  0.064 ( 0.071)	Loss 6.6147e+00 (6.6628e+00)	Acc@1   0.00 (  0.54)	Acc@5   0.00 (  2.40)
+ * Acc@1 0.541 Acc@5 2.405
+Epoch: [64][1999/2000]	Time  0.168 ( 0.170)	Data  0.000 ( 0.004)	Loss 7.6629e+00 (7.4996e+00)	Loss_cse 7.5694e+00 (7.4345e+00)	Loss_cse_fake 7.9570e+00 (7.7819e+00)	Loss_kld_sup 9.3449e-02 (6.5066e-02)	Loss_kld_unsup 9.3449e-02 (6.5066e-02)	Acc@1   0.00 (  0.23)	Acc@5   0.00 (  1.06)	d_x 9.9068e-01 (9.9733e-01)	d_xr 3.1141e-02 (1.6491e-03)	d_z 2.9229e-07 (8.6693e-04)	g_z 5.7571e-09 (7.6204e-04)
+Test: [1999/2000]	Time  0.052 ( 0.026)	Loss 6.6758e+00 (6.5998e+00)	Acc@1   0.00 (  0.88)	Acc@5   6.25 (  3.55)
+ * Acc@1 0.883 Acc@5 3.555
+Epoch: [65][1999/2000]	Time  0.166 ( 0.170)	Data  0.000 ( 0.002)	Loss 7.4886e+00 (7.4426e+00)	Loss_cse 7.4169e+00 (7.3712e+00)	Loss_cse_fake 7.5070e+00 (7.7789e+00)	Loss_kld_sup 7.1673e-02 (7.1485e-02)	Loss_kld_unsup 7.1673e-02 (7.1485e-02)	Acc@1   0.00 (  0.22)	Acc@5   0.00 (  1.12)	d_x 9.9790e-01 (9.9784e-01)	d_xr 5.4105e-08 (1.1761e-03)	d_z 6.7808e-07 (6.1842e-04)	g_z 4.9200e-06 (6.9546e-04)
+Test: [1999/2000]	Time  0.009 ( 0.026)	Loss 6.6713e+00 (6.5744e+00)	Acc@1   0.00 (  1.03)	Acc@5   3.12 (  4.76)
+ * Acc@1 1.033 Acc@5 4.763
+Epoch: [66][1999/2000]	Time  0.165 ( 0.170)	Data  0.000 ( 0.002)	Loss 7.6584e+00 (7.3974e+00)	Loss_cse 7.5760e+00 (7.3234e+00)	Loss_cse_fake 7.9146e+00 (7.7886e+00)	Loss_kld_sup 8.2396e-02 (7.3961e-02)	Loss_kld_unsup 8.2396e-02 (7.3961e-02)	Acc@1   0.00 (  0.27)	Acc@5   3.12 (  1.17)	d_x 9.9857e-01 (9.9800e-01)	d_xr 1.1200e-05 (9.9645e-04)	d_z 4.7732e-07 (7.3264e-04)	g_z 1.2765e-06 (8.8950e-04)
+Test: [1999/2000]	Time  0.010 ( 0.027)	Loss 6.4938e+00 (6.5220e+00)	Acc@1   0.00 (  0.88)	Acc@5   3.12 (  4.18)
+ * Acc@1 0.877 Acc@5 4.178
+Epoch: [67][1999/2000]	Time  0.181 ( 0.170)	Data  0.000 ( 0.002)	Loss 7.6613e+00 (7.3519e+00)	Loss_cse 7.5702e+00 (7.2716e+00)	Loss_cse_fake 7.8349e+00 (7.8206e+00)	Loss_kld_sup 9.1069e-02 (8.0314e-02)	Loss_kld_unsup 9.1069e-02 (8.0314e-02)	Acc@1   0.00 (  0.25)	Acc@5   0.00 (  1.28)	d_x 9.9785e-01 (9.9742e-01)	d_xr 3.2300e-10 (1.2992e-03)	d_z 7.5454e-07 (7.0253e-04)	g_z 1.1983e-08 (8.1945e-04)
+Test: [1999/2000]	Time  0.061 ( 0.027)	Loss 6.4815e+00 (6.4756e+00)	Acc@1   0.00 (  1.21)	Acc@5   6.25 (  4.94)
+ * Acc@1 1.208 Acc@5 4.938
+Epoch: [68][1999/2000]	Time  0.169 ( 0.170)	Data  0.000 ( 0.002)	Loss 7.2877e+00 (7.3112e+00)	Loss_cse 7.1723e+00 (7.2251e+00)	Loss_cse_fake 8.0298e+00 (7.8784e+00)	Loss_kld_sup 1.1544e-01 (8.6131e-02)	Loss_kld_unsup 1.1544e-01 (8.6131e-02)	Acc@1   0.00 (  0.29)	Acc@5   6.25 (  1.50)	d_x 9.9889e-01 (9.9818e-01)	d_xr 3.4251e-10 (8.1449e-04)	d_z 2.7985e-02 (8.6070e-04)	g_z 7.2763e-09 (8.5665e-04)
+Test: [1999/2000]	Time  0.010 ( 0.027)	Loss 6.4151e+00 (6.4655e+00)	Acc@1   0.00 (  1.43)	Acc@5   6.25 (  5.55)
+ * Acc@1 1.428 Acc@5 5.553
+Epoch: [69][1999/2000]	Time  0.169 ( 0.169)	Data  0.000 ( 0.002)	Loss 7.4822e+00 (7.2976e+00)	Loss_cse 7.4183e+00 (7.2054e+00)	Loss_cse_fake 7.8386e+00 (7.9241e+00)	Loss_kld_sup 6.3904e-02 (9.2148e-02)	Loss_kld_unsup 6.3904e-02 (9.2148e-02)	Acc@1   0.00 (  0.33)	Acc@5   0.00 (  1.53)	d_x 9.9940e-01 (9.9824e-01)	d_xr 1.0150e-08 (9.8728e-04)	d_z 1.6519e-09 (6.2237e-04)	g_z 2.9836e-02 (7.1836e-04)
+Test: [1999/2000]	Time  0.010 ( 0.027)	Loss 6.6408e+00 (6.3820e+00)	Acc@1   0.00 (  1.89)	Acc@5   3.12 (  7.04)
+ * Acc@1 1.888 Acc@5 7.039
+Epoch: [70][1999/2000]	Time  0.163 ( 0.170)	Data  0.000 ( 0.002)	Loss 7.1978e+00 (7.2948e+00)	Loss_cse 7.1048e+00 (7.1979e+00)	Loss_cse_fake 8.0804e+00 (7.9214e+00)	Loss_kld_sup 9.3021e-02 (9.6814e-02)	Loss_kld_unsup 9.3021e-02 (9.6814e-02)	Acc@1   0.00 (  0.34)	Acc@5   0.00 (  1.53)	d_x 9.9824e-01 (9.9794e-01)	d_xr 5.1000e-28 (1.1258e-03)	d_z 1.7732e-32 (6.6208e-04)	g_z 9.4257e-32 (7.5804e-04)
+Test: [1999/2000]	Time  0.010 ( 0.026)	Loss 6.3008e+00 (6.4174e+00)	Acc@1   3.12 (  1.68)	Acc@5  12.50 (  6.25)
+ * Acc@1 1.683 Acc@5 6.247
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v31_r18
+weights_version_load: wv31_r18
+weights_version_save: wv31_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+
+
+ => loading checkpoint wv31_r18
+ ===> loaded optimizer state for adam
+ => loaded checkpoint wv31_r18

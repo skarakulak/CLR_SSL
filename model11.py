@@ -52,6 +52,7 @@ def train(
 
     # until epoch 45, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
+    num_cl_lim = math.ceil(args.num_of_clusters/1000)
     model.eval()
     with torch.no_grad():
         if epoch <= 45:
@@ -61,7 +62,7 @@ def train(
                 input_sup = input_sup.to(device)
                 output_sup, latent_sup, logvar_sup, c_dist_sup, cluster_sup  = model(input_sup, add_eps=False, return_c_dist=True)
                 for (z,label) in zip(latent_sup,y):
-                    if latent_reps_count[int(label)] <= torch.mean(latent_reps_count) + 1e-10:
+                    if latent_reps_count[int(label)] < num_cl_lim:
                         model.cl_centers[idx_cl,:] = z.detach().data.clone()
                         idx_cl += 1
                         latent_reps_count[int(label)] += 1
@@ -74,11 +75,12 @@ def train(
 
     # switch to train mode
     model.train()
-
-    if epoch < 30: kld_multiplier = 0
-    elif epoch < 40: kld_multiplier = 1e-4 * args.kld_multiplier
-    elif epoch < 50: kld_multiplier = 1e-2 * args.kld_multiplier
-    elif epoch < 60: kld_multiplier = 1e-1 * args.kld_multiplier
+    
+    if args.kld_loss_schedule and epoch < 60:
+        if epoch < 30: kld_multiplier = 0
+        elif epoch < 40: kld_multiplier = 1e-4 * args.kld_multiplier
+        elif epoch < 50: kld_multiplier = 1e-2 * args.kld_multiplier
+        elif epoch < 60: kld_multiplier = 1e-1 * args.kld_multiplier
     else: kld_multiplier = args.kld_multiplier
 
 
