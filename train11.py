@@ -19,6 +19,7 @@ parser.add_argument('-N','--num-of-clusters', type=int, default=2000, help='numb
 parser.add_argument('-f','--fake-cse-multiplier', type=float, default=0.0, help='multiplier of cse loss for the fake examples')
 parser.add_argument('-k','--kld-multiplier', type=float, default=1.0, help='multiplier for the kl-div')
 parser.add_argument('-S','--kld-loss-schedule', type=int, default=1, help='gradually increase the multiplier of kl-div loss')
+parser.add_argument('-g','--train-generator', type=int, default=1, help='flag for training the generator (1/0)')
 
 
 args = parser.parse_args()
