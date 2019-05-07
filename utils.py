@@ -35,7 +35,7 @@ def write_to_log(log_path,str_to_log):
 def image_loader(path, batch_size, num_workers=3, pin_memory = True, valid_crop = 84):
     transform_train = transforms.Compose(
         [   
-            transforms.RandomRotation(12, resample=PIL.Image.BILINEAR),
+            #transforms.RandomRotation(12, resample=PIL.Image.BILINEAR),
             transforms.RandomResizedCrop(84),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(), 

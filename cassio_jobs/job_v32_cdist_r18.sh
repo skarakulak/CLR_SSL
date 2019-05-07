@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=V28_r18
+#SBATCH --job-name=V32_r18
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v28_r18.out
+#SBATCH --output=output_v32_r18.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v28_r18.err
+#SBATCH --error=error_v32_r18.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -37,7 +37,7 @@
 module load python-3.6
 module load cuda-10.0
 source /data/sk7685/pytorch_10/bin/activate pytorch_10
-srun python3 ../train11.py -e 300  -v v28_r18 -w wv28_r18_best -x wv28_r18 -o adam -l 0.001  -N 2000 -f 0 -k .01
-srun python3 ../train11.py -e 3000 -v v28_r18 -w wv28_r18      -x wv28_r18 -o adam -l 0.0003 -N 2000 -f 0 -k .01
+srun python3 ../train11.py -e 300  -v v32_r18 -w wv32_r18 -x wv32_r18 -o adam -l 0.001  -N 8000 -f 0 -k 1
+srun python3 ../train11.py -e 3000 -v v32_r18 -w wv32_r18 -x wv32_r18 -o adam -l 0.0003 -N 8000 -f 0 -k 1
 
 
