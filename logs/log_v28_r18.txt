@@ -168,3 +168,89 @@ fake_cse_multiplier: 0.0
 kld_multiplier: 1.0
 
 
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v28_r18
+weights_version_load: wv28_r18
+weights_version_save: wv28_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+
+
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v28_r18
+weights_version_load: wv28_r18
+weights_version_save: wv28_r18
+set_optimizer: adam
+lr: 0.0003
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+
+
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v28_r18
+weights_version_load: wv28_r18
+weights_version_save: wv28_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+
+
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v28_r18
+weights_version_load: wv28_r18
+weights_version_save: wv28_r18
+set_optimizer: adam
+lr: 0.0003
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+
+
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v28_r18
+weights_version_load: wv28_r18
+weights_version_save: wv28_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+
+
+Epoch: [0][1999/2000]	Time  0.171 ( 0.173)	Data  0.000 ( 0.004)	Loss 7.1480e+00 (7.4436e+00)	Loss_cse 7.1480e+00 (7.4436e+00)	Loss_cse_fake 7.1617e+00 (7.9793e+00)	Loss_kld_sup 1.0121e+05 (1.0794e+05)	Loss_kld_unsup 1.0121e+05 (1.0794e+05)	Acc@1   0.00 (  0.24)	Acc@5   3.12 (  1.17)	d_x 9.9714e-01 (9.8049e-01)	d_xr 1.1737e-07 (1.1067e-02)	d_z 1.0562e-03 (8.0268e-03)	g_z 7.2222e-08 (7.4307e-03)

@@ -132,6 +132,7 @@ class ResNet(nn.Module):
             x_k = mu.unsqueeze(1).expand(mu.size(0),self.cl_centers.size(0),512)
             c_k = self.cl_centers.unsqueeze(0).expand(mu.size(0),self.cl_centers.size(0),512)
             c_dist,c_min = torch.min(((x_k-c_k)**2).sum(2), dim=1)
+            c_dist = (self.cl_centers[c_min] - mu)**2
         if add_eps:
             std = logvar.mul(0.5).exp_()
             eps = std.data.new(std.size()).normal_()
