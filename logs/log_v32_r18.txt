@@ -79,3 +79,31 @@ kld_loss_schedule: 1
  => loading checkpoint wv32_r18
  ===> loaded optimizer state for adam
  => loaded checkpoint wv32_r18
+Epoch: [2][1999/2000]	Time  0.188 ( 0.188)	Data  0.000 ( 0.001)	Loss 6.1689e+00 (5.6515e+00)	Loss_cse 6.1689e+00 (5.6515e+00)	Loss_cse_fake 8.3846e+00 (8.2640e+00)	Loss_kld_sup 4.8962e+03 (2.8464e+03)	Loss_kld_unsup 4.8962e+03 (2.8464e+03)	Acc@1   3.12 (  4.86)	Acc@5   3.12 ( 14.63)	d_x 8.1379e-01 (7.8571e-01)	d_xr 9.4716e-02 (1.5145e-01)	d_z 1.0140e-02 (5.4161e-02)	g_z 7.2142e-02 (9.8141e-02)
+Test: [1999/2000]	Time  0.010 ( 0.028)	Loss 6.0959e+00 (6.0200e+00)	Acc@1   0.00 (  2.37)	Acc@5   9.38 (  8.92)
+ * Acc@1 2.370 Acc@5 8.919
+Epoch: [3][1999/2000]	Time  0.180 ( 0.188)	Data  0.000 ( 0.002)	Loss 6.1621e+00 (6.5598e+00)	Loss_cse 6.1621e+00 (6.5598e+00)	Loss_cse_fake 9.2196e+00 (8.7454e+00)	Loss_kld_sup 5.1565e+03 (3.5029e+03)	Loss_kld_unsup 5.1565e+03 (3.5029e+03)	Acc@1   6.25 (  1.68)	Acc@5   6.25 (  6.49)	d_x 8.9778e-01 (8.3827e-01)	d_xr 1.5325e-01 (1.1863e-01)	d_z 4.8765e-02 (3.8152e-02)	g_z 6.3132e-03 (7.2135e-02)
+Test: [1999/2000]	Time  0.055 ( 0.026)	Loss 5.0777e+00 (5.6385e+00)	Acc@1   9.38 (  4.24)	Acc@5  21.88 ( 13.66)
+ * Acc@1 4.241 Acc@5 13.659
+Epoch: [4][1999/2000]	Time  0.193 ( 0.189)	Data  0.000 ( 0.002)	Loss 6.1094e+00 (6.3216e+00)	Loss_cse 6.1094e+00 (6.3216e+00)	Loss_cse_fake 9.2977e+00 (8.6843e+00)	Loss_kld_sup 5.6006e+03 (4.9499e+03)	Loss_kld_unsup 5.6006e+03 (4.9499e+03)	Acc@1   3.12 (  2.38)	Acc@5  12.50 (  8.71)	d_x 8.6693e-01 (8.4897e-01)	d_xr 1.4952e-01 (1.0900e-01)	d_z 1.1877e-02 (3.6909e-02)	g_z 1.0319e-01 (5.9095e-02)
+Test: [1999/2000]	Time  0.010 ( 0.030)	Loss 5.8486e+00 (5.4542e+00)	Acc@1   6.25 (  5.31)	Acc@5  12.50 ( 16.55)
+ * Acc@1 5.306 Acc@5 16.547
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v32_r18
+weights_version_load: wv32_r18
+weights_version_save: wv32_r18
+set_optimizer: adam
+lr: 0.0003
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 8000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+kld_loss_schedule: 1
+
+
+ => loading checkpoint wv32_r18

@@ -324,3 +324,31 @@ kld_loss_schedule: 1
  => loading checkpoint wv29_r18
  ===> loaded optimizer state for adam
  => loaded checkpoint wv29_r18
+Epoch: [70][1999/2000]	Time  0.171 ( 0.176)	Data  0.000 ( 0.003)	Loss 5.6512e+00 (5.3160e+00)	Loss_cse 5.5194e+00 (5.2023e+00)	Loss_cse_fake 8.2474e+00 (8.4028e+00)	Loss_kld_sup 1.3188e-01 (1.1371e-01)	Loss_kld_unsup 1.3188e-01 (1.1371e-01)	Acc@1  12.50 (  9.23)	Acc@5  12.50 ( 22.09)	d_x 9.9983e-01 (9.8904e-01)	d_xr 6.0217e-07 (6.6228e-03)	d_z 1.1258e-06 (4.3255e-03)	g_z 2.7527e-06 (1.8163e-03)
+Test: [1999/2000]	Time  0.440 ( 0.137)	Loss 6.2608e+00 (6.2534e+00)	Acc@1   3.12 (  2.58)	Acc@5   3.12 (  8.51)
+ * Acc@1 2.584 Acc@5 8.513
+Epoch: [71][1999/2000]	Time  0.175 ( 0.174)	Data  0.000 ( 0.001)	Loss 7.1511e+00 (7.3831e+00)	Loss_cse 7.0349e+00 (7.2611e+00)	Loss_cse_fake 8.3152e+00 (8.4931e+00)	Loss_kld_sup 1.1628e-01 (1.2196e-01)	Loss_kld_unsup 1.1628e-01 (1.2196e-01)	Acc@1   0.00 (  0.59)	Acc@5   0.00 (  2.68)	d_x 9.9784e-01 (9.9849e-01)	d_xr 2.8518e-07 (7.5811e-04)	d_z 2.3578e-07 (5.1837e-04)	g_z 3.2847e-07 (4.5978e-04)
+Test: [1999/2000]	Time  0.009 ( 0.027)	Loss 6.0758e+00 (6.1374e+00)	Acc@1   0.00 (  3.18)	Acc@5   6.25 ( 10.12)
+ * Acc@1 3.184 Acc@5 10.117
+Epoch: [72][1999/2000]	Time  0.174 ( 0.175)	Data  0.000 ( 0.001)	Loss 6.9082e+00 (7.1974e+00)	Loss_cse 6.8064e+00 (7.0721e+00)	Loss_cse_fake 8.6644e+00 (8.3819e+00)	Loss_kld_sup 1.0179e-01 (1.2534e-01)	Loss_kld_unsup 1.0179e-01 (1.2534e-01)	Acc@1   0.00 (  0.69)	Acc@5   6.25 (  2.94)	d_x 9.9844e-01 (9.9848e-01)	d_xr 6.6287e-10 (5.1656e-04)	d_z 6.2514e-11 (7.6251e-04)	g_z 1.4900e-08 (9.1550e-04)
+Test: [1999/2000]	Time  0.009 ( 0.027)	Loss 6.3383e+00 (6.1199e+00)	Acc@1   6.25 (  2.88)	Acc@5  12.50 (  9.37)
+ * Acc@1 2.877 Acc@5 9.366
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v29_r18
+weights_version_load: wv29_r18
+weights_version_save: wv29_r18
+set_optimizer: adam
+lr: 0.0003
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 4000
+fake_cse_multiplier: 0.0
+kld_multiplier: 1.0
+kld_loss_schedule: 1
+
+
+ => loading checkpoint wv29_r18

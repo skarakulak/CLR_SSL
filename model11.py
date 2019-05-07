@@ -52,10 +52,10 @@ def train(
 
     # until epoch 45, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
-    num_cl_lim = math.ceil(args.num_of_clusters/1000)
-    model.eval()
-    with torch.no_grad():
-        if epoch <= 45:
+    if epoch <= 45:
+        num_cl_lim = math.ceil(args.num_of_clusters/1000)
+        model.eval()
+        with torch.no_grad():
             latent_reps_count = torch.zeros(1000)
             idx_cl=0
             for input_sup,y in sup_loader:
