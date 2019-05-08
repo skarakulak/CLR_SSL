@@ -1,0 +1,26 @@
+
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v36_r18
+weights_version_load: wv36_r18
+weights_version_save: wv36_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+fake_cse_multiplier: 0.1
+kld_multiplier: 0.005
+kld_loss_schedule: 1
+train_generator: 1
+
+
+Epoch: [0][1999/2000]	Time  0.165 ( 0.169)	Data  0.000 ( 0.011)	Loss 7.0160e+00 (7.5583e+00)	Loss_cse 7.0160e+00 (7.5583e+00)	Loss_cse_fake 7.4972e+00 (1.0950e+01)	Loss_kld_sup 7.5699e+04 (9.3851e+04)	Loss_kld_unsup 7.5699e+04 (9.3851e+04)	loss_g nan (nan)	Acc@1   3.12 (  0.20)	Acc@5   6.25 (  0.96)
+Test: [1999/2000]	Time  0.051 ( 0.051)	Loss 7.2744e+00 (7.1186e+00)	Acc@1   0.00 (  0.41)	Acc@5   0.00 (  1.94)
+ * Acc@1 0.411 Acc@5 1.939
+Epoch: [1][1999/2000]	Time  0.197 ( 0.187)	Data  0.000 ( 0.001)	Loss 7.1534e+00 (6.7596e+00)	Loss_cse 7.1534e+00 (6.7596e+00)	Loss_cse_fake 7.8550e+00 (8.3270e+00)	Loss_kld_sup 1.8406e+04 (6.5305e+03)	Loss_kld_unsup 1.8406e+04 (6.5305e+03)	loss_g nan (nan)	Acc@1   0.00 (  0.77)	Acc@5   0.00 (  3.01)
+Test: [1999/2000]	Time  0.010 ( 0.064)	Loss 6.8288e+00 (6.9289e+00)	Acc@1   0.00 (  0.76)	Acc@5   6.25 (  3.09)
+ * Acc@1 0.764 Acc@5 3.086

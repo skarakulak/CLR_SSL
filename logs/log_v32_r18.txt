@@ -761,3 +761,86 @@ Epoch: [18][1999/2000]	Time  0.073 ( 0.080)	Data  0.000 ( 0.005)	Loss 5.1676e+00
 Test: [1999/2000]	Time  0.010 ( 0.029)	Loss 4.3337e+00 (4.3310e+00)	Acc@1  12.50 ( 16.97)	Acc@5  37.50 ( 37.66)
  * Acc@1 16.969 Acc@5 37.656
 Epoch: [19][1999/2000]	Time  0.078 ( 0.080)	Data  0.000 ( 0.006)	Loss 4.9971e+00 (5.0107e+00)	Loss_cse 4.9971e+00 (5.0107e+00)	Loss_kld_sup 3.2186e+03 (3.3847e+03)	Loss_kld_unsup 3.2186e+03 (3.3847e+03)	Acc@1  12.50 ( 12.69)	Acc@5  21.88 ( 29.90)
+Test: [1999/2000]	Time  0.052 ( 0.028)	Loss 4.8478e+00 (4.2728e+00)	Acc@1  15.62 ( 17.64)	Acc@5  40.62 ( 38.99)
+ * Acc@1 17.642 Acc@5 38.986
+Epoch: [20][1999/2000]	Time  0.075 ( 0.083)	Data  0.000 ( 0.008)	Loss 5.2343e+00 (4.9666e+00)	Loss_cse 5.2343e+00 (4.9666e+00)	Loss_kld_sup 3.1680e+03 (3.5011e+03)	Loss_kld_unsup 3.1680e+03 (3.5011e+03)	Acc@1   3.12 ( 13.19)	Acc@5  34.38 ( 30.76)
+Test: [1999/2000]	Time  0.009 ( 0.034)	Loss 4.0660e+00 (4.3451e+00)	Acc@1  18.75 ( 17.40)	Acc@5  37.50 ( 38.18)
+ * Acc@1 17.398 Acc@5 38.177
+Epoch: [21][1999/2000]	Time  0.077 ( 0.080)	Data  0.000 ( 0.005)	Loss 5.7711e+00 (4.9156e+00)	Loss_cse 5.7711e+00 (4.9156e+00)	Loss_kld_sup 3.5541e+03 (3.6259e+03)	Loss_kld_unsup 3.5541e+03 (3.6259e+03)	Acc@1   6.25 ( 13.81)	Acc@5  18.75 ( 31.63)
+Test: [1999/2000]	Time  0.056 ( 0.032)	Loss 3.5642e+00 (4.3070e+00)	Acc@1  25.00 ( 18.01)	Acc@5  40.62 ( 39.12)
+ * Acc@1 18.014 Acc@5 39.123
+Epoch: [22][1999/2000]	Time  0.074 ( 0.079)	Data  0.000 ( 0.005)	Loss 4.1891e+00 (4.8666e+00)	Loss_cse 4.1891e+00 (4.8666e+00)	Loss_kld_sup 3.5547e+03 (3.7492e+03)	Loss_kld_unsup 3.5547e+03 (3.7492e+03)	Acc@1  28.12 ( 14.42)	Acc@5  40.62 ( 32.60)
+Test: [1999/2000]	Time  0.009 ( 0.034)	Loss 4.4171e+00 (4.2962e+00)	Acc@1   9.38 ( 18.45)	Acc@5  40.62 ( 39.47)
+ * Acc@1 18.455 Acc@5 39.469
+Epoch: [23][1999/2000]	Time  0.073 ( 0.078)	Data  0.000 ( 0.003)	Loss 5.3453e+00 (4.8296e+00)	Loss_cse 5.3453e+00 (4.8296e+00)	Loss_kld_sup 3.6281e+03 (3.8644e+03)	Loss_kld_unsup 3.6281e+03 (3.8644e+03)	Acc@1   6.25 ( 14.95)	Acc@5  18.75 ( 33.40)
+Test: [1999/2000]	Time  0.041 ( 0.028)	Loss 3.8466e+00 (4.2985e+00)	Acc@1  25.00 ( 18.55)	Acc@5  50.00 ( 40.09)
+ * Acc@1 18.550 Acc@5 40.089
+Epoch: [24][1999/2000]	Time  0.074 ( 0.077)	Data  0.000 ( 0.002)	Loss 4.3184e+00 (4.7771e+00)	Loss_cse 4.3184e+00 (4.7771e+00)	Loss_kld_sup 3.7150e+03 (4.0080e+03)	Loss_kld_unsup 3.7150e+03 (4.0080e+03)	Acc@1  21.88 ( 15.64)	Acc@5  37.50 ( 34.53)
+Test: [1999/2000]	Time  0.124 ( 0.035)	Loss 4.2888e+00 (4.2764e+00)	Acc@1  31.25 ( 18.74)	Acc@5  43.75 ( 40.28)
+ * Acc@1 18.739 Acc@5 40.281
+Epoch: [25][1999/2000]	Time  0.072 ( 0.078)	Data  0.000 ( 0.003)	Loss 5.1976e+00 (4.7274e+00)	Loss_cse 5.1976e+00 (4.7274e+00)	Loss_kld_sup 3.9816e+03 (4.0489e+03)	Loss_kld_unsup 3.9816e+03 (4.0489e+03)	Acc@1  15.62 ( 16.09)	Acc@5  43.75 ( 35.21)
+Test: [1999/2000]	Time  0.009 ( 0.038)	Loss 4.4391e+00 (4.2389e+00)	Acc@1  21.88 ( 19.64)	Acc@5  34.38 ( 41.37)
+ * Acc@1 19.642 Acc@5 41.367
+Epoch: [26][1999/2000]	Time  0.075 ( 0.078)	Data  0.000 ( 0.003)	Loss 5.0280e+00 (4.6829e+00)	Loss_cse 5.0280e+00 (4.6829e+00)	Loss_kld_sup 3.8809e+03 (4.1986e+03)	Loss_kld_unsup 3.8809e+03 (4.1986e+03)	Acc@1  12.50 ( 16.79)	Acc@5  34.38 ( 36.16)
+Test: [1999/2000]	Time  0.010 ( 0.032)	Loss 3.7673e+00 (4.2955e+00)	Acc@1  28.12 ( 19.77)	Acc@5  43.75 ( 41.25)
+ * Acc@1 19.772 Acc@5 41.245
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v32_r18
+weights_version_load: wv32_r18
+weights_version_save: wv32_r18
+set_optimizer: adam
+lr: 0.0003
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 8000
+fake_cse_multiplier: 0.0
+kld_multiplier: 0.003
+kld_loss_schedule: 1
+train_generator: 0
+
+
+ => loading checkpoint wv32_r18
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v32_r18
+weights_version_load: wv32_r18
+weights_version_save: wv32_r18
+set_optimizer: adam
+lr: 0.001
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 8000
+fake_cse_multiplier: 0.0
+kld_multiplier: 0.003
+kld_loss_schedule: 1
+train_generator: 0
+
+
+ => loading checkpoint wv32_r18
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v32_r18
+weights_version_load: wv32_r18
+weights_version_save: wv32_r18
+set_optimizer: adam
+lr: 0.0003
+print_freq: 2000
+num_of_workers: 4
+hpc: cassio
+user: sk7685
+num_of_clusters: 8000
+fake_cse_multiplier: 0.0
+kld_multiplier: 0.003
+kld_loss_schedule: 1
+train_generator: 0
+
+
+ => loading checkpoint wv32_r18

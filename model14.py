@@ -57,7 +57,7 @@ def train(
             prefix="Epoch: [{}]".format(epoch)
         )
 
-    # until epoch 45, we set `model.cl_centers` by sampling latent representations from the training examples
+    # until epoch 55, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
     if epoch <= 55:
         num_cl_lim = math.ceil(args.num_of_clusters/1000)
@@ -89,7 +89,8 @@ def train(
         elif epoch < 75: kld_multiplier = 1e-2 * args.kld_multiplier
         elif epoch < 95: kld_multiplier = 1e-1 * args.kld_multiplier
     else: kld_multiplier = args.kld_multiplier
-
+    
+    fake_cse_mult = 0 if epoch < 50 else args.fake_cse_multiplier
 
 
     end = time.time()
@@ -114,7 +115,7 @@ def train(
             input_fake = netG(z[:,:,None,None])
             output_fake, mu_fake, logvar_fake, c_dist_fake, cluster_fake  = model(input_fake, add_eps=True, return_c_dist=True)
             loss_g = gen_critereon(torch.log(output_fake),output_unsup)
-            loss_g.backward()
+            loss_g.backward(retain_graph=True)
             optimizerG.step()
 
             with torch.no_grad():
@@ -132,8 +133,8 @@ def train(
         loss = loss_cse + kld_multiplier * ((8/9)*KLD_unsup+(1/9)*KLD_sup) 
         
         if args.train_generator:             
-            loss += args.fake_cse_multiplier * loss_cse_fake
-            loss_g_meter.update(D_G_z2.item(), input_sup.size(0))
+            loss += fake_cse_mult * loss_cse_fake
+            loss_g_meter.update(loss_g.item(), input_sup.size(0))
             loss_cse_fake_meter.update(loss_cse_fake.item(), input_sup.size(0))
 
 
