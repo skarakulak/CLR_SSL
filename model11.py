@@ -60,9 +60,9 @@ def train(
             prefix="Epoch: [{}]".format(epoch)
         )
 
-    # until epoch 45, we set `model.cl_centers` by sampling latent representations from the training examples
+    # until epoch 55, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
-    if epoch <= 45:
+    if epoch <= 55:
         num_cl_lim = math.ceil(args.num_of_clusters/1000)
         model.eval()
         with torch.no_grad():
@@ -86,11 +86,11 @@ def train(
     # switch to train mode
     model.train()
     
-    if args.kld_loss_schedule and epoch < 60:
-        if epoch < 30: kld_multiplier = 0
-        elif epoch < 40: kld_multiplier = 1e-4 * args.kld_multiplier
-        elif epoch < 50: kld_multiplier = 1e-2 * args.kld_multiplier
-        elif epoch < 60: kld_multiplier = 1e-1 * args.kld_multiplier
+    if args.kld_loss_schedule and epoch < 95:
+        if epoch < 40: kld_multiplier = 0
+        elif epoch < 50: kld_multiplier = 1e-4 * args.kld_multiplier
+        elif epoch < 75: kld_multiplier = 1e-2 * args.kld_multiplier
+        elif epoch < 95: kld_multiplier = 1e-1 * args.kld_multiplier
     else: kld_multiplier = args.kld_multiplier
 
 
@@ -158,9 +158,9 @@ def train(
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
-        KLD_sup = -0.5 * torch.sum(1 + logvar_sup - c_dist_sup.pow(2) - logvar_sup.exp())
-        KLD_unsup = -0.5 * torch.sum(1 + logvar_unsup - c_dist_unsup.pow(2) - logvar_unsup.exp())
-        #KLD_fake = -0.5 * torch.sum(1 + logvar_fake - c_dist_fake.pow(2) - logvar_fake.exp())
+        KLD_sup = -0.5 * torch.sum(1 + logvar_sup - c_dist_sup - logvar_sup.exp())
+        KLD_unsup = -0.5 * torch.sum(1 + logvar_unsup - c_dist_unsup - logvar_unsup.exp())
+        #KLD_fake = -0.5 * torch.sum(1 + logvar_fake - c_dist_fake - logvar_fake.exp())
         loss = loss_cse + kld_multiplier * ((8/9)*KLD_unsup+(1/9)*KLD_sup) 
         
         if args.train_generator: 
