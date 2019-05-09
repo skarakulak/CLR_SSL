@@ -132,13 +132,14 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def get_cdist(self, x, c_ind):
-        b,f,h,w = x.size()
-        if a.ndimension()>2:
+        if x.ndimension()>2:
+            b,f,h,w = x.size()
             # sample one pixel per image
             x = x.view(b,f,-1).transpose(1,2)
-            rand_idx = torch.randint(0,x.size(1),(b,))
+            rand_idx = torch.randint(0,x.size(1),(b,),device=self.conv1.weight.device)
             r=rand_idx[:,None,None].expand(b,1,f)
             x = torch.gather(input=x, dim=1, index=r).squeeze(1)
+        else: b,f = x.size()
         # k-means
         x_k = x.unsqueeze(1).expand(b,self.cl_centers[c_ind].size(0),f)
         c_k = self.cl_centers[c_ind].unsqueeze(0).expand(b,self.cl_centers[c_ind].size(0),f)

@@ -22,7 +22,7 @@ from model_def15 import *
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 
 
-def init_clusters(model, sup_loader, unsup_loader, args, num_of_classes=1000):
+def init_clusters(model, sup_loader, unsup_loader,device, args, num_of_classes=1000):
     num_cl_lim = math.ceil(args.num_of_clusters/num_of_classes)
     model.eval()
     with torch.no_grad():
@@ -34,7 +34,10 @@ def init_clusters(model, sup_loader, unsup_loader, args, num_of_classes=1000):
             for (z1,z2,z3,label) in zip(*latents,y):
                 if latent_reps_count[int(label)] < num_cl_lim:
                     for cl,z in zip(model.cl_centers,[z1,z2,z3]): 
-                        cl[idx_cl,:] = z.detach().data.clone()
+                        if z.ndimension()>2:
+                            rh,rw = random.randint(0,z.size(1)-1), random.randint(0,z.size(2)-1)
+                            cl[idx_cl,:] = z[:,rh,rw].detach().data.clone()
+                        else: cl[idx_cl,:] = z.detach().data.clone()
                     idx_cl += 1
                     latent_reps_count[int(label)] += 1
                     if idx_cl>=args.num_of_clusters: break
@@ -68,7 +71,7 @@ def train(
     # until epoch 55, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
     if epoch <= 55:
-        init_clusters(model, sup_loader, unsup_loader, args)
+        init_clusters(model, sup_loader, unsup_loader, device, args)
 
     # switch to train mode
     model.train()
