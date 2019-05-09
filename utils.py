@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.autograd import Variable
 from torch.utils.data.dataset import Dataset
 from torch.utils.data import DataLoader
 import torchvision
@@ -12,6 +13,8 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
 import shutil
 import PIL
+import math
+import random
 
 # references
 # https://github.com/pytorch/examples/blob/master/imagenet/main.py
@@ -187,3 +190,46 @@ def gan_weights_init(m):
     elif classname.find('BatchNorm') != -1:
         m.weight.data.normal_(1.0, 0.02)
         m.bias.data.fill_(0)
+def one_hot_embedding(labels, num_classes):
+    return torch.eye(num_classes)[labels.data].cuda()
+
+class FocalLoss(nn.Module):
+
+    def __init__(self, gamma=2, eps=1e-7):
+        super(FocalLoss, self).__init__()
+        self.gamma = gamma
+        self.eps = eps
+
+    def forward(self, input, target):
+        y = one_hot_embedding(target, input.size(-1))
+        inp = input.clamp(self.eps, 1. - self.eps)
+
+        loss = -1 * Variable(y) * torch.log(inp) # cross entropy
+        loss = loss * (1 - inp) ** self.gamma # focal loss
+        return loss.sum(dim=1).mean()
+
+
+def init_clusters(model, sup_loader, unsup_loader,device, args, num_of_classes=1000):
+    num_cl_lim = math.ceil(args.num_of_clusters/num_of_classes)
+    model.eval()
+    with torch.no_grad():
+        latent_reps_count = torch.zeros(num_of_classes)
+        idx_cl=0
+        for input_sup,y in sup_loader:
+            input_sup = input_sup.to(device)
+            output_sup, latents = model(input_sup, return_latent=True)
+            for (z1,z2,z3,label) in zip(*latents,y):
+                if latent_reps_count[int(label)] < num_cl_lim:
+                    for cl,z in zip(model.cl_centers,[z1,z2,z3]):
+                        if z.ndimension()>2:
+                            rh,rw = random.randint(0,z.size(1)-1), random.randint(0,z.size(2)-1)
+                            cl[idx_cl,:] = z[:,rh,rw].detach().data.clone()
+                        else: cl[idx_cl,:] = z.detach().data.clone()
+                    idx_cl += 1
+                    latent_reps_count[int(label)] += 1
+                    if idx_cl>=args.num_of_clusters: break
+            if idx_cl>=args.num_of_clusters: break
+        for cl in model.cl_centers: cl = nn.parameter.Parameter(cl.data)
+
+
+

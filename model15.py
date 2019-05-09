@@ -6,6 +6,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+from torch.autograd import Variable
 import torch.backends.cudnn as cudnn
 from torch.utils.data.dataset import Dataset
 from torch.utils.data import DataLoader
@@ -20,44 +21,6 @@ from utils import *
 from model_def15 import *
 
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
-
-class FocalLoss(nn.Module):
-    def __init__(self, alpha=1, gamma=2, logits=False, reduce=True):
-        super(FocalLoss, self).__init__()
-        self.alpha = alpha
-        self.gamma = gamma
-        self.logits = logits
-
-    def forward(self, inputs, targets):
-        BCE_loss = F.binary_cross_entropy(inputs, targets, reduce=False)
-        pt = torch.exp(-BCE_loss)
-        F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
-
-        return torch.mean(F_loss)
-
-def init_clusters(model, sup_loader, unsup_loader,device, args, num_of_classes=1000):
-    num_cl_lim = math.ceil(args.num_of_clusters/num_of_classes)
-    model.eval()
-    with torch.no_grad():
-        latent_reps_count = torch.zeros(num_of_classes)
-        idx_cl=0
-        for input_sup,y in sup_loader:
-            input_sup = input_sup.to(device)
-            output_sup, latents = model(input_sup, return_latent=True)
-            for (z1,z2,z3,label) in zip(*latents,y):
-                if latent_reps_count[int(label)] < num_cl_lim:
-                    for cl,z in zip(model.cl_centers,[z1,z2,z3]): 
-                        if z.ndimension()>2:
-                            rh,rw = random.randint(0,z.size(1)-1), random.randint(0,z.size(2)-1)
-                            cl[idx_cl,:] = z[:,rh,rw].detach().data.clone()
-                        else: cl[idx_cl,:] = z.detach().data.clone()
-                    idx_cl += 1
-                    latent_reps_count[int(label)] += 1
-                    if idx_cl>=args.num_of_clusters: break
-            if idx_cl>=args.num_of_clusters: break
-        for cl in model.cl_centers: cl = nn.parameter.Parameter(cl.data)
-
-
 
 def train(
     sup_loader, unsup_loader,
@@ -224,13 +187,13 @@ def train_and_val(args):
     model = model.to(device)
 
     # define loss function (criterion) and optimizer
-    #criterion = nn.CrossEntropyLoss()
-    criterion = FocalLoss()
+    if args.focal_loss: criterion = FocalLoss()
+    else: criterion = nn.CrossEntropyLoss()
 
     if args.set_optimizer == 'adam':
-        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
+        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     else:
-        optimizer = torch.optim.SGD(model.parameters(), lr=args.lr)
+        optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     # torch.optim.SGD(model.parameters(), args['lr'],
     #                             momentum=args.momentum,
     #                             weight_decay=args.weight_decay)

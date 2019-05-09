@@ -11,6 +11,8 @@ parser.add_argument('-w','--weights-version-load', type=str, default='v0', help=
 parser.add_argument('-x','--weights-version-save', type=str, default='v0', help='version of the model weight checkpoint to load')
 parser.add_argument('-o','--set-optimizer', type=str, default='adam', help="optimizer ('adam' or 'sgd')")
 parser.add_argument('-l','--lr', type=float, default=0.01, help='learning rate')
+parser.add_argument('-d','--weight-decay', type=float, default=0.0, help='weight decay')
+parser.add_argument('-F','--focal-loss', type=int, default=0, help='give 1 for focal loss')
 parser.add_argument('-p','--print-freq', type=int, default=2000, help='multiplier for the variance loss')
 parser.add_argument('-W','--num-of-workers', type=int, default=4, help='number of workers for the dataprep')
 parser.add_argument('-C','--hpc', type=str, default='cassio', help='prince/cassio/bigpurple')
