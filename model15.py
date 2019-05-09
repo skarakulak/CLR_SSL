@@ -21,6 +21,19 @@ from model_def15 import *
 
 # reference: https://github.com/pytorch/examples/blob/master/imagenet/main.py
 
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=1, gamma=2, logits=False, reduce=True):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.logits = logits
+
+    def forward(self, inputs, targets):
+        BCE_loss = F.binary_cross_entropy(inputs, targets, reduce=False)
+        pt = torch.exp(-BCE_loss)
+        F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
+
+        return torch.mean(F_loss)
 
 def init_clusters(model, sup_loader, unsup_loader,device, args, num_of_classes=1000):
     num_cl_lim = math.ceil(args.num_of_clusters/num_of_classes)
@@ -211,8 +224,8 @@ def train_and_val(args):
     model = model.to(device)
 
     # define loss function (criterion) and optimizer
-    criterion = nn.CrossEntropyLoss()
-
+    #criterion = nn.CrossEntropyLoss()
+    criterion = FocalLoss()
 
     if args.set_optimizer == 'adam':
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
