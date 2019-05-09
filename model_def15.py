@@ -144,7 +144,9 @@ class ResNet(nn.Module):
         x_k = x.unsqueeze(1).expand(b,self.cl_centers[c_ind].size(0),f)
         c_k = self.cl_centers[c_ind].unsqueeze(0).expand(b,self.cl_centers[c_ind].size(0),f)
         c_dist = torch.min(((x_k-c_k)**2).sum(2), dim=1)[0].mean()
-        return c_dist
+        if c_ind==2:   return c_dist
+        elif c_ind==1: return c_dist*2
+        else:          return c_dist*4 
 
 
     def forward(self, x, add_eps = None, return_c_dist=False, return_latent=False):

@@ -76,11 +76,10 @@ def train(
     # switch to train mode
     model.train()
     
-    if args.cdist_loss_schedule and epoch < 95:
+    if args.cdist_loss_schedule and epoch < 65:
         if epoch < 40: cdist_multiplier = 0
-        elif epoch < 50: cdist_multiplier = 1e-4 * args.cdist_multiplier
-        elif epoch < 75: cdist_multiplier = 1e-2 * args.cdist_multiplier
-        elif epoch < 95: cdist_multiplier = 1e-1 * args.cdist_multiplier
+        elif epoch < 50: cdist_multiplier = 1e-3 * args.cdist_multiplier
+        elif epoch < 65: cdist_multiplier = 1e-1 * args.cdist_multiplier
     else: cdist_multiplier = args.cdist_multiplier
     
 
