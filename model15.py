@@ -75,7 +75,7 @@ def train(
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
-        loss = loss_cse + cdist_multiplier * ((8/9)*c_dist_sup+(1/9)*c_dist_unsup) 
+        loss = loss_cse + cdist_multiplier * ((8/9)*c_dist_unsup+(1/9)*c_dist_sup) 
 
 
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))

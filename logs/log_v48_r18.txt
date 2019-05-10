@@ -424,3 +424,138 @@ Test: [1999/2000]	Time  0.023 ( 0.019)	Loss 4.0673e+00 (3.6455e+00)	Acc@1  25.00
 Epoch: [111][1999/2000]	Time  0.054 ( 0.059)	Data  0.000 ( 0.001)	Loss 4.9635e+00 (4.9116e+00)	Loss_cse 3.4872e+00 (3.4410e+00)	Loss_cdist_sup 1.4739e+02 (1.4707e+02)	Loss_cdist_unsup 1.4962e+02 (1.4708e+02)	Acc@1  37.50 ( 32.84)	Acc@5  56.25 ( 57.82)
 Test: [1999/2000]	Time  0.007 ( 0.024)	Loss 4.2873e+00 (3.6527e+00)	Acc@1  18.75 ( 25.61)	Acc@5  34.38 ( 49.95)
  * Acc@1 25.606 Acc@5 49.952
+Epoch: [112][1999/2000]	Time  0.055 ( 0.058)	Data  0.000 ( 0.001)	Loss 4.7921e+00 (4.9185e+00)	Loss_cse 3.2282e+00 (3.4477e+00)	Loss_cdist_sup 1.5660e+02 (1.4707e+02)	Loss_cdist_unsup 1.5473e+02 (1.4708e+02)	Acc@1  43.75 ( 32.81)	Acc@5  75.00 ( 57.64)
+Test: [1999/2000]	Time  0.047 ( 0.019)	Loss 3.8126e+00 (3.6331e+00)	Acc@1  21.88 ( 25.72)	Acc@5  50.00 ( 50.33)
+ * Acc@1 25.717 Acc@5 50.327
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v48_r18
+weights_version_load: wv48_r18_best
+weights_version_save: wv48_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 0.001
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 5
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.01
+cdist_loss_schedule: 0
+drop_prob: 0.1
+
+
+ => loading checkpoint wv48_r18_best
+ ===> loaded optimizer state for sgd
+ => loaded checkpoint wv48_r18_best
+Epoch: [107][1999/2000]	Time  0.086 ( 0.086)	Data  0.000 ( 0.001)	Loss 5.0912e+00 (5.3679e+00)	Loss_cse 3.6332e+00 (3.8529e+00)	Loss_cdist_sup 1.4537e+02 (1.5152e+02)	Loss_cdist_unsup 1.4918e+02 (1.5142e+02)	Acc@1  40.62 ( 27.60)	Acc@5  56.25 ( 50.12)
+Test: [1999/2000]	Time  0.009 ( 0.025)	Loss 3.5589e+00 (3.6493e+00)	Acc@1  25.00 ( 25.72)	Acc@5  46.88 ( 50.10)
+ * Acc@1 25.722 Acc@5 50.105
+Epoch: [108][1999/2000]	Time  0.090 ( 0.086)	Data  0.000 ( 0.001)	Loss 5.2149e+00 (5.3301e+00)	Loss_cse 3.6705e+00 (3.8254e+00)	Loss_cdist_sup 1.5393e+02 (1.5047e+02)	Loss_cdist_unsup 1.5859e+02 (1.5047e+02)	Acc@1  25.00 ( 27.92)	Acc@5  50.00 ( 50.61)
+Test: [1999/2000]	Time  0.019 ( 0.020)	Loss 3.8392e+00 (3.6799e+00)	Acc@1  21.88 ( 25.25)	Acc@5  40.62 ( 49.55)
+ * Acc@1 25.248 Acc@5 49.550
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v48_r18
+weights_version_load: wv48_r18_best
+weights_version_save: wv48_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 0.001
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 5
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.01
+cdist_loss_schedule: 0
+drop_prob: 0.1
+
+
+ => loading checkpoint wv48_r18_best
+ ===> loaded optimizer state for sgd
+ => loaded checkpoint wv48_r18_best
+Epoch: [108][1999/2000]	Time  0.068 ( 0.062)	Data  0.000 ( 0.001)	Loss 5.0846e+00 (5.3298e+00)	Loss_cse 3.6157e+00 (3.8260e+00)	Loss_cdist_sup 1.4403e+02 (1.5044e+02)	Loss_cdist_unsup 1.4724e+02 (1.5038e+02)	Acc@1  37.50 ( 27.71)	Acc@5  56.25 ( 50.54)
+Test: [1999/2000]	Time  0.007 ( 0.021)	Loss 3.5701e+00 (3.6531e+00)	Acc@1  25.00 ( 25.69)	Acc@5  43.75 ( 50.06)
+ * Acc@1 25.688 Acc@5 50.061
+Epoch: [109][1999/2000]	Time  0.063 ( 0.062)	Data  0.000 ( 0.001)	Loss 5.2336e+00 (5.3074e+00)	Loss_cse 3.6651e+00 (3.8115e+00)	Loss_cdist_sup 1.5309e+02 (1.4959e+02)	Loss_cdist_unsup 1.5732e+02 (1.4959e+02)	Acc@1  25.00 ( 27.97)	Acc@5  50.00 ( 50.78)
+Test: [1999/2000]	Time  0.008 ( 0.020)	Loss 3.8439e+00 (3.6822e+00)	Acc@1  21.88 ( 25.21)	Acc@5  40.62 ( 49.50)
+ * Acc@1 25.213 Acc@5 49.498
+Epoch: [110][1999/2000]	Time  0.064 ( 0.062)	Data  0.000 ( 0.002)	Loss 5.2278e+00 (5.2883e+00)	Loss_cse 3.7054e+00 (3.8010e+00)	Loss_cdist_sup 1.5348e+02 (1.4871e+02)	Loss_cdist_unsup 1.5208e+02 (1.4873e+02)	Acc@1  28.12 ( 27.86)	Acc@5  53.12 ( 50.90)
+Test: [1999/2000]	Time  0.008 ( 0.019)	Loss 3.8257e+00 (3.6731e+00)	Acc@1  28.12 ( 25.39)	Acc@5  46.88 ( 49.81)
+ * Acc@1 25.394 Acc@5 49.814
+Epoch: [111][1999/2000]	Time  0.058 ( 0.062)	Data  0.000 ( 0.001)	Loss 4.9366e+00 (5.2656e+00)	Loss_cse 3.5261e+00 (3.7842e+00)	Loss_cdist_sup 1.4130e+02 (1.4811e+02)	Loss_cdist_unsup 1.4102e+02 (1.4814e+02)	Acc@1  28.12 ( 28.15)	Acc@5  56.25 ( 51.33)
+Test: [1999/2000]	Time  0.008 ( 0.019)	Loss 4.2613e+00 (3.6758e+00)	Acc@1  12.50 ( 25.30)	Acc@5  37.50 ( 49.68)
+ * Acc@1 25.302 Acc@5 49.680
+Epoch: [112][1999/2000]	Time  0.054 ( 0.063)	Data  0.000 ( 0.002)	Loss 5.7063e+00 (5.2598e+00)	Loss_cse 4.2068e+00 (3.7839e+00)	Loss_cdist_sup 1.4944e+02 (1.4756e+02)	Loss_cdist_unsup 1.5002e+02 (1.4759e+02)	Acc@1  25.00 ( 27.98)	Acc@5  43.75 ( 50.93)
+Test: [1999/2000]	Time  0.008 ( 0.019)	Loss 3.4243e+00 (3.6921e+00)	Acc@1  21.88 ( 25.22)	Acc@5  53.12 ( 49.64)
+ * Acc@1 25.223 Acc@5 49.636
+Epoch: [113][1999/2000]	Time  0.064 ( 0.062)	Data  0.000 ( 0.001)	Loss 5.6777e+00 (5.2501e+00)	Loss_cse 4.2724e+00 (3.7789e+00)	Loss_cdist_sup 1.4061e+02 (1.4705e+02)	Loss_cdist_unsup 1.4052e+02 (1.4713e+02)	Acc@1  12.50 ( 28.08)	Acc@5  37.50 ( 51.20)
+Test: [1999/2000]	Time  0.009 ( 0.020)	Loss 3.4158e+00 (3.6773e+00)	Acc@1  28.12 ( 25.46)	Acc@5  59.38 ( 49.80)
+ * Acc@1 25.458 Acc@5 49.805
+Epoch: [114][1999/2000]	Time  0.058 ( 0.063)	Data  0.000 ( 0.003)	Loss 5.6872e+00 (5.2425e+00)	Loss_cse 4.1320e+00 (3.7754e+00)	Loss_cdist_sup 1.5633e+02 (1.4660e+02)	Loss_cdist_unsup 1.5542e+02 (1.4672e+02)	Acc@1  21.88 ( 28.20)	Acc@5  56.25 ( 51.41)
+Test: [1999/2000]	Time  0.009 ( 0.019)	Loss 3.7575e+00 (3.6683e+00)	Acc@1  21.88 ( 25.42)	Acc@5  46.88 ( 49.81)
+ * Acc@1 25.417 Acc@5 49.808
+Epoch: [115][1999/2000]	Time  0.059 ( 0.061)	Data  0.000 ( 0.001)	Loss 4.5541e+00 (5.2377e+00)	Loss_cse 3.1424e+00 (3.7749e+00)	Loss_cdist_sup 1.4428e+02 (1.4629e+02)	Loss_cdist_unsup 1.4078e+02 (1.4629e+02)	Acc@1  37.50 ( 28.04)	Acc@5  68.75 ( 51.26)
+Test: [1999/2000]	Time  0.007 ( 0.019)	Loss 3.7401e+00 (3.6733e+00)	Acc@1  28.12 ( 25.48)	Acc@5  46.88 ( 49.79)
+ * Acc@1 25.477 Acc@5 49.789
+Epoch: [116][1999/2000]	Time  0.057 ( 0.062)	Data  0.000 ( 0.001)	Loss 5.0718e+00 (5.2218e+00)	Loss_cse 3.6182e+00 (3.7633e+00)	Loss_cdist_sup 1.4614e+02 (1.4589e+02)	Loss_cdist_unsup 1.4527e+02 (1.4585e+02)	Acc@1  21.88 ( 28.26)	Acc@5  62.50 ( 51.53)
+Test: [1999/2000]	Time  0.009 ( 0.019)	Loss 4.0506e+00 (3.6813e+00)	Acc@1  12.50 ( 25.35)	Acc@5  40.62 ( 49.77)
+ * Acc@1 25.352 Acc@5 49.767
+Epoch: [117][1999/2000]	Time  0.059 ( 0.061)	Data  0.000 ( 0.001)	Loss 5.5655e+00 (5.2247e+00)	Loss_cse 4.0960e+00 (3.7706e+00)	Loss_cdist_sup 1.4997e+02 (1.4538e+02)	Loss_cdist_unsup 1.4657e+02 (1.4541e+02)	Acc@1  21.88 ( 28.05)	Acc@5  40.62 ( 51.41)
+Test: [1999/2000]	Time  0.035 ( 0.024)	Loss 3.9151e+00 (3.6780e+00)	Acc@1  21.88 ( 25.41)	Acc@5  40.62 ( 49.68)
+ * Acc@1 25.408 Acc@5 49.681
+Epoch: [118][1999/2000]	Time  0.063 ( 0.062)	Data  0.000 ( 0.000)	Loss 5.1489e+00 (5.2154e+00)	Loss_cse 3.5975e+00 (3.7658e+00)	Loss_cdist_sup 1.5560e+02 (1.4499e+02)	Loss_cdist_unsup 1.5508e+02 (1.4496e+02)	Acc@1  37.50 ( 28.00)	Acc@5  62.50 ( 51.50)
+Test: [1999/2000]	Time  0.007 ( 0.020)	Loss 3.8866e+00 (3.6995e+00)	Acc@1  28.12 ( 25.37)	Acc@5  40.62 ( 49.36)
+ * Acc@1 25.366 Acc@5 49.359
+Epoch: [119][1999/2000]	Time  0.063 ( 0.062)	Data  0.000 ( 0.001)	Loss 5.2235e+00 (5.2187e+00)	Loss_cse 3.7054e+00 (3.7696e+00)	Loss_cdist_sup 1.4962e+02 (1.4497e+02)	Loss_cdist_unsup 1.5208e+02 (1.4490e+02)	Acc@1  34.38 ( 28.10)	Acc@5  71.88 ( 51.47)
+Test: [1999/2000]	Time  0.007 ( 0.022)	Loss 3.7981e+00 (3.6841e+00)	Acc@1  28.12 ( 25.16)	Acc@5  46.88 ( 49.43)
+ * Acc@1 25.164 Acc@5 49.430
+Epoch: [120][1999/2000]	Time  0.071 ( 0.061)	Data  0.027 ( 0.001)	Loss 5.3733e+00 (5.2077e+00)	Loss_cse 3.9340e+00 (3.7607e+00)	Loss_cdist_sup 1.4335e+02 (1.4463e+02)	Loss_cdist_unsup 1.4400e+02 (1.4471e+02)	Acc@1  21.88 ( 28.17)	Acc@5  46.88 ( 51.46)
+Test: [1999/2000]	Time  0.025 ( 0.020)	Loss 4.2848e+00 (3.6984e+00)	Acc@1  21.88 ( 25.23)	Acc@5  43.75 ( 49.40)
+ * Acc@1 25.228 Acc@5 49.395
+Epoch: [121][1999/2000]	Time  0.061 ( 0.061)	Data  0.000 ( 0.001)	Loss 5.1911e+00 (5.2075e+00)	Loss_cse 3.6451e+00 (3.7638e+00)	Loss_cdist_sup 1.5895e+02 (1.4446e+02)	Loss_cdist_unsup 1.5406e+02 (1.4437e+02)	Acc@1  28.12 ( 28.29)	Acc@5  56.25 ( 51.68)
+Test: [1999/2000]	Time  0.070 ( 0.020)	Loss 3.6455e+00 (3.6688e+00)	Acc@1  28.12 ( 25.56)	Acc@5  43.75 ( 49.85)
+ * Acc@1 25.561 Acc@5 49.847
+Epoch: [122][1999/2000]	Time  0.066 ( 0.061)	Data  0.000 ( 0.000)	Loss 5.0062e+00 (5.2048e+00)	Loss_cse 3.5587e+00 (3.7656e+00)	Loss_cdist_sup 1.4089e+02 (1.4399e+02)	Loss_cdist_unsup 1.4523e+02 (1.4392e+02)	Acc@1  31.25 ( 28.08)	Acc@5  56.25 ( 51.44)
+Test: [1999/2000]	Time  0.008 ( 0.018)	Loss 4.1476e+00 (3.6844e+00)	Acc@1  12.50 ( 25.22)	Acc@5  37.50 ( 49.67)
+ * Acc@1 25.222 Acc@5 49.669
+Epoch: [123][1999/2000]	Time  0.059 ( 0.062)	Data  0.000 ( 0.001)	Loss 5.4070e+00 (5.2011e+00)	Loss_cse 3.8798e+00 (3.7638e+00)	Loss_cdist_sup 1.5255e+02 (1.4382e+02)	Loss_cdist_unsup 1.5274e+02 (1.4372e+02)	Acc@1  31.25 ( 28.33)	Acc@5  46.88 ( 51.48)
+Test: [1999/2000]	Time  0.023 ( 0.020)	Loss 3.5967e+00 (3.6815e+00)	Acc@1  28.12 ( 25.31)	Acc@5  56.25 ( 49.62)
+ * Acc@1 25.311 Acc@5 49.616
+Epoch: [124][1999/2000]	Time  0.058 ( 0.062)	Data  0.000 ( 0.001)	Loss 4.9067e+00 (5.1938e+00)	Loss_cse 3.5564e+00 (3.7589e+00)	Loss_cdist_sup 1.3066e+02 (1.4350e+02)	Loss_cdist_unsup 1.3558e+02 (1.4349e+02)	Acc@1  31.25 ( 28.01)	Acc@5  59.38 ( 51.80)
+Test: [1999/2000]	Time  0.013 ( 0.019)	Loss 3.5632e+00 (3.6936e+00)	Acc@1  25.00 ( 25.38)	Acc@5  43.75 ( 49.55)
+ * Acc@1 25.375 Acc@5 49.545
+Epoch: [125][1999/2000]	Time  0.066 ( 0.062)	Data  0.000 ( 0.001)	Loss 4.8854e+00 (5.1838e+00)	Loss_cse 3.4745e+00 (3.7491e+00)	Loss_cdist_sup 1.4159e+02 (1.4339e+02)	Loss_cdist_unsup 1.4103e+02 (1.4348e+02)	Acc@1  25.00 ( 28.42)	Acc@5  68.75 ( 51.89)
+Test: [1999/2000]	Time  0.026 ( 0.019)	Loss 3.5250e+00 (3.6700e+00)	Acc@1  34.38 ( 25.55)	Acc@5  59.38 ( 49.84)
+ * Acc@1 25.547 Acc@5 49.841
+Epoch: [126][1999/2000]	Time  0.059 ( 0.061)	Data  0.000 ( 0.001)	Loss 5.0201e+00 (5.1936e+00)	Loss_cse 3.6188e+00 (3.7612e+00)	Loss_cdist_sup 1.3940e+02 (1.4323e+02)	Loss_cdist_unsup 1.4022e+02 (1.4323e+02)	Acc@1  31.25 ( 28.15)	Acc@5  59.38 ( 51.75)
+Test: [1999/2000]	Time  0.007 ( 0.019)	Loss 3.5464e+00 (3.6873e+00)	Acc@1  21.88 ( 25.27)	Acc@5  53.12 ( 49.50)
+ * Acc@1 25.266 Acc@5 49.497
+start_epoch: 0
+epochs: 300
+arch: resnet18
+version: v48_r18
+weights_version_load: wv48_r18_best
+weights_version_save: wv48_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 0.001
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 5
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.01
+cdist_loss_schedule: 0
+drop_prob: 0.0
+
+
+ => loading checkpoint wv48_r18_best
+ ===> loaded optimizer state for sgd
+ => loaded checkpoint wv48_r18_best
