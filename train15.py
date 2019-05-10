@@ -20,6 +20,7 @@ parser.add_argument('-U','--user', type=str, default='sk7685', help='hpc usernam
 parser.add_argument('-n','--num-of-clusters', type=int, default=2000, help='number of clusters')
 parser.add_argument('-c','--cdist-multiplier', type=float, default=1.0, help='multiplier for the kl-div')
 parser.add_argument('-S','--cdist-loss-schedule', type=int, default=1, help='gradually increase the multiplier of cdist loss')
+parser.add_argument('-D','--drop_prob', type=float, default=0.0, help='dropout probability at the last layer')
 
 
 args = parser.parse_args()

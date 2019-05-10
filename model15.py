@@ -141,7 +141,7 @@ def validate(val_loader, model, criterion, args,device, log_path):
         ' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'.format(top1=top1, top5=top5)
     )
         
-    return top1.avg
+    return top5.avg
 
 
 def train_and_val(args):
@@ -176,14 +176,14 @@ def train_and_val(args):
 
     write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
 
-    global best_acc1
+    global best_acc5
     # create model
     if args.arch=='resnet32':
         model = resnet34(
-            num_clust = args.num_of_clusters) 
+            num_clust = args.num_of_clusters, dp = args.drop_prob) 
     else:
         model = resnet18(
-            num_clust = args.num_of_clusters)
+            num_clust = args.num_of_clusters, dp = args.drop_prob)
     model = model.to(device)
 
     # define loss function (criterion) and optimizer
@@ -206,7 +206,7 @@ def train_and_val(args):
             write_to_log(log_path,f' ===> model architecture saved at checkpoint {args.weights_version_load} is different.')
             return
         args.start_epoch = checkpoint['epoch']
-        best_acc1 = checkpoint['best_acc1']
+        best_acc5 = checkpoint['best_acc1'] # name is kept as best_acc1 to not cause an issue while loading the model
     
         model.load_state_dict(checkpoint['state_dict'])
         if checkpoint['optimizer_name'] == args.set_optimizer:
@@ -214,7 +214,7 @@ def train_and_val(args):
             write_to_log(log_path,f' ===> loaded optimizer state for {args.set_optimizer}')
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}')
     else:
-        best_acc1 = -1
+        best_acc5 = -1
 
 
     for epoch in range(args.start_epoch, args.start_epoch+args.epochs):
@@ -227,18 +227,18 @@ def train_and_val(args):
         )
 
         # evaluate on validation set
-        acc1 = validate(data_loader_sup_val, model, criterion, args, device, log_path)
+        acc5 = validate(data_loader_sup_val, model, criterion, args, device, log_path)
 
         # remember best acc@1 and save checkpoint
-        is_best = acc1 > best_acc1
-        best_acc1 = max(acc1, best_acc1)
+        is_best = acc5 > best_acc5
+        best_acc5 = max(acc5, best_acc5)
 
         save_checkpoint(
             {
             'epoch': epoch + 1,
             'arch': args.arch,
             'state_dict': model.state_dict(),
-            'best_acc1': best_acc1,
+            'best_acc1': best_acc5,
             'optimizer' : optimizer.state_dict(),
             'optimizer_name' : args.set_optimizer
             },

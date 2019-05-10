@@ -37,5 +37,6 @@
 module load python-3.6
 module load cuda-10.0
 source /data/sk7685/pytorch_10/bin/activate pytorch_10
-srun python3 ../train15.py -e 300  -v v47_r18 -w wv47_r18 -x wv47_r18 -o adam -l 0.0001 -d 0.01 -n 2000 -c 3 -S 1 -W 6
-srun python3 ../train15.py -e 3000 -v v47_r18 -w wv47_r18 -x wv47_r18 -o adam -l 0.00003 -d 0.01 -n 2000 -c 3 -S 1 -W 6
+srun python3 ../train15.py -e 300  -v v47_r18 -w wv49_r18_best -x wv47_r18 -o adam -l 0.0001 -d 0.001 -n 2000 -c .05 -S 1 -W 6
+srun python3 ../train15.py -e 3000 -v v47_r18 -w wv47_r18      -x wv47_r18 -o adam -l 0.00003 -d 0.001 -n 2000 -c .05 -S 1 -W 6
+
