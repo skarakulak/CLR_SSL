@@ -84,9 +84,10 @@ class Bottleneck(nn.Module):
 
 class ResNet(nn.Module):
 
-    def __init__(self, block, layers, num_classes=1000, num_clust=2000, dp=0):
+    def __init__(self, block, layers, num_classes=1000, num_clust=2000, dp=0, drop2d=0):
         self.inplanes = 64 
         self.dp = dp
+        self.drop2d=drop2d
         super(ResNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
                                bias=False)
@@ -108,6 +109,7 @@ class ResNet(nn.Module):
         if dp and 0<dp<1: 
             self.drop_input = nn.Dropout2d(p=0.05)
             self.drop_fc = nn.Dropout(p=dp)
+        if drop2d: self.dropout2d = nn.Dropout2d(p=dp)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -170,6 +172,7 @@ class ResNet(nn.Module):
         if return_c_dist: c_dist += self.get_cdist(x,1)
         if return_latent: z_list.append(x.detach())
 
+        if self.drop2d: x = self.dropout2d(x) 
         x = self.layer4(x)
         x = self.avgpool(x).view(x.size(0), 512)
         if return_c_dist: c_dist += self.get_cdist(x,2)
@@ -184,7 +187,7 @@ class ResNet(nn.Module):
         else: return x
 
 
-def resnet18(pretrained=False, num_clust=2000, dp=0, **kwargs):
+def resnet18(pretrained=False, num_clust=2000, dp=0, drop2d=0, **kwargs):
     """Constructs a ResNet-18 model.
 
     Args:
@@ -195,13 +198,14 @@ def resnet18(pretrained=False, num_clust=2000, dp=0, **kwargs):
         [2, 2, 2, 2],
         num_clust=num_clust,
         dp=dp,
+        drop2d=drop2d,
         **kwargs
     )
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['resnet18']))
     return model
 
-def resnet34(pretrained=False, num_clust=2000,dp=0, **kwargs):
+def resnet34(pretrained=False, num_clust=2000,dp=0, drop2d=0, **kwargs):
     """Constructs a ResNet-34 model.
 
     Args:
@@ -212,6 +216,7 @@ def resnet34(pretrained=False, num_clust=2000,dp=0, **kwargs):
         [3, 4, 6, 3], 
         num_clust=num_clust, 
         dp=dp,
+        drop2d=drop2d,
         **kwargs
     )
     if pretrained:

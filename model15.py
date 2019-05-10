@@ -180,10 +180,10 @@ def train_and_val(args):
     # create model
     if args.arch=='resnet32':
         model = resnet34(
-            num_clust = args.num_of_clusters, dp = args.drop_prob) 
+            num_clust = args.num_of_clusters, dp = args.drop_prob, drop2d = args.drop_2d) 
     else:
         model = resnet18(
-            num_clust = args.num_of_clusters, dp = args.drop_prob)
+            num_clust = args.num_of_clusters, dp = args.drop_prob, drop2d = args.drop_2d)
     model = model.to(device)
 
     # define loss function (criterion) and optimizer

@@ -21,6 +21,7 @@ parser.add_argument('-n','--num-of-clusters', type=int, default=2000, help='numb
 parser.add_argument('-c','--cdist-multiplier', type=float, default=1.0, help='multiplier for the kl-div')
 parser.add_argument('-S','--cdist-loss-schedule', type=int, default=1, help='gradually increase the multiplier of cdist loss')
 parser.add_argument('-D','--drop_prob', type=float, default=0.0, help='dropout probability at the last layer')
+parser.add_argument('-R','--drop-2d', type=int, default=0, help='insert dropout inbetween resnet modules')
 
 
 args = parser.parse_args()
