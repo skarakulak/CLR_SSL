@@ -84,7 +84,7 @@ def train(
             output_unsup, c_dist_unsup, output_h_smx  = model(input_unsup, return_c_dist=True, return_hier_smax=True)
             output_h_smx =  torch.gather(output_h_smx.flatten(), 0, y_ent_idx)
             output_h_smx = torch.clamp(output_h_smx,1e-7,1-1e-7)
-            loss_ent_unsup = torch.mean(output_h_smx*torch.log(output_h_smx) + (1-output_h_smx)*torch.log(1-output_h_smx))
+            loss_ent_unsup = -torch.mean(output_h_smx*torch.log(output_h_smx) + (1-output_h_smx)*torch.log(1-output_h_smx))
         else:
             output_unsup, c_dist_unsup  = model(input_unsup, return_c_dist=True)
 
@@ -203,7 +203,7 @@ def train_and_val(args):
     else:
         model = resnet18(
             num_clust = args.num_of_clusters, dp = args.drop_prob, 
-            drop2d = args.drop_2d, hier_smax=args.hier_softmax_entropy, num_of_paths)
+            drop2d = args.drop_2d, hier_smax=args.hier_softmax_entropy, num_of_paths=num_of_paths)
     model = model.to(device)
 
     # define loss function (criterion) and optimizer
