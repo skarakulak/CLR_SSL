@@ -232,4 +232,27 @@ def init_clusters(model, sup_loader, unsup_loader,device, args, num_of_classes=1
         for cl in model.cl_centers: cl = nn.parameter.Parameter(cl.data)
 
 
-
+def get_label_hierarchy(path):
+    tree_labels_path = {}
+    tree_label_full_path = {}
+    tree_paths = set()
+    with open('clusters','r') as f:
+        for line in f:
+            label, l_path = line.split(',')[:2]
+            full_path = l_path.strip()
+            tree_label_full_path[int(label)]=[int(l) for l in list(full_path)]
+            path_labels ={}
+            for k in range(1,1+len(full_path)):
+                tree_paths.add(full_path[:k-1])
+                path_labels[full_path[:k-1]] = int(full_path[k-1])
+            tree_labels_path[int(label)] = path_labels
+    path_inds = {k:i for i,k in enumerate(sorted(tree_paths,key=len))}
+    tree_labels_path_indexed = {
+        l:{path_inds[p]:p_l for p,p_l in path_dict.items()} 
+        for l, path_dict in tree_labels_path.items()
+    }
+    labels_hier_idx = {}
+    for k, v in tree_labels_path_indexed.items():
+        idx,labs = list(zip(*v.items()))
+        labels_hier_idx[k] = (list(idx),list(labs))
+    return labels_hier_idx, len(tree_paths)

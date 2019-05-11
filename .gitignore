@@ -5,3 +5,5 @@ ssl_data_96/
 __pycache__/
 data/
 *.ipynb
+.~lock.*
+correlation_matrix.csv
