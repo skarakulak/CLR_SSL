@@ -228,8 +228,8 @@ def train_and_val(args):
         args.start_epoch = checkpoint['epoch']
         best_acc5 = checkpoint['best_acc1'] # name is kept as best_acc1 to not cause an issue while loading the model
     
-        model.load_state_dict(checkpoint['state_dict'])
-        if checkpoint['optimizer_name'] == args.set_optimizer:
+        model.load_state_dict(checkpoint['state_dict'],strict=False)
+        if args.set_optimizer == 'adam' and checkpoint['optimizer_name'] == args.set_optimizer:
             optimizer.load_state_dict(checkpoint['optimizer'])
             write_to_log(log_path,f' ===> loaded optimizer state for {args.set_optimizer}')
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}')
