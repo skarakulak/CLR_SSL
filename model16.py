@@ -254,6 +254,8 @@ def train_and_val(args):
     else:
         best_acc5 = -1
 
+    # temp
+    if args.weights_version_load !=  args.weights_version_save: best_acc5 = -1 
 
     for epoch in range(args.start_epoch, args.start_epoch+args.epochs):
         #adjust_learning_rate(optimizer, epoch, args)
