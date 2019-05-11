@@ -86,15 +86,15 @@ def train(
             y_smx_labels_s = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_sup],[])).to(device)
 
             # unsup set: paths that have the cumulative probability above the threshold
-            output_unsup = torch.sigmoid(output_unsup)
+            out_us_hsmx_sig = torch.sigmoid(out_us_hsmx)
             y_smx_idx_us = torch.Tensor(sum([
-                pred_path_with_threshold(row,path_idx,rowind*num_of_paths,args.unsup_p_threshold) 
-                for rowind, row in enumerate(output_unsup)
+                pred_path_with_threshold(row,path_idx,rowind*num_of_paths,.50) 
+                for rowind, row in enumerate(out_us_hsmx_sig)
             ],[])).type(torch.LongTensor).to(device)
 
 
             out_s_hsmx =  torch.gather(out_s_hsmx.flatten(), 0, y_smx_idx_s)
-            out_us_hsmx = torch.gather(out_us_hsmx.flatten(), 0, y_smx_idx_us)
+            out_us_hsmx = torch.gather(out_us_hsmx_sig.flatten(), 0, y_smx_idx_us)
             loss_smx_us_ent = - torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
             loss_smx_s_bce  = criterion_hsmx(out_s_hsmx,y_smx_labels_s)
         else:
@@ -103,14 +103,7 @@ def train(
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
-        loss = (
-            loss_cse 
-            + cdist_multiplier * ((8/9)*c_dist_unsup+(1/9)*c_dist_sup) 
-            + args.hier_smx_mult*(
-                loss_smx_s_bce + 
-                args.entropy_multiplier*loss_smx_us_ent
-            )
-        )
+        loss = loss_cse  + cdist_multiplier * ((8/9)*c_dist_unsup+(1/9)*c_dist_sup) + args.hier_smx_mult*(loss_smx_s_bce + args.entropy_multiplier*loss_smx_us_ent )
 
 
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
@@ -211,7 +204,7 @@ def train_and_val(args):
         data_path,32,num_workers=args.num_of_workers, valid_crop = None
     )
     
-    labels_hier_idx, num_of_paths, path_idx = get_label_hierarchy('clusters') if args.hier_softmax_entropy else (None,None,None)
+    labels_hier_idx, num_of_paths, path_idx = get_label_hierarchy(args.path_clusters) if args.hier_softmax_entropy else (None,None,None)
 
     write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
 

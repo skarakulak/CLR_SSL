@@ -236,7 +236,7 @@ def get_label_hierarchy(path):
     tree_labels_path = {}
     tree_label_full_path = {}
     tree_paths = set()
-    with open('../clusters','r') as f:
+    with open(path,'r') as f:
         for line in f:
             label, l_path = line.split(',')[:2]
             full_path = l_path.strip()

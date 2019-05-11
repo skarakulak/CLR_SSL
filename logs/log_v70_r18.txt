@@ -25,3 +25,188 @@ unsup_p_threshold: 0.66
 
  => loading checkpoint wv61_r18
  => loaded checkpoint wv61_r18
+Epoch: [1107][1999/2000]	Time  0.150 ( 0.164)	Data  0.000 ( 0.001)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce nan (nan)	loss_smx_us_ent nan (nan)	Acc@1   0.00 (  0.03)	Acc@5   0.00 (  0.05)
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v70_r18
+weights_version_load: wv61_r18
+weights_version_save: wv70_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.05
+hier_smx_mult: 10.0
+unsup_p_threshold: 0.66
+
+
+ => loading checkpoint wv61_r18
+ => loaded checkpoint wv61_r18
+Test: [1999/2000]	Time  0.007 ( 0.027)	Loss nan (nan)	Acc@1   0.00 (  0.02)	Acc@5   0.00 (  0.08)
+ * Acc@1 0.017 Acc@5 0.077
+Epoch: [1108][1999/2000]	Time  0.151 ( 0.160)	Data  0.000 ( 0.000)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce nan (nan)	loss_smx_us_ent nan (nan)	Acc@1   0.00 (  0.00)	Acc@5   0.00 (  0.00)
+Test: [1999/2000]	Time  0.007 ( 0.019)	Loss nan (nan)	Acc@1   0.00 (  0.05)	Acc@5   0.00 (  0.26)
+ * Acc@1 0.052 Acc@5 0.258
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v70_r18
+weights_version_load: wv61_r18
+weights_version_save: wv70_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.05
+hier_smx_mult: 10.0
+unsup_p_threshold: 0.66
+
+
+ => loading checkpoint wv61_r18
+ => loaded checkpoint wv61_r18
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v70_r18
+weights_version_load: wv61_r18
+weights_version_save: wv70_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.05
+hier_smx_mult: 10.0
+unsup_p_threshold: 0.66
+
+
+ => loading checkpoint wv61_r18
+ => loaded checkpoint wv61_r18
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v70_r18
+weights_version_load: wv61_r18
+weights_version_save: wv70_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.05
+hier_smx_mult: 10.0
+unsup_p_threshold: 0.66
+
+
+ => loading checkpoint wv61_r18
+ => loaded checkpoint wv61_r18
+Epoch: [1116][1999/2000]	Time  0.147 ( 0.155)	Data  0.000 ( 0.001)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce nan (nan)	loss_smx_us_ent nan (nan)	Acc@1   0.00 (  0.03)	Acc@5   0.00 (  0.04)
+Test: [1999/2000]	Time  0.007 ( 0.017)	Loss nan (nan)	Acc@1   0.00 (  0.04)	Acc@5   0.00 (  0.20)
+ * Acc@1 0.042 Acc@5 0.203
+Epoch: [1115][1999/2000]	Time  0.283 ( 0.267)	Data  0.000 ( 0.001)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce nan (nan)	loss_smx_us_ent nan (nan)	Acc@1   0.00 (  0.03)	Acc@5   0.00 (  0.05)
+Test: [1999/2000]	Time  0.018 ( 0.021)	Loss nan (nan)	Acc@1   0.00 (  0.00)	Acc@5   0.00 (  0.00)
+ * Acc@1 0.000 Acc@5 0.000
+Epoch: [1118][1999/2000]	Time  0.159 ( 0.163)	Data  0.000 ( 0.001)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce nan (nan)	loss_smx_us_ent nan (nan)	Acc@1   0.00 (  0.03)	Acc@5   0.00 (  0.04)
+Test: [1999/2000]	Time  0.007 ( 0.017)	Loss nan (nan)	Acc@1   0.00 (  0.07)	Acc@5   0.00 (  0.34)
+ * Acc@1 0.069 Acc@5 0.341
+Epoch: [1117][1999/2000]	Time  0.147 ( 0.155)	Data  0.000 ( 0.000)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce nan (nan)	loss_smx_us_ent nan (nan)	Acc@1   0.00 (  0.00)	Acc@5   0.00 (  0.00)
+Test: [1999/2000]	Time  0.007 ( 0.016)	Loss nan (nan)	Acc@1   0.00 (  0.07)	Acc@5   0.00 (  0.35)
+ * Acc@1 0.070 Acc@5 0.350
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v70_r18
+weights_version_load: wv61_r18
+weights_version_save: wv70_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.05
+hier_smx_mult: 10.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+
+
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v70_r18
+weights_version_load: wv61_r18
+weights_version_save: wv70_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.05
+hier_smx_mult: 10.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+
+
+ => loading checkpoint wv61_r18
+ => loaded checkpoint wv61_r18
+ => loading checkpoint wv61_r18
+ => loaded checkpoint wv61_r18
+Epoch: [1123][1999/2000]	Time  0.157 ( 0.161)	Data  0.000 ( 0.000)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce nan (nan)	loss_smx_us_ent nan (nan)	Acc@1   0.00 (  0.03)	Acc@5   0.00 (  0.04)
+Test: [1999/2000]	Time  0.008 ( 0.018)	Loss nan (nan)	Acc@1   0.00 (  0.06)	Acc@5   0.00 (  0.31)
+ * Acc@1 0.059 Acc@5 0.309
