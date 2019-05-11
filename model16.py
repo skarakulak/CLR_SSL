@@ -80,6 +80,25 @@ def train(
             ],[])).to(device)
             y_smx_labels_s = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_sup],[])).to(device)
 
+        input_sup = input_sup.to(device)
+        target_sup = target_sup.to(device)
+        input_unsup = input_sup.to(device)
+        target_unsup = target_sup.to(device)
+        
+        # compute output
+        if args.hier_softmax_entropy: 
+            y_smx_idx_us = torch.tensor(sum([
+                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
+                for row, l in enumerate(target_unsup)
+            ],[])).to(device)
+            #y_smx_labels_us = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_unsup],[])).to(device)
+
+            y_smx_idx_s = torch.tensor(sum([
+                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
+                for row, l in enumerate(target_sup)
+            ],[])).to(device)
+            y_smx_labels_s = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_sup],[])).to(device)
+
 
         input_sup = input_sup.to(device)
         target_sup = target_sup.to(device)
@@ -225,7 +244,7 @@ def train_and_val(args):
     else:
         model = resnet18(
             num_clust = args.num_of_clusters, dp = args.drop_prob, 
-            drop2d = args.drop_2d, hier_smax=args.hier_softmax_entropy, num_of_paths)
+            drop2d = args.drop_2d, hier_smax=args.hier_softmax_entropy, num_of_paths=num_of_paths)
     model = model.to(device)
 
     # define loss function (criterion) and optimizer
@@ -251,8 +270,8 @@ def train_and_val(args):
         args.start_epoch = checkpoint['epoch']
         best_acc5 = checkpoint['best_acc1'] # name is kept as best_acc1 to not cause an issue while loading the model
     
-        model.load_state_dict(checkpoint['state_dict'])
-        if checkpoint['optimizer_name'] == args.set_optimizer:
+        model.load_state_dict(checkpoint['state_dict'],strict=False)
+        if args.set_optimizer == 'adam' and checkpoint['optimizer_name'] == args.set_optimizer:
             optimizer.load_state_dict(checkpoint['optimizer'])
             write_to_log(log_path,f' ===> loaded optimizer state for {args.set_optimizer}')
         write_to_log(log_path,f' => loaded checkpoint {args.weights_version_load}')

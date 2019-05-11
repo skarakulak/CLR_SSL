@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=CITY_V6
+#SBATCH --job-name=CITY_V63
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v6.out
+#SBATCH --output=output_v63.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v6.err
+#SBATCH --error=error_v63.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -18,7 +18,7 @@
 #SBATCH --time=1-23:58:00
 #################
 # --gres will give you one GPU, you can ask for more, up to 4 (or how ever many are on the node/card)
-#SBATCH --gres gpu:p40:1
+#SBATCH --gres gpu:v100:1
 #remove SBATCH --constraint=gpu_12gb
 # We are submitting to the batch partition
 # remove SBATCH --qos=batch
@@ -27,8 +27,8 @@
 #SBATCH --nodes=1
 #################
 #memory per node; default is 4000 MB per CPU
-#SBATCH --mem=16000
-#SBATCH --cpus-per-task=6
+#SBATCH --mem=12000
+#SBATCH --cpus-per-task=5
 #################
 # Have SLURM send you an email when the job ends or fails, careful, the email could end up in your clutter folder
 #SBATCH --mail-type=END,FAIL # notifications for job done & fail
@@ -38,5 +38,5 @@ module load python3/intel/3.6.3
 module load cuda/10.0.130
 #virtualenv ~/pytorch_10
 source ~/pytorch_10/bin/activate pytorch_10
-srun python3 ../train15.py -e 130  -v v62_r18 -w wv61_r18_best -x wv62_r18 -o sgd -l 0.00003 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 0.1
-srun python3 ../train15.py -e 3000 -v v62_r18 -w wv62_r18      -x wv62_r18 -o sgd -l 0.00001 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 0.1
+srun python3 ../train16.py -e 130  -v v63_r18 -w wv61_r18_best -x wv63_r18 -o sgd -l 0.00003 -d 0.00001 -n 2000 -c .002 -S 0 -W 5 -D 0.33 -R 1 -E 1 -b 0.1 -C prince
+srun python3 ../train16.py -e 3000 -v v63_r18 -w wv63_r18      -x wv63_r18 -o sgd -l 0.00001 -d 0.00001 -n 2000 -c .002 -S 0 -W 5 -D 0.33 -R 1 -E 1 -b 0.1 -C prince
