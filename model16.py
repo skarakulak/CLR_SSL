@@ -90,7 +90,7 @@ def train(
             y_smx_idx_us = torch.Tensor(sum([
                 pred_path_with_threshold(row,path_idx,rowind*num_of_paths,args.unsup_p_threshold) 
                 for rowind, row in enumerate(output_unsup)
-            ],[])).to(device)
+            ],[])).type(torch.LongTensor).to(device)
 
 
             out_s_hsmx =  torch.gather(out_s_hsmx.flatten(), 0, y_smx_idx_s)
