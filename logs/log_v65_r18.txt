@@ -1,0 +1,25 @@
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v65_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv65_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 6.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
