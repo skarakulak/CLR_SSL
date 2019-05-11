@@ -87,26 +87,6 @@ def train(
         
         # compute output
         if args.hier_softmax_entropy: 
-            y_smx_idx_us = torch.tensor(sum([
-                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
-                for row, l in enumerate(target_unsup)
-            ],[])).to(device)
-            #y_smx_labels_us = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_unsup],[])).to(device)
-
-            y_smx_idx_s = torch.tensor(sum([
-                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
-                for row, l in enumerate(target_sup)
-            ],[])).to(device)
-            y_smx_labels_s = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_sup],[])).to(device)
-
-
-        input_sup = input_sup.to(device)
-        target_sup = target_sup.to(device)
-        input_unsup = input_sup.to(device)
-        target_unsup = target_sup.to(device)
-        
-        # compute output
-        if args.hier_softmax_entropy: 
             output_sup, c_dist_sup, out_s_hsmx = model(input_sup, return_c_dist=True, return_hier_smax=True)
             output_unsup, c_dist_unsup, out_us_hsmx  = model(input_unsup, return_c_dist=True, return_hier_smax=True)
             out_s_hsmx =  torch.gather(out_s_hsmx.flatten(), 0, y_smx_idx_s)
@@ -114,9 +94,6 @@ def train(
             out_us_hsmx = torch.clamp(out_us_hsmx,1e-7,1-1e-7)
             loss_smx_us_ent = torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
             loss_smx_s_bce  = torch.criterion_hsmx(out_u_hsmx,y_smx_labels_s)
-
-
-            criterion_hsmx
         else:
             output_sup, c_dist_sup = model(input_sup, return_c_dist=True)
             output_unsup, c_dist_unsup  = model(input_unsup, return_c_dist=True)
