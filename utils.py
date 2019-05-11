@@ -15,6 +15,7 @@ import shutil
 import PIL
 import math
 import random
+import socket
 
 # references
 # https://github.com/pytorch/examples/blob/master/imagenet/main.py
@@ -31,7 +32,7 @@ def safe_mkdir(path):
 
 def write_to_log(log_path,str_to_log):
     with open(log_path ,'a') as lgfile:
-        lgfile.write(str_to_log + '\n')
+        lgfile.write(f'{str_to_log} ({socket.gethostname()}) \n')
         lgfile.flush()
 
 
