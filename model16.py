@@ -91,7 +91,7 @@ def train(
             output_unsup, c_dist_unsup, out_us_hsmx  = model(input_unsup, return_c_dist=True, return_hier_smax=True)
             out_s_hsmx =  torch.gather(out_s_hsmx.flatten(), 0, y_smx_idx_s)
             out_us_hsmx = torch.sigmoid(torch.gather(out_us_hsmx.flatten(), 0, y_smx_idx_us))
-            loss_smx_us_ent = torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
+            loss_smx_us_ent = - torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
             loss_smx_s_bce  = criterion_hsmx(out_s_hsmx,y_smx_labels_s)
         else:
             output_sup, c_dist_sup = model(input_sup, return_c_dist=True)
