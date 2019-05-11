@@ -1,0 +1,53 @@
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v68_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv68_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 20.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
+Epoch: [796][1999/2000]	Time  0.170 ( 0.172)	Data  0.000 ( 0.000)	Loss 6.2294e+00 (6.3463e+00)	Loss_cse 3.3064e+00 (2.8628e+00)	Loss_cdist_sup 2.0322e+02 (2.0336e+02)	Loss_cdist_unsup 2.0483e+02 (2.0324e+02)	Loss_ent_unsup 1.2568e-01 (1.5385e-01)	Acc@1  28.12 ( 39.45)	Acc@5  59.38 ( 64.92)
+Test: [1999/2000]	Time  0.018 ( 0.020)	Loss 3.6517e+00 (3.3109e+00)	Acc@1  25.00 ( 31.20)	Acc@5  53.12 ( 56.46)
+ * Acc@1 31.198 Acc@5 56.458
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v68_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv68_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 20.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
