@@ -26,7 +26,7 @@ def train(
     sup_loader, unsup_loader,
     model, criterion, optimizer,
     epoch, args, device, log_path, 
-    labels_hier_idx=None, num_of_paths=None
+    criterion_hsmx, labels_hier_idx=None, num_of_paths=None
     ):
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
@@ -34,14 +34,16 @@ def train(
     loss_cse_meter = AverageMeter('Loss_cse', ':.4e')
     loss_cdist_s_meter = AverageMeter('Loss_cdist_sup', ':.4e')
     loss_cdist_us_meter = AverageMeter('Loss_cdist_unsup', ':.4e')
-    loss_ent_us_meter = AverageMeter('Loss_ent_unsup', ':.4e')
+    l_smx_s_meter = AverageMeter('loss_smx_s_bce', ':.4e')
+    l_smx_us_meter = AverageMeter('loss_smx_us_ent', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
 
     progress = ProgressMeter(
         len(sup_loader), batch_time, data_time, 
         losses, loss_cse_meter,
-        loss_cdist_s_meter,loss_cdist_us_meter,loss_ent_us_meter,
+        loss_cdist_s_meter,loss_cdist_us_meter,
+        l_smx_s_meter,l_smx_us_meter,
         top1,top5,
         prefix="Epoch: [{}]".format(epoch)
     )
@@ -66,11 +68,17 @@ def train(
         # measure data loading time
         data_time.update(time.time() - end)
         if args.hier_softmax_entropy: 
-            y_ent_idx = torch.tensor(sum([
+            y_smx_idx_us = torch.tensor(sum([
                 [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
                 for row, l in enumerate(target_unsup)
             ],[])).to(device)
-            y_ent_labels = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_unsup],[])).to(device)
+            #y_smx_labels_us = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_unsup],[])).to(device)
+
+            y_smx_idx_s = torch.tensor(sum([
+                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
+                for row, l in enumerate(target_sup)
+            ],[])).to(device)
+            y_smx_labels_s = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_sup],[])).to(device)
 
 
         input_sup = input_sup.to(device)
@@ -79,18 +87,31 @@ def train(
         target_unsup = target_sup.to(device)
         
         # compute output
-        output_sup, c_dist_sup = model(input_sup, return_c_dist=True)
         if args.hier_softmax_entropy: 
-            output_unsup, c_dist_unsup, output_h_smx  = model(input_unsup, return_c_dist=True, return_hier_smax=True)
-            output_h_smx =  torch.gather(output_h_smx.flatten(), 0, y_ent_idx)
-            output_h_smx = torch.clamp(output_h_smx,1e-7,1-1e-7)
-            loss_ent_unsup = torch.mean(output_h_smx*torch.log(output_h_smx) + (1-output_h_smx)*torch.log(1-output_h_smx))
+            output_sup, c_dist_sup, out_s_hsmx = model(input_sup, return_c_dist=True, return_hier_smax=True)
+            output_unsup, c_dist_unsup, out_us_hsmx  = model(input_unsup, return_c_dist=True, return_hier_smax=True)
+            out_s_hsmx =  torch.gather(out_s_hsmx.flatten(), 0, y_smx_idx_s)
+            out_us_hsmx =  torch.gather(out_us_hsmx.flatten(), 0, y_smx_idx_us)
+            out_us_hsmx = torch.clamp(out_us_hsmx,1e-7,1-1e-7)
+            loss_smx_us_ent = torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
+            loss_smx_s_bce  = torch.criterion_hsmx(out_u_hsmx,y_smx_labels_s)
+
+
+            criterion_hsmx
         else:
+            output_sup, c_dist_sup = model(input_sup, return_c_dist=True)
             output_unsup, c_dist_unsup  = model(input_unsup, return_c_dist=True)
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
-        loss = loss_cse + cdist_multiplier * ((8/9)*c_dist_unsup+(1/9)*c_dist_sup) + args.entropy_multiplier*loss_ent_unsup
+        loss = (
+            loss_cse 
+            + cdist_multiplier * ((8/9)*c_dist_unsup+(1/9)*c_dist_sup) 
+            + args.hier_smx_mult*(
+                loss_smx_s_bce + 
+                args.entropy_multiplier*loss_smx_us_ent
+            )
+        )
 
 
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
@@ -98,7 +119,8 @@ def train(
         loss_cse_meter.update(loss_cse.item(), input_sup.size(0))
         loss_cdist_s_meter.update(c_dist_sup.item(), input_sup.size(0))
         loss_cdist_us_meter.update(c_dist_unsup.item(), input_sup.size(0))
-        loss_ent_us_meter.update(loss_ent_unsup.item(), input_sup.size(0))
+        l_smx_s_meter.update(loss_smx_s_bce.item(), input_sup.size(0))
+        l_smx_us_meter.update(loss_smx_us_ent.item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))
         top5.update(acc5[0], input_sup.size(0))
 
@@ -116,7 +138,7 @@ def train(
 
 
 
-def validate(val_loader, model, criterion, args,device, log_path):
+def validate(val_loader, model, criterion, args,device, log_path,criterion_hsmx):
     batch_time = AverageMeter('Time', ':6.3f')
     losses = AverageMeter('Loss', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
@@ -209,6 +231,7 @@ def train_and_val(args):
     # define loss function (criterion) and optimizer
     if args.focal_loss: criterion = FocalLoss()
     else: criterion = nn.CrossEntropyLoss()
+    criterion_hsmx = nn.BCELoss()
 
     if args.set_optimizer == 'adam':
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
@@ -244,11 +267,11 @@ def train_and_val(args):
             data_loader_sup_train, data_loader_unsup,
             model, criterion, optimizer,
             epoch, args, device, log_path, 
-            labels_hier_idx, num_of_paths
+            criterion_hsmx, labels_hier_idx, num_of_paths
         )
 
         # evaluate on validation set
-        acc5 = validate(data_loader_sup_val, model, criterion, args, device, log_path)
+        acc5 = validate(data_loader_sup_val, model, criterion, args, device, log_path,criterion_hsmx)
 
         # remember best acc@1 and save checkpoint
         is_best = acc5 > best_acc5

@@ -23,7 +23,8 @@ parser.add_argument('-S','--cdist-loss-schedule', type=int, default=1, help='gra
 parser.add_argument('-D','--drop_prob', type=float, default=0.0, help='dropout probability at the last layer')
 parser.add_argument('-R','--drop-2d', type=int, default=0, help='insert dropout inbetween resnet modules')
 parser.add_argument('-E','--hier-softmax-entropy', type=int, default=0, help='insert dropout inbetween resnet modules')
-parser.add_argument('-b','--entropy-multiplier', type=int, default=0, help='insert dropout inbetween resnet modules')
+parser.add_argument('-b','--entropy-multiplier', type=float, default=0, help='multiplier for entropy of unsup set')
+parser.add_argument('-i','--hier-smx-mult', type=float, default=0, help='multiplier for loss of the hierarchical softmax')
 
 
 
