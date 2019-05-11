@@ -26,7 +26,7 @@ def train(
     sup_loader, unsup_loader,
     model, criterion, optimizer,
     epoch, args, device, log_path, 
-    criterion_hsmx, labels_hier_idx=None, num_of_paths=None
+    criterion_hsmx, labels_hier_idx=None, num_of_paths=None,path_idx=None
     ):
     batch_time = AverageMeter('Time', ':6.3f')
     data_time = AverageMeter('Data', ':6.3f')
@@ -67,18 +67,6 @@ def train(
     for i, ((input_sup, target_sup), (input_unsup,target_unsup)) in enumerate(zip(sup_loader,unsup_loader)):
         # measure data loading time
         data_time.update(time.time() - end)
-        if args.hier_softmax_entropy: 
-            y_smx_idx_us = torch.tensor(sum([
-                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
-                for row, l in enumerate(target_unsup)
-            ],[])).to(device)
-            #y_smx_labels_us = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_unsup],[])).to(device)
-
-            y_smx_idx_s = torch.tensor(sum([
-                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]] 
-                for row, l in enumerate(target_sup)
-            ],[])).to(device)
-            y_smx_labels_s = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_sup],[])).to(device)
 
         input_sup = input_sup.to(device)
         target_sup = target_sup.to(device)
@@ -89,8 +77,24 @@ def train(
         if args.hier_softmax_entropy: 
             output_sup, c_dist_sup, out_s_hsmx = model(input_sup, return_c_dist=True, return_hier_smax=True)
             output_unsup, c_dist_unsup, out_us_hsmx  = model(input_unsup, return_c_dist=True, return_hier_smax=True)
+             
+            # hierarchical softmax for the labeled set
+            y_smx_idx_s = torch.tensor(sum([
+                [int(row*num_of_paths + k) for k in labels_hier_idx[int(l)][0]]
+                for row, l in enumerate(target_sup)
+            ],[])).to(device)
+            y_smx_labels_s = torch.Tensor(sum([labels_hier_idx[int(l)][1] for l in target_sup],[])).to(device)
+
+            # unsup set: paths that have the cumulative probability above the threshold
+            output_unsup = torch.sigmoid(output_unsup)
+            y_smx_idx_us = torch.Tensor(sum([
+                pred_path_with_threshold(row,path_idx,rowind*num_of_paths,args.unsup_p_threshold) 
+                for rowind, row in enumerate(output_unsup)
+            ],[])).to(device)
+
+
             out_s_hsmx =  torch.gather(out_s_hsmx.flatten(), 0, y_smx_idx_s)
-            out_us_hsmx = torch.sigmoid(torch.gather(out_us_hsmx.flatten(), 0, y_smx_idx_us))
+            out_us_hsmx = torch.gather(out_us_hsmx.flatten(), 0, y_smx_idx_us)
             loss_smx_us_ent = - torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
             loss_smx_s_bce  = criterion_hsmx(out_s_hsmx,y_smx_labels_s)
         else:
@@ -207,7 +211,7 @@ def train_and_val(args):
         data_path,32,num_workers=args.num_of_workers, valid_crop = None
     )
     
-    labels_hier_idx, num_of_paths = get_label_hierarchy('clusters') if args.hier_softmax_entropy else (None,None)
+    labels_hier_idx, num_of_paths, path_idx = get_label_hierarchy('clusters') if args.hier_softmax_entropy else (None,None,None)
 
     write_to_log(log_path, '\n'.join([f'{key}: {value}' for key,value in vars(args).items()])+'\n\n' )
 
@@ -264,7 +268,7 @@ def train_and_val(args):
             data_loader_sup_train, data_loader_unsup,
             model, criterion, optimizer,
             epoch, args, device, log_path, 
-            criterion_hsmx, labels_hier_idx, num_of_paths
+            criterion_hsmx, labels_hier_idx, num_of_paths, path_idx
         )
 
         # evaluate on validation set

@@ -1,9 +1,9 @@
 start_epoch: 0
 epochs: 130
 arch: resnet18
-version: v70_r18
+version: v71_r18
 weights_version_load: wv61_r18
-weights_version_save: wv70_r18
+weights_version_save: wv71_r18
 set_optimizer: sgd
 lr: 1e-05
 weight_decay: 1e-05
@@ -18,7 +18,7 @@ cdist_loss_schedule: 0
 drop_prob: 0.33
 drop_2d: 1
 hier_softmax_entropy: 1
-entropy_multiplier: 0.05
+entropy_multiplier: 0.3
 hier_smx_mult: 10.0
 unsup_p_threshold: 0.66
 

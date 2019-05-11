@@ -255,4 +255,24 @@ def get_label_hierarchy(path):
     for k, v in tree_labels_path_indexed.items():
         idx,labs = list(zip(*v.items()))
         labels_hier_idx[k] = (list(idx),list(labs))
-    return labels_hier_idx, len(tree_paths)
+    return labels_hier_idx, len(tree_paths), path_inds
+
+def pred_path_with_threshold(pred, path_inds, start_ind, p_threshold=.66):
+    current_node=0
+    node_cumul_prob = 1.
+    current_path = []
+    cur_node_path_idx = [0]
+    while True:     
+        next_path_pred = pred[cur_node_path_idx[-1]]
+        next_path_prob = max(next_path_pred,1-next_path_pred)
+        node_cumul_prob *= next_path_prob
+        if node_cumul_prob<p_threshold: 
+            break
+        else: 
+            current_path.append('1' if next_path_pred >= .5 else '0')
+            new_path = ''.join(current_path)
+            if new_path not in path_inds: 
+                return [start_ind+i for i in cur_node_path_idx]
+
+            cur_node_path_idx.append(path_inds[new_path])
+    return [start_ind+i for i in cur_node_path_idx[:-1]]

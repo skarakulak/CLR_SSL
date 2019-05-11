@@ -25,7 +25,7 @@ parser.add_argument('-R','--drop-2d', type=int, default=0, help='insert dropout 
 parser.add_argument('-E','--hier-softmax-entropy', type=int, default=0, help='insert dropout inbetween resnet modules')
 parser.add_argument('-b','--entropy-multiplier', type=float, default=0, help='multiplier for entropy of unsup set')
 parser.add_argument('-i','--hier-smx-mult', type=float, default=0, help='multiplier for loss of the hierarchical softmax')
-
+parser.add_argument('-t','--unsup-p-threshold', type=float, default=0.66, help='probability threshold to select the path for entropy loss')
 
 
 
