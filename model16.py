@@ -231,7 +231,7 @@ def train_and_val(args):
         optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     resnet_freeze = args.freeze_epoch>0
     if resnet_freeze: 
-        f_optimizer = torch.optim.Adam(model.parameters(), lr=0.0001, weight_decay=args.weight_decay)
+        f_optimizer = torch.optim.Adam(model.parameters(), lr=0.0003, weight_decay=args.weight_decay)
         for param in model.parameters():
             if param.size(0)!=999: param.requires_grad = False        
 
@@ -263,6 +263,7 @@ def train_and_val(args):
                 param.requires_grad = True
             resnet_freeze = False
 
+        if resnet_freeze:
             train(
                 data_loader_sup_train, data_loader_unsup,
                 model, criterion, f_optimizer,
@@ -279,7 +280,7 @@ def train_and_val(args):
                 'optimizer' : optimizer.state_dict(),
                 'optimizer_name' : args.set_optimizer
                 },
-                is_best=False,
+                False, #is_best
                 cpoint_folder_path,
                 args.weights_version_save
             )
