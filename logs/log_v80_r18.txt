@@ -1,0 +1,203 @@
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v80_r18
+weights_version_load: wv80_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 5.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (loopy8.cs.nyu.edu) 
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v80_r18
+weights_version_load: wv80_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 5.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (loopy6.cs.nyu.edu) 
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v80_r18
+weights_version_load: wv80_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 5.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (loopy6.cs.nyu.edu) 
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v80_r18
+weights_version_load: wv80_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 5.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (vine6.cs.nyu.edu) 
+ => loading checkpoint wv80_r18 (loopy8.cs.nyu.edu) 
+ => loaded checkpoint wv80_r18 (loopy8.cs.nyu.edu) 
+ => loading checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loaded checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loading checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loaded checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loading checkpoint wv80_r18 (vine6.cs.nyu.edu) 
+ => loaded checkpoint wv80_r18 (vine6.cs.nyu.edu) 
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v80_r18
+weights_version_load: wv80_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 1.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (loopy6.cs.nyu.edu) 
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v80_r18
+weights_version_load: wv80_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 1.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (loopy6.cs.nyu.edu) 
+start_epoch: 0
+epochs: 3000
+arch: resnet18
+version: v80_r18
+weights_version_load: wv80_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 1.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (vine6.cs.nyu.edu) 
+ => loading checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loading checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loaded checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loaded checkpoint wv80_r18 (loopy6.cs.nyu.edu) 
+ => loading checkpoint wv80_r18 (vine6.cs.nyu.edu) 
+ => loaded checkpoint wv80_r18 (vine6.cs.nyu.edu) 
