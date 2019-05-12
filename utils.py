@@ -36,7 +36,7 @@ def write_to_log(log_path,str_to_log):
         lgfile.flush()
 
 
-def image_loader(path, batch_size, num_workers=3, pin_memory = True, valid_crop = 84):
+def image_loader(path, batch_size, num_workers=3, pin_memory = True, valid_crop = 84, subset_n=64):
     transform_train = transforms.Compose(
         [   
             #transforms.RandomRotation(12, resample=PIL.Image.BILINEAR),
@@ -65,17 +65,32 @@ def image_loader(path, batch_size, num_workers=3, pin_memory = True, valid_crop 
     sup_train_data = datasets.ImageFolder('{}/{}/train'.format(path, 'supervised'), transform=transform_train)
     sup_val_data = datasets.ImageFolder('{}/{}/val'.format(path, 'supervised'), transform=transform_valid)
     unsup_data = datasets.ImageFolder('{}/{}/'.format(path, 'unsupervised'), transform=transform_train)
-    data_loader_sup_train = torch.utils.data.DataLoader(
-        sup_train_data,
-        batch_size=batch_size,
-        shuffle=True,
-        num_workers=num_workers,
-        pin_memory=pin_memory
-    )
+
+    if subset_n == 64:
+        data_loader_sup_train = torch.utils.data.DataLoader(
+            sup_train_data,
+            batch_size=batch_size,
+            shuffle=True,
+            num_workers=num_workers,
+            pin_memory=pin_memory
+        )
+    else:
+        train_ind = sum([list(i*64+np.random.choice(64, subset_n, replace=False)) for i in range(1000)],[])
+        train_sampler = SubsetRandomSampler(train_ind)
+        data_loader_sup_train = torch.utils.data.DataLoader(
+            sup_train_data,
+            batch_size=batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+            sampler=train_sampler
+        )
+
+
     data_loader_sup_val = torch.utils.data.DataLoader(
         sup_val_data,
         batch_size=batch_size,
-        shuffle=True,
+        shuffle=False,
         num_workers=num_workers,
         pin_memory=pin_memory
     )
@@ -261,6 +276,26 @@ def get_label_hierarchy(path):
 def pred_path_with_threshold(pred, path_inds, start_ind, p_threshold=.66):
     current_node=0
     node_cumul_prob = 1.
+    current_path = []
+    cur_node_path_idx = [0]
+    while True:     
+        next_path_pred = pred[cur_node_path_idx[-1]]
+        next_path_prob = max(next_path_pred,1-next_path_pred)
+        node_cumul_prob *= next_path_prob
+        if node_cumul_prob<p_threshold: 
+            break
+        else: 
+            current_path.append('1' if next_path_pred >= .5 else '0')
+            new_path = ''.join(current_path)
+            if new_path not in path_inds: 
+                return [start_ind+i for i in cur_node_path_idx]
+
+            cur_node_path_idx.append(path_inds[new_path])
+    return [start_ind+i for i in cur_node_path_idx[:-1]]
+
+
+def pred_class_hsfmx(pred, path_inds, start_ind):
+    current_node=0
     current_path = []
     cur_node_path_idx = [0]
     while True:     

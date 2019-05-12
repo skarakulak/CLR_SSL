@@ -202,7 +202,7 @@ def train_and_val(args):
 
 
     data_loader_sup_train, data_loader_sup_val, data_loader_unsup = image_loader(
-        data_path,32,num_workers=args.num_of_workers, valid_crop = None
+        data_path,32,num_workers=args.num_of_workers, valid_crop = None, subset_n = args.train_subset
     )
     
     labels_hier_idx, num_of_paths, path_idx = get_label_hierarchy(args.path_clusters) if args.hier_softmax_entropy else (None,None,None)

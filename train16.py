@@ -28,6 +28,7 @@ parser.add_argument('-i','--hier-smx-mult', type=float, default=0, help='multipl
 parser.add_argument('-t','--unsup-p-threshold', type=float, default=0.66, help='probability threshold to select the path for entropy loss')
 parser.add_argument('-f','--path-clusters', type=str, default='../clusters', help='path to the clusters file')
 parser.add_argument('-Z','--freeze-epoch', type=int, default=0, help='num of epoch the weights of the resnet module would be frozen while hiersoftmax trains')
+parser.add_argument('-u','--train-subset', type=int, default=64, help='train with n images per class')
 
 
 
