@@ -229,11 +229,12 @@ def train_and_val(args):
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     else:
         optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-    # torch.optim.SGD(model.parameters(), args['lr'],
-    #                             momentum=args.momentum,
-    #                             weight_decay=args.weight_decay)
+    resnet_freeze = args.freeze_epoch>0
+    if resnet_freeze: 
+        f_optimizer = torch.optim.Adam(model.parameters(), lr=0.0001, weight_decay=args.weight_decay)
+        for param in model.parameters():
+            if param.size(0)!=999: param.requires_grad = False        
 
-    # optionally resume from a checkpoint
     if isfile(load_cpoint_path):
         write_to_log(log_path,f' => loading checkpoint {args.weights_version_load}')
         checkpoint = torch.load(load_cpoint_path)
@@ -257,33 +258,60 @@ def train_and_val(args):
     for epoch in range(args.start_epoch, args.start_epoch+args.epochs):
         #adjust_learning_rate(optimizer, epoch, args)
         # train for one epoch
-        train(
-            data_loader_sup_train, data_loader_unsup,
-            model, criterion, optimizer,
-            epoch, args, device, log_path, 
-            criterion_hsmx, labels_hier_idx, num_of_paths, path_idx
-        )
+        if resnet_freeze and epoch-args.start_epoch> args.freeze_epoch:
+            for param in model.parameters():
+                param.requires_grad = True
+            resnet_freeze = False
 
-        # evaluate on validation set
-        acc5 = validate(data_loader_sup_val, model, criterion, args, device, log_path,criterion_hsmx)
+            train(
+                data_loader_sup_train, data_loader_unsup,
+                model, criterion, f_optimizer,
+                epoch, args, device, log_path, 
+                criterion_hsmx, labels_hier_idx, num_of_paths, path_idx
+            )
 
-        # remember best acc@1 and save checkpoint
-        is_best = acc5 > best_acc5
-        best_acc5 = max(acc5, best_acc5)
+            save_checkpoint(
+                {
+                'epoch': epoch + 1,
+                'arch': args.arch,
+                'state_dict': model.state_dict(),
+                'best_acc1': best_acc5,
+                'optimizer' : optimizer.state_dict(),
+                'optimizer_name' : args.set_optimizer
+                },
+                is_best=False,
+                cpoint_folder_path,
+                args.weights_version_save
+            )
 
-        save_checkpoint(
-            {
-            'epoch': epoch + 1,
-            'arch': args.arch,
-            'state_dict': model.state_dict(),
-            'best_acc1': best_acc5,
-            'optimizer' : optimizer.state_dict(),
-            'optimizer_name' : args.set_optimizer
-            },
-            is_best,
-            cpoint_folder_path,
-            args.weights_version_save
-        )
+        else:
+            train(
+                data_loader_sup_train, data_loader_unsup,
+                model, criterion, optimizer,
+                epoch, args, device, log_path, 
+                criterion_hsmx, labels_hier_idx, num_of_paths, path_idx
+            )
+
+            # evaluate on validation set
+            acc5 = validate(data_loader_sup_val, model, criterion, args, device, log_path,criterion_hsmx)
+
+            # remember best acc@1 and save checkpoint
+            is_best = acc5 > best_acc5
+            best_acc5 = max(acc5, best_acc5)
+
+            save_checkpoint(
+                {
+                'epoch': epoch + 1,
+                'arch': args.arch,
+                'state_dict': model.state_dict(),
+                'best_acc1': best_acc5,
+                'optimizer' : optimizer.state_dict(),
+                'optimizer_name' : args.set_optimizer
+                },
+                is_best,
+                cpoint_folder_path,
+                args.weights_version_save
+            )
 
 
 

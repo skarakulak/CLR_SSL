@@ -22,11 +22,13 @@ parser.add_argument('-c','--cdist-multiplier', type=float, default=1.0, help='mu
 parser.add_argument('-S','--cdist-loss-schedule', type=int, default=1, help='gradually increase the multiplier of cdist loss')
 parser.add_argument('-D','--drop_prob', type=float, default=0.0, help='dropout probability at the last layer')
 parser.add_argument('-R','--drop-2d', type=int, default=0, help='insert dropout inbetween resnet modules')
-parser.add_argument('-E','--hier-softmax-entropy', type=int, default=0, help='insert dropout inbetween resnet modules')
+parser.add_argument('-E','--hier-softmax-entropy', type=int, default=0, help='use entropy of the unlabeled set')
 parser.add_argument('-b','--entropy-multiplier', type=float, default=0, help='multiplier for entropy of unsup set')
 parser.add_argument('-i','--hier-smx-mult', type=float, default=0, help='multiplier for loss of the hierarchical softmax')
 parser.add_argument('-t','--unsup-p-threshold', type=float, default=0.66, help='probability threshold to select the path for entropy loss')
 parser.add_argument('-f','--path-clusters', type=str, default='../clusters', help='path to the clusters file')
+parser.add_argument('-Z','--freeze-epoch', type=int, default=0, help='num of epoch the weights of the resnet module would be frozen while hiersoftmax trains')
+
 
 
 
