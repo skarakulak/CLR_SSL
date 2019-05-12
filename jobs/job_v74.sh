@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=CITY_v66
+#SBATCH --job-name=CITY_v74
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v66.out
+#SBATCH --output=output_v74.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v66.err
+#SBATCH --error=error_v74.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -18,7 +18,7 @@
 #SBATCH --time=1-23:58:00
 #################
 # --gres will give you one GPU, you can ask for more, up to 4 (or how ever many are on the node/card)
-#SBATCH --gres gpu:k80:1
+#SBATCH --gres gpu:p40:1
 #remove SBATCH --constraint=gpu_12gb
 # We are submitting to the batch partition
 # remove SBATCH --qos=batch
@@ -38,5 +38,7 @@ module load python3/intel/3.6.3
 module load cuda/10.0.130
 #virtualenv ~/pytorch_10
 source ~/pytorch_10/bin/activate pytorch_10
-srun python3 ../train16.py -e 130  -v v66_r18 -w wv61_r18_best -x wv66_r18 -o sgd -l 0.0003 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 0 -i 8 -C prince
-srun python3 ../train16.py -e 3000 -v v66_r18 -w wv66_r18      -x wv66_r18 -o sgd -l 0.00001 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 0 -i 8 -C prince
+srun python3 ../train16.py -e 130  -v v74_r18 -w wv61_r18_best -x wv74_r18 -o sgd -l 0.00001  -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b .2 -i 3 -C prince
+srun python3 ../train16.py -e 3000 -v v74_r18 -w wv74_r18      -x wv74_r18 -o sgd -l 0.000003 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b .2 -i 3 -C prince
+
+

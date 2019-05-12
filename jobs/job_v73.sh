@@ -3,13 +3,13 @@
 # all commands that start with SBATCH contain commands that are just used by SLURM for scheduling
 #################
 # set a job name
-#SBATCH --job-name=CITY_v70
+#SBATCH --job-name=CITY_v73
 #################
 # a file for job output, you can check job progress
-#SBATCH --output=output_v70.out
+#SBATCH --output=output_v73.out
 #################
 # a file for errors from the job
-#SBATCH --error=error_v70.err
+#SBATCH --error=error_v73.err
 #################
 # time you think you need; default is one hour
 # in minutes
@@ -38,5 +38,7 @@ module load python3/intel/3.6.3
 module load cuda/10.0.130
 #virtualenv ~/pytorch_10
 source ~/pytorch_10/bin/activate pytorch_10
-srun python3 ../train16.py -e 130  -v v70_r18 -w wv70_r18 -x wv70_r18 -o sgd -l 0.00001 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 15 -C prince
-srun python3 ../train16.py -e 3000 -v v70_r18 -w wv70_r18 -x wv70_r18 -o sgd -l 0.000003 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 15 -C prince
+srun python3 ../train16.py -e 130  -v v73_r18 -w wv61_r18_best -x wv73_r18 -o sgd -l 0.00001  -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b .01 -i 1 -C prince
+srun python3 ../train16.py -e 3000 -v v73_r18 -w wv73_r18      -x wv73_r18 -o sgd -l 0.000003 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b .01 -i 1 -C prince
+
+
