@@ -263,6 +263,7 @@ def train_and_val(args):
                 param.requires_grad = True
             resnet_freeze = False
 
+        if resnet_freeze:
             train(
                 data_loader_sup_train, data_loader_unsup,
                 model, criterion, f_optimizer,
