@@ -34,19 +34,31 @@ def train(
     loss_cse_meter = AverageMeter('Loss_cse', ':.4e')
     loss_cdist_s_meter = AverageMeter('Loss_cdist_sup', ':.4e')
     loss_cdist_us_meter = AverageMeter('Loss_cdist_unsup', ':.4e')
-    l_smx_s_meter = AverageMeter('loss_smx_s_bce', ':.4e')
-    l_smx_us_meter = AverageMeter('loss_smx_us_ent', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
 
-    progress = ProgressMeter(
-        len(sup_loader), batch_time, data_time, 
-        losses, loss_cse_meter,
-        loss_cdist_s_meter,loss_cdist_us_meter,
-        l_smx_s_meter,l_smx_us_meter,
-        top1,top5,
-        prefix="Epoch: [{}]".format(epoch)
-    )
+    if args.hier_softmax_entropy:
+        l_smx_s_meter = AverageMeter('loss_smx_s_bce', ':.4e')
+        l_smx_us_meter = AverageMeter('loss_smx_us_ent', ':.4e')
+
+        progress = ProgressMeter(
+            len(sup_loader), batch_time, data_time, 
+            losses, loss_cse_meter,
+            loss_cdist_s_meter,loss_cdist_us_meter,
+            l_smx_s_meter,l_smx_us_meter,
+            top1,top5,
+            prefix="Epoch: [{}]".format(epoch)
+        )
+    else:
+        progress = ProgressMeter(
+            len(sup_loader), batch_time, data_time,
+            losses, loss_cse_meter,
+            loss_cdist_s_meter,loss_cdist_us_meter,
+            top1,top5,
+            prefix="Epoch: [{}]".format(epoch)
+        )
+
+
 
     # until epoch 55, we set `model.cl_centers` by sampling latent representations from the training examples
     # and make sure that we sample evenly among classes.
@@ -98,13 +110,20 @@ def train(
             out_us_hsmx = torch.clamp(torch.gather(out_us_hsmx_sig.flatten(), 0, y_smx_idx_us),1e-7,1-1e-7)
             loss_smx_us_ent = - torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
             loss_smx_s_bce  = criterion_hsmx(out_s_hsmx,y_smx_labels_s)
+            l_smx_s_meter.update(loss_smx_s_bce.item(), input_sup.size(0))
+            l_smx_us_meter.update(loss_smx_us_ent.item(), input_sup.size(0))
+
+
         else:
             output_sup, c_dist_sup = model(input_sup, return_c_dist=True)
             output_unsup, c_dist_unsup  = model(input_unsup, return_c_dist=True)
 
         # update the resnet model. 
         loss_cse = criterion(output_sup, target_sup)
-        loss = loss_cse  + cdist_multiplier * ((8/9)*c_dist_unsup+(1/9)*c_dist_sup) + args.hier_smx_mult*(loss_smx_s_bce + args.entropy_multiplier*loss_smx_us_ent )
+        loss = loss_cse  + cdist_multiplier * ((8/9)*c_dist_unsup+(1/9)*c_dist_sup)
+
+        if args.hier_softmax_entropy:
+            loss += args.hier_smx_mult*(loss_smx_s_bce + args.entropy_multiplier*loss_smx_us_ent )
 
 
         acc1, acc5 = accuracy(output_sup, target_sup, topk=(1, 5))
@@ -112,8 +131,6 @@ def train(
         loss_cse_meter.update(loss_cse.item(), input_sup.size(0))
         loss_cdist_s_meter.update(c_dist_sup.item(), input_sup.size(0))
         loss_cdist_us_meter.update(c_dist_unsup.item(), input_sup.size(0))
-        l_smx_s_meter.update(loss_smx_s_bce.item(), input_sup.size(0))
-        l_smx_us_meter.update(loss_smx_us_ent.item(), input_sup.size(0))
         top1.update(acc1[0], input_sup.size(0))
         top5.update(acc5[0], input_sup.size(0))
 
