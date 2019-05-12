@@ -1,0 +1,64 @@
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v76_r18
+weights_version_load: wv61_r18
+weights_version_save: wv76_r18
+set_optimizer: sgd
+lr: 5e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.1
+hier_smx_mult: 1.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+
+ (loopy6.cs.nyu.edu) 
+ => loading checkpoint wv61_r18 (loopy6.cs.nyu.edu) 
+ => loaded checkpoint wv61_r18 (loopy6.cs.nyu.edu) 
+Epoch: [1154][1999/2000]	Time  0.056 ( 0.050)	Data  0.000 ( 0.001)	Loss 4.3614e+00 (3.9802e+00)	Loss_cse 3.1688e+00 (2.7879e+00)	Loss_cdist_sup 1.9063e+02 (1.9475e+02)	Loss_cdist_unsup 1.9310e+02 (1.9461e+02)	loss_smx_s_bce 7.4139e-01 (7.3682e-01)	loss_smx_us_ent 6.5603e-01 (6.6231e-01)	Acc@1  31.25 ( 40.89)	Acc@5  56.25 ( 66.42) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.006 ( 0.014)	Loss 3.6306e+00 (3.2883e+00)	Acc@1  28.12 ( 31.43)	Acc@5  53.12 ( 56.75) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.428 Acc@5 56.755 (loopy6.cs.nyu.edu) 
+Epoch: [1155][1999/2000]	Time  0.050 ( 0.050)	Data  0.000 ( 0.002)	Loss 4.4865e+00 (3.9799e+00)	Loss_cse 3.3152e+00 (2.7908e+00)	Loss_cdist_sup 1.8311e+02 (1.9438e+02)	Loss_cdist_unsup 1.8860e+02 (1.9449e+02)	loss_smx_s_bce 7.2947e-01 (7.3401e-01)	loss_smx_us_ent 6.5814e-01 (6.6066e-01)	Acc@1  31.25 ( 40.85)	Acc@5  53.12 ( 66.45) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.005 ( 0.013)	Loss 2.7993e+00 (3.2449e+00)	Acc@1  31.25 ( 31.88)	Acc@5  59.38 ( 57.25) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.878 Acc@5 57.250 (loopy6.cs.nyu.edu) 
+Epoch: [1156][1999/2000]	Time  0.050 ( 0.049)	Data  0.000 ( 0.000)	Loss 3.9821e+00 (3.9686e+00)	Loss_cse 2.7613e+00 (2.7822e+00)	Loss_cdist_sup 1.9278e+02 (1.9428e+02)	Loss_cdist_unsup 1.9815e+02 (1.9441e+02)	loss_smx_s_bce 7.6145e-01 (7.3173e-01)	loss_smx_us_ent 6.4188e-01 (6.5882e-01)	Acc@1  46.88 ( 40.94)	Acc@5  68.75 ( 66.51) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.006 ( 0.014)	Loss 3.3228e+00 (3.2756e+00)	Acc@1  25.00 ( 31.37)	Acc@5  56.25 ( 56.92) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.373 Acc@5 56.920 (loopy6.cs.nyu.edu) 
+Epoch: [1157][1999/2000]	Time  0.051 ( 0.050)	Data  0.000 ( 0.002)	Loss 4.0770e+00 (3.9650e+00)	Loss_cse 2.9123e+00 (2.7806e+00)	Loss_cdist_sup 1.8893e+02 (1.9440e+02)	Loss_cdist_unsup 1.8954e+02 (1.9426e+02)	loss_smx_s_bce 7.1988e-01 (7.3016e-01)	loss_smx_us_ent 6.5811e-01 (6.5726e-01)	Acc@1  43.75 ( 41.01)	Acc@5  68.75 ( 66.74) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.004 ( 0.013)	Loss 3.0590e+00 (3.2682e+00)	Acc@1  31.25 ( 31.73)	Acc@5  53.12 ( 57.01) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.727 Acc@5 57.013 (loopy6.cs.nyu.edu) 
+Epoch: [1158][1999/2000]	Time  0.052 ( 0.049)	Data  0.000 ( 0.001)	Loss 3.9751e+00 (3.9716e+00)	Loss_cse 2.7993e+00 (2.7897e+00)	Loss_cdist_sup 1.9499e+02 (1.9388e+02)	Loss_cdist_unsup 1.9412e+02 (1.9427e+02)	loss_smx_s_bce 7.2086e-01 (7.2796e-01)	loss_smx_us_ent 6.6530e-01 (6.5475e-01)	Acc@1  31.25 ( 40.91)	Acc@5  59.38 ( 66.32) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.005 ( 0.011)	Loss 3.6030e+00 (3.2707e+00)	Acc@1  21.88 ( 31.51)	Acc@5  59.38 ( 56.95) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.509 Acc@5 56.948 (loopy6.cs.nyu.edu) 
+Epoch: [1159][1999/2000]	Time  0.050 ( 0.049)	Data  0.000 ( 0.000)	Loss 3.7951e+00 (3.9812e+00)	Loss_cse 2.5964e+00 (2.8022e+00)	Loss_cdist_sup 2.0840e+02 (1.9385e+02)	Loss_cdist_unsup 1.9151e+02 (1.9382e+02)	loss_smx_s_bce 7.4623e-01 (7.2605e-01)	loss_smx_us_ent 6.5705e-01 (6.5276e-01)	Acc@1  46.88 ( 40.48)	Acc@5  75.00 ( 66.40) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.005 ( 0.010)	Loss 2.9359e+00 (3.2803e+00)	Acc@1  37.50 ( 31.45)	Acc@5  53.12 ( 56.72) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.455 Acc@5 56.716 (loopy6.cs.nyu.edu) 
+Epoch: [1160][1999/2000]	Time  0.042 ( 0.050)	Data  0.000 ( 0.001)	Loss 3.8621e+00 (3.9562e+00)	Loss_cse 2.6906e+00 (2.7793e+00)	Loss_cdist_sup 1.9092e+02 (1.9397e+02)	Loss_cdist_unsup 1.9011e+02 (1.9395e+02)	loss_smx_s_bce 7.2631e-01 (7.2400e-01)	loss_smx_us_ent 6.4691e-01 (6.4990e-01)	Acc@1  43.75 ( 41.02)	Acc@5  68.75 ( 66.94) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.012 ( 0.014)	Loss 3.1823e+00 (3.2628e+00)	Acc@1  31.25 ( 31.77)	Acc@5  62.50 ( 57.19) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.766 Acc@5 57.188 (loopy6.cs.nyu.edu) 
+Epoch: [1161][1999/2000]	Time  0.045 ( 0.052)	Data  0.000 ( 0.003)	Loss 4.8980e+00 (3.9629e+00)	Loss_cse 3.7383e+00 (2.7890e+00)	Loss_cdist_sup 1.8677e+02 (1.9369e+02)	Loss_cdist_unsup 1.8779e+02 (1.9370e+02)	loss_smx_s_bce 7.2072e-01 (7.2185e-01)	loss_smx_us_ent 6.3660e-01 (6.4720e-01)	Acc@1  28.12 ( 40.76)	Acc@5  46.88 ( 66.40) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.006 ( 0.014)	Loss 3.2469e+00 (3.2862e+00)	Acc@1  34.38 ( 31.40)	Acc@5  65.62 ( 56.80) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.400 Acc@5 56.805 (loopy6.cs.nyu.edu) 
+Epoch: [1162][1999/2000]	Time  0.048 ( 0.050)	Data  0.000 ( 0.002)	Loss 4.5032e+00 (3.9574e+00)	Loss_cse 3.3312e+00 (2.7858e+00)	Loss_cdist_sup 1.8798e+02 (1.9370e+02)	Loss_cdist_unsup 1.9505e+02 (1.9371e+02)	loss_smx_s_bce 7.1815e-01 (7.1972e-01)	loss_smx_us_ent 6.5287e-01 (6.4434e-01)	Acc@1  31.25 ( 40.93)	Acc@5  56.25 ( 66.44) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.008 ( 0.014)	Loss 3.0510e+00 (3.2787e+00)	Acc@1  31.25 ( 31.60)	Acc@5  62.50 ( 56.85) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.602 Acc@5 56.845 (loopy6.cs.nyu.edu) 
+Epoch: [1163][1999/2000]	Time  0.050 ( 0.051)	Data  0.000 ( 0.002)	Loss 3.9313e+00 (3.9540e+00)	Loss_cse 2.7537e+00 (2.7835e+00)	Loss_cdist_sup 1.9041e+02 (1.9361e+02)	Loss_cdist_unsup 2.0435e+02 (1.9389e+02)	loss_smx_s_bce 7.0799e-01 (7.1861e-01)	loss_smx_us_ent 6.4043e-01 (6.4143e-01)	Acc@1  40.62 ( 41.02)	Acc@5  65.62 ( 66.63) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.055 ( 0.014)	Loss 2.0551e+00 (3.2834e+00)	Acc@1  56.25 ( 31.35)	Acc@5  84.38 ( 56.72) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.348 Acc@5 56.722 (loopy6.cs.nyu.edu) 
+Epoch: [1164][1999/2000]	Time  0.047 ( 0.049)	Data  0.000 ( 0.001)	Loss 3.3737e+00 (3.9478e+00)	Loss_cse 2.1844e+00 (2.7806e+00)	Loss_cdist_sup 2.0199e+02 (1.9371e+02)	Loss_cdist_unsup 2.1068e+02 (1.9355e+02)	loss_smx_s_bce 7.0666e-01 (7.1621e-01)	loss_smx_us_ent 6.3210e-01 (6.3801e-01)	Acc@1  50.00 ( 41.02)	Acc@5  71.88 ( 66.65) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.008 ( 0.013)	Loss 3.0295e+00 (3.2677e+00)	Acc@1  28.12 ( 31.62)	Acc@5  50.00 ( 57.02) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.616 Acc@5 57.023 (loopy6.cs.nyu.edu) 
+Epoch: [1165][1999/2000]	Time  0.049 ( 0.050)	Data  0.000 ( 0.001)	Loss 3.6346e+00 (3.9487e+00)	Loss_cse 2.4673e+00 (2.7837e+00)	Loss_cdist_sup 2.0091e+02 (1.9374e+02)	Loss_cdist_unsup 2.0518e+02 (1.9363e+02)	loss_smx_s_bce 6.9635e-01 (7.1433e-01)	loss_smx_us_ent 6.1543e-01 (6.3448e-01)	Acc@1  46.88 ( 40.77)	Acc@5  78.12 ( 66.53) (loopy6.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.021 ( 0.009)	Loss 3.3945e+00 (3.2440e+00)	Acc@1  28.12 ( 31.91)	Acc@5  59.38 ( 57.43) (loopy6.cs.nyu.edu) 
+ * Acc@1 31.909 Acc@5 57.427 (loopy6.cs.nyu.edu) 
