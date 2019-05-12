@@ -87,14 +87,15 @@ def train(
 
             # unsup set: paths that have the cumulative probability above the threshold
             out_us_hsmx_sig = torch.sigmoid(out_us_hsmx)
+            out_s_hsmx_sig = torch.sigmoid(out_s_hsmx)
             y_smx_idx_us = torch.Tensor(sum([
                 pred_path_with_threshold(row,path_idx,rowind*num_of_paths,.50) 
                 for rowind, row in enumerate(out_us_hsmx_sig)
             ],[])).type(torch.LongTensor).to(device)
 
 
-            out_s_hsmx =  torch.gather(out_s_hsmx.flatten(), 0, y_smx_idx_s)
-            out_us_hsmx = torch.gather(out_us_hsmx_sig.flatten(), 0, y_smx_idx_us)
+            out_s_hsmx =  torch.clamp(torch.gather(out_s_hsmx_sig.flatten(), 0, y_smx_idx_s),1e-7,1-1e-7)
+            out_us_hsmx = torch.clamp(torch.gather(out_us_hsmx_sig.flatten(), 0, y_smx_idx_us),1e-7,1-1e-7)
             loss_smx_us_ent = - torch.mean(out_us_hsmx*torch.log(out_us_hsmx) + (1-out_us_hsmx)*torch.log(1-out_us_hsmx))
             loss_smx_s_bce  = criterion_hsmx(out_s_hsmx,y_smx_labels_s)
         else:
@@ -223,17 +224,14 @@ def train_and_val(args):
     # define loss function (criterion) and optimizer
     if args.focal_loss: criterion = FocalLoss()
     else: criterion = nn.CrossEntropyLoss()
-    criterion_hsmx = nn.BCEWithLogitsLoss()
+    criterion_hsmx = nn.BCELoss()
 
     if args.set_optimizer == 'adam':
         optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     else:
         optimizer = torch.optim.SGD(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     resnet_freeze = args.freeze_epoch>0
-    if resnet_freeze: 
-        f_optimizer = torch.optim.Adam(model.parameters(), lr=0.0003, weight_decay=args.weight_decay)
-        for param in model.parameters():
-            if param.size(0)!=999: param.requires_grad = False        
+
 
     if isfile(load_cpoint_path):
         write_to_log(log_path,f' => loading checkpoint {args.weights_version_load}')
@@ -254,6 +252,18 @@ def train_and_val(args):
 
     # temp
     if args.weights_version_load !=  args.weights_version_save: best_acc5 = -1 
+
+
+    if resnet_freeze:
+        f_optimizer = torch.optim.Adam(model.parameters(), lr=0.0003, weight_decay=args.weight_decay)
+        for param in model.parameters():
+            if param.size(0)!=999: param.requires_grad = False
+    else:
+        for param in model.parameters():
+            param.requires_grad = True
+
+
+
 
     for epoch in range(args.start_epoch, args.start_epoch+args.epochs):
         #adjust_learning_rate(optimizer, epoch, args)

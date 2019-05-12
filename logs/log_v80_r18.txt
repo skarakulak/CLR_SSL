@@ -1,0 +1,30 @@
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v80_r18
+weights_version_load: wv78_r18
+weights_version_save: wv80_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 5.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 2
+
+ (loopy1.cs.nyu.edu) 
+ => loading checkpoint wv78_r18 (loopy1.cs.nyu.edu) 
+ => loaded checkpoint wv78_r18 (loopy1.cs.nyu.edu) 
+Epoch: [1243][1999/2000]	Time  0.051 ( 0.060)	Data  0.000 ( 0.002)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce 8.0890e+00 (8.7326e+00)	loss_smx_us_ent 2.0197e-06 (2.0197e-06)	Acc@1   3.12 (  0.00)	Acc@5   9.38 (  0.02) (loopy1.cs.nyu.edu) 

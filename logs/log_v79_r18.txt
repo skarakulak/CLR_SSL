@@ -1,0 +1,61 @@
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v79_r18
+weights_version_load: wv78_r18
+weights_version_save: wv79_r18
+set_optimizer: sgd
+lr: 5e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 5.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (loopy6.cs.nyu.edu) 
+ => loading checkpoint wv78_r18 (loopy6.cs.nyu.edu) 
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v79_r18
+weights_version_load: wv78_r18
+weights_version_save: wv79_r18
+set_optimizer: sgd
+lr: 5e-06
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: cassio
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.8
+hier_smx_mult: 5.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+freeze_epoch: 0
+
+ (vine3.cs.nyu.edu) 
+ => loaded checkpoint wv78_r18 (loopy6.cs.nyu.edu) 
+ => loading checkpoint wv78_r18 (vine3.cs.nyu.edu) 
+ => loaded checkpoint wv78_r18 (vine3.cs.nyu.edu) 
+Epoch: [1238][1999/2000]	Time  0.260 ( 0.263)	Data  0.000 ( 0.001)	Loss nan (nan)	Loss_cse nan (nan)	Loss_cdist_sup nan (nan)	Loss_cdist_unsup nan (nan)	loss_smx_s_bce 8.0890e+00 (8.7283e+00)	loss_smx_us_ent 2.0197e-06 (1.5010e-04)	Acc@1   0.00 (  0.03)	Acc@5   0.00 (  0.04) (vine3.cs.nyu.edu) 
+Test: [1999/2000]	Time  0.018 ( 0.022)	Loss nan (nan)	Acc@1   0.00 (  0.01)	Acc@5   0.00 (  0.07) (vine3.cs.nyu.edu) 
+ * Acc@1 0.014 Acc@5 0.072 (vine3.cs.nyu.edu) 
