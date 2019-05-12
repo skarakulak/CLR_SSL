@@ -38,5 +38,5 @@ module load python3/intel/3.6.3
 module load cuda/10.0.130
 #virtualenv ~/pytorch_10
 source ~/pytorch_10/bin/activate pytorch_10
-srun python3 ../train16.py -e 130  -v v65_r18 -w wv61_r18_best -x wv65_r18 -o sgd -l 0.00003 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 6 -C prince
-srun python3 ../train16.py -e 3000 -v v65_r18 -w wv65_r18      -x wv65_r18 -o sgd -l 0.00001 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 6 -C prince
+srun python3 ../train16.py -e 60  -v v65_r18 -w wv61_r18_best -x wv65_r18 -o sgd -l 0.000003 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 0 -i 8 -C prince
+srun python3 ../train16.py -e 3000 -v v65_r18 -w wv65_r18      -x wv65_r18 -o sgd -l 0.000001 -d 0.00001 -n 2000 -c .002 -S 0 -W 6 -D 0.33 -R 1 -E 1 -b 0 -i 8 -C prince

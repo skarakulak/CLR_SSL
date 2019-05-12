@@ -1,0 +1,49 @@
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v74_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv74_r18
+set_optimizer: sgd
+lr: 1e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.2
+hier_smx_mult: 3.0
+unsup_p_threshold: 0.66
+path_clusters: ../clusters
+
+ (gpu-32) 
+ => loading checkpoint wv61_r18_best (gpu-32) 
+ => loaded checkpoint wv61_r18_best (gpu-32) 
+Epoch: [554][1999/2000]	Time  0.083 ( 0.089)	Data  0.000 ( 0.007)	Loss 6.2742e+00 (5.8592e+00)	Loss_cse 3.3888e+00 (2.9449e+00)	Loss_cdist_sup 1.9701e+02 (2.0025e+02)	Loss_cdist_unsup 1.9949e+02 (2.0016e+02)	loss_smx_s_bce 7.0065e-01 (7.0697e-01)	loss_smx_us_ent 6.4173e-01 (6.5517e-01)	Acc@1  25.00 ( 38.20)	Acc@5  59.38 ( 63.75) (gpu-32) 
+Test: [1999/2000]	Time  0.008 ( 0.048)	Loss 3.6283e+00 (3.3091e+00)	Acc@1  25.00 ( 30.99)	Acc@5  56.25 ( 56.22) (gpu-32) 
+ * Acc@1 30.986 Acc@5 56.217 (gpu-32) 
+Epoch: [555][1999/2000]	Time  0.074 ( 0.085)	Data  0.000 ( 0.001)	Loss 6.2577e+00 (5.8159e+00)	Loss_cse 3.4695e+00 (2.9482e+00)	Loss_cdist_sup 1.8856e+02 (1.9995e+02)	Loss_cdist_unsup 1.9347e+02 (2.0003e+02)	loss_smx_s_bce 6.7687e-01 (6.9603e-01)	loss_smx_us_ent 6.1957e-01 (6.3257e-01)	Acc@1  31.25 ( 38.09)	Acc@5  56.25 ( 63.77) (gpu-32) 
+Test: [1999/2000]	Time  0.014 ( 0.010)	Loss 2.7303e+00 (3.2672e+00)	Acc@1  31.25 ( 31.41)	Acc@5  59.38 ( 56.78) (gpu-32) 
+ * Acc@1 31.406 Acc@5 56.783 (gpu-32) 
+Epoch: [556][1999/2000]	Time  0.082 ( 0.091)	Data  0.000 ( 0.007)	Loss 5.8344e+00 (5.7562e+00)	Loss_cse 2.9685e+00 (2.9370e+00)	Loss_cdist_sup 2.0004e+02 (2.0016e+02)	Loss_cdist_unsup 2.0430e+02 (2.0024e+02)	loss_smx_s_bce 7.0326e-01 (6.8635e-01)	loss_smx_us_ent 5.8077e-01 (5.9945e-01)	Acc@1  43.75 ( 38.15)	Acc@5  65.62 ( 64.04) (gpu-32) 
+Test: [1999/2000]	Time  0.014 ( 0.010)	Loss 3.2907e+00 (3.2958e+00)	Acc@1  28.12 ( 31.06)	Acc@5  59.38 ( 56.41) (gpu-32) 
+ * Acc@1 31.064 Acc@5 56.408 (gpu-32) 
+Epoch: [557][1999/2000]	Time  0.083 ( 0.094)	Data  0.000 ( 0.009)	Loss 5.8108e+00 (5.7122e+00)	Loss_cse 3.0519e+00 (2.9370e+00)	Loss_cdist_sup 1.9575e+02 (2.0077e+02)	Loss_cdist_unsup 1.9635e+02 (2.0062e+02)	loss_smx_s_bce 6.7853e-01 (6.7820e-01)	loss_smx_us_ent 5.5129e-01 (5.6559e-01)	Acc@1  43.75 ( 38.10)	Acc@5  68.75 ( 64.19) (gpu-32) 
+Test: [1999/2000]	Time  0.007 ( 0.010)	Loss 3.0466e+00 (3.2914e+00)	Acc@1  31.25 ( 31.19)	Acc@5  56.25 ( 56.52) (gpu-32) 
+ * Acc@1 31.189 Acc@5 56.522 (gpu-32) 
+Epoch: [558][1999/2000]	Time  0.090 ( 0.092)	Data  0.000 ( 0.006)	Loss 5.5998e+00 (5.6858e+00)	Loss_cse 2.8753e+00 (2.9453e+00)	Loss_cdist_sup 2.0282e+02 (2.0090e+02)	Loss_cdist_unsup 2.0234e+02 (2.0127e+02)	loss_smx_s_bce 6.6570e-01 (6.7187e-01)	loss_smx_us_ent 5.3761e-01 (5.3729e-01)	Acc@1  37.50 ( 38.18)	Acc@5  56.25 ( 63.70) (gpu-32) 
+Test: [1999/2000]	Time  0.007 ( 0.010)	Loss 3.5231e+00 (3.2963e+00)	Acc@1  21.88 ( 31.08)	Acc@5  53.12 ( 56.45) (gpu-32) 
+ * Acc@1 31.075 Acc@5 56.445 (gpu-32) 
+Epoch: [559][1999/2000]	Time  0.076 ( 0.096)	Data  0.000 ( 0.009)	Loss 5.4840e+00 (5.6655e+00)	Loss_cse 2.7894e+00 (2.9544e+00)	Loss_cdist_sup 2.1690e+02 (2.0154e+02)	Loss_cdist_unsup 1.9939e+02 (2.0152e+02)	loss_smx_s_bce 6.6199e-01 (6.6639e-01)	loss_smx_us_ent 5.1005e-01 (5.1492e-01)	Acc@1  37.50 ( 37.72)	Acc@5  78.12 ( 63.69) (gpu-32) 
+Test: [1999/2000]	Time  0.007 ( 0.010)	Loss 2.9730e+00 (3.3025e+00)	Acc@1  37.50 ( 30.95)	Acc@5  53.12 ( 56.24) (gpu-32) 
+ * Acc@1 30.953 Acc@5 56.239 (gpu-32) 
+Epoch: [560][1999/2000]	Time  0.099 ( 0.092)	Data  0.000 ( 0.004)	Loss 5.5928e+00 (5.6208e+00)	Loss_cse 2.9081e+00 (2.9325e+00)	Loss_cdist_sup 1.9932e+02 (2.0229e+02)	Loss_cdist_unsup 1.9836e+02 (2.0226e+02)	loss_smx_s_bce 6.6387e-01 (6.6208e-01)	loss_smx_us_ent 4.9357e-01 (4.9580e-01)	Acc@1  40.62 ( 38.15)	Acc@5  68.75 ( 63.98) (gpu-32) 
+Test: [1999/2000]	Time  0.007 ( 0.010)	Loss 3.1449e+00 (3.2880e+00)	Acc@1  28.12 ( 31.38)	Acc@5  65.62 ( 56.58) (gpu-32) 
+ * Acc@1 31.381 Acc@5 56.577 (gpu-32) 

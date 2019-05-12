@@ -193,3 +193,242 @@ entropy_multiplier: 7.0
 
  => loading checkpoint wv66_r18
  => loaded checkpoint wv66_r18
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v66_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv66_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 1.0
+hier_smx_mult: 10.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v66_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv66_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 1.0
+hier_smx_mult: 10.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
+Epoch: [554][1999/2000]	Time  0.169 ( 0.171)	Data  0.000 ( 0.000)	Loss 1.6407e+01 (1.6517e+01)	Loss_cse 3.3966e+00 (2.9404e+00)	Loss_cdist_sup 2.0483e+02 (2.0390e+02)	Loss_cdist_unsup 2.0676e+02 (2.0382e+02)	loss_smx_s_bce 6.4078e-01 (6.7251e-01)	loss_smx_us_ent 6.1897e-01 (6.4439e-01)	Acc@1  25.00 ( 38.15)	Acc@5  56.25 ( 63.69)
+Test: [1999/2000]	Time  0.018 ( 0.019)	Loss 3.6256e+00 (3.3139e+00)	Acc@1  25.00 ( 31.02)	Acc@5  53.12 ( 56.18)
+ * Acc@1 31.019 Acc@5 56.181
+Epoch: [555][1999/2000]	Time  0.173 ( 0.170)	Data  0.000 ( 0.001)	Loss 1.6203e+01 (1.5715e+01)	Loss_cse 3.5179e+00 (2.9318e+00)	Loss_cdist_sup 2.0837e+02 (2.1390e+02)	Loss_cdist_unsup 2.1252e+02 (2.1398e+02)	loss_smx_s_bce 6.4994e-01 (6.3819e-01)	loss_smx_us_ent 5.7611e-01 (5.9729e-01)	Acc@1  28.12 ( 37.88)	Acc@5  53.12 ( 63.61)
+Test: [1999/2000]	Time  0.018 ( 0.019)	Loss 2.6722e+00 (3.2760e+00)	Acc@1  34.38 ( 31.40)	Acc@5  59.38 ( 56.78)
+ * Acc@1 31.403 Acc@5 56.784
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v66_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv66_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.1
+hier_smx_mult: 8.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v66_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv66_r18
+set_optimizer: sgd
+lr: 3e-05
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.1
+hier_smx_mult: 8.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
+Epoch: [554][1999/2000]	Time  0.161 ( 0.162)	Data  0.000 ( 0.000)	Loss 9.7453e+00 (9.3737e+00)	Loss_cse 3.4057e+00 (2.9498e+00)	Loss_cdist_sup 1.9565e+02 (1.9881e+02)	Loss_cdist_unsup 1.9797e+02 (1.9871e+02)	loss_smx_s_bce 6.7866e-01 (6.8775e-01)	loss_smx_us_ent 6.4364e-01 (6.5552e-01)	Acc@1  25.00 ( 38.19)	Acc@5  56.25 ( 63.68)
+Test: [1999/2000]	Time  0.017 ( 0.018)	Loss 3.6131e+00 (3.3093e+00)	Acc@1  25.00 ( 30.95)	Acc@5  53.12 ( 56.19)
+ * Acc@1 30.955 Acc@5 56.186
+Epoch: [555][1999/2000]	Time  0.161 ( 0.163)	Data  0.000 ( 0.002)	Loss 9.4232e+00 (9.0750e+00)	Loss_cse 3.4998e+00 (2.9533e+00)	Loss_cdist_sup 1.8803e+02 (1.9893e+02)	Loss_cdist_unsup 1.9266e+02 (1.9901e+02)	loss_smx_s_bce 6.2924e-01 (6.5149e-01)	loss_smx_us_ent 6.3150e-01 (6.3972e-01)	Acc@1  31.25 ( 38.03)	Acc@5  50.00 ( 63.65)
+Test: [1999/2000]	Time  0.017 ( 0.018)	Loss 2.7331e+00 (3.2698e+00)	Acc@1  34.38 ( 31.38)	Acc@5  62.50 ( 56.80)
+ * Acc@1 31.377 Acc@5 56.805
+Epoch: [556][1999/2000]	Time  0.156 ( 0.162)	Data  0.000 ( 0.002)	Loss 9.3150e+00 (8.9048e+00)	Loss_cse 2.9809e+00 (2.9395e+00)	Loss_cdist_sup 2.0062e+02 (2.0046e+02)	Loss_cdist_unsup 2.0462e+02 (2.0053e+02)	loss_smx_s_bce 6.7901e-01 (6.3296e-01)	loss_smx_us_ent 6.1707e-01 (6.2566e-01)	Acc@1  40.62 ( 38.12)	Acc@5  65.62 ( 63.94)
+Test: [1999/2000]	Time  0.017 ( 0.018)	Loss 3.2950e+00 (3.2953e+00)	Acc@1  28.12 ( 31.07)	Acc@5  59.38 ( 56.40)
+ * Acc@1 31.069 Acc@5 56.405
+Epoch: [557][1999/2000]	Time  0.161 ( 0.162)	Data  0.000 ( 0.002)	Loss 8.9266e+00 (8.7974e+00)	Loss_cse 3.0599e+00 (2.9385e+00)	Loss_cdist_sup 1.9825e+02 (2.0220e+02)	Loss_cdist_unsup 1.9854e+02 (2.0206e+02)	loss_smx_s_bce 6.2233e-01 (6.2032e-01)	loss_smx_us_ent 6.1379e-01 (6.1513e-01)	Acc@1  43.75 ( 38.03)	Acc@5  65.62 ( 64.02)
+Test: [1999/2000]	Time  0.017 ( 0.018)	Loss 3.0400e+00 (3.2934e+00)	Acc@1  31.25 ( 31.12)	Acc@5  56.25 ( 56.53)
+ * Acc@1 31.123 Acc@5 56.530
+Epoch: [558][1999/2000]	Time  0.161 ( 0.163)	Data  0.000 ( 0.002)	Loss 8.6013e+00 (8.7250e+00)	Loss_cse 2.8768e+00 (2.9459e+00)	Loss_cdist_sup 2.0607e+02 (2.0316e+02)	Loss_cdist_unsup 2.0500e+02 (2.0351e+02)	loss_smx_s_bce 6.0368e-01 (6.1082e-01)	loss_smx_us_ent 6.0610e-01 (6.0699e-01)	Acc@1  37.50 ( 38.05)	Acc@5  56.25 ( 63.58)
+Test: [1999/2000]	Time  0.017 ( 0.018)	Loss 3.5056e+00 (3.2997e+00)	Acc@1  21.88 ( 31.03)	Acc@5  53.12 ( 56.31)
+ * Acc@1 31.027 Acc@5 56.306
+Epoch: [559][1999/2000]	Time  0.157 ( 0.162)	Data  0.000 ( 0.001)	Loss 8.6441e+00 (8.6668e+00)	Loss_cse 2.7901e+00 (2.9547e+00)	Loss_cdist_sup 2.2071e+02 (2.0426e+02)	Loss_cdist_unsup 2.0299e+02 (2.0422e+02)	loss_smx_s_bce 6.2051e-01 (6.0289e-01)	loss_smx_us_ent 5.9998e-01 (6.0067e-01)	Acc@1  37.50 ( 37.55)	Acc@5  78.12 ( 63.60)
+Test: [1999/2000]	Time  0.017 ( 0.017)	Loss 2.9534e+00 (3.3046e+00)	Acc@1  37.50 ( 30.92)	Acc@5  53.12 ( 56.27)
+ * Acc@1 30.923 Acc@5 56.267
+Epoch: [560][1999/2000]	Time  0.168 ( 0.162)	Data  0.000 ( 0.001)	Loss 8.4736e+00 (8.5850e+00)	Loss_cse 2.9040e+00 (2.9334e+00)	Loss_cdist_sup 2.0230e+02 (2.0537e+02)	Loss_cdist_unsup 2.0291e+02 (2.0535e+02)	loss_smx_s_bce 5.8672e-01 (5.9554e-01)	loss_smx_us_ent 5.8781e-01 (5.9570e-01)	Acc@1  43.75 ( 38.00)	Acc@5  65.62 ( 63.78)
+Test: [1999/2000]	Time  0.017 ( 0.017)	Loss 3.1508e+00 (3.2890e+00)	Acc@1  31.25 ( 31.27)	Acc@5  65.62 ( 56.51)
+ * Acc@1 31.270 Acc@5 56.508
+Epoch: [561][1999/2000]	Time  0.162 ( 0.162)	Data  0.000 ( 0.001)	Loss 9.3815e+00 (8.5434e+00)	Loss_cse 3.7530e+00 (2.9405e+00)	Loss_cdist_sup 1.9862e+02 (2.0615e+02)	Loss_cdist_unsup 2.0029e+02 (2.0616e+02)	loss_smx_s_bce 5.9435e-01 (5.8968e-01)	loss_smx_us_ent 5.9190e-01 (5.9147e-01)	Acc@1  21.88 ( 37.62)	Acc@5  46.88 ( 63.48)
+Test: [1999/2000]	Time  0.017 ( 0.017)	Loss 3.2828e+00 (3.3086e+00)	Acc@1  34.38 ( 30.99)	Acc@5  65.62 ( 56.24)
+ * Acc@1 30.994 Acc@5 56.239
+Epoch: [562][1999/2000]	Time  0.161 ( 0.162)	Data  0.000 ( 0.001)	Loss 9.2823e+00 (8.4937e+00)	Loss_cse 3.5452e+00 (2.9351e+00)	Loss_cdist_sup 1.9937e+02 (2.0702e+02)	Loss_cdist_unsup 2.0864e+02 (2.0708e+02)	loss_smx_s_bce 6.0659e-01 (5.8428e-01)	loss_smx_us_ent 5.8644e-01 (5.8773e-01)	Acc@1  28.12 ( 38.02)	Acc@5  50.00 ( 63.54)
+Test: [1999/2000]	Time  0.017 ( 0.017)	Loss 3.0885e+00 (3.3061e+00)	Acc@1  34.38 ( 31.00)	Acc@5  59.38 ( 56.39)
+ * Acc@1 31.005 Acc@5 56.391
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v66_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv66_r18
+set_optimizer: sgd
+lr: 0.0003
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.0
+hier_smx_mult: 15.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v66_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv66_r18
+set_optimizer: sgd
+lr: 0.0003
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.0
+hier_smx_mult: 15.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
+Epoch: [554][1999/2000]	Time  0.173 ( 0.172)	Data  0.000 ( 0.001)	Loss 1.2427e+01 (1.2319e+01)	Loss_cse 3.4678e+00 (2.9877e+00)	Loss_cdist_sup 2.0706e+02 (2.0191e+02)	Loss_cdist_unsup 2.0930e+02 (2.0185e+02)	loss_smx_s_bce 5.6938e-01 (5.9519e-01)	loss_smx_us_ent 5.7330e-01 (5.9886e-01)	Acc@1  28.12 ( 37.31)	Acc@5  56.25 ( 62.91)
+Test: [1999/2000]	Time  0.019 ( 0.020)	Loss 3.5701e+00 (3.3140e+00)	Acc@1  28.12 ( 30.81)	Acc@5  50.00 ( 56.03)
+ * Acc@1 30.814 Acc@5 56.027
+Epoch: [555][1999/2000]	Time  0.170 ( 0.170)	Data  0.000 ( 0.001)	Loss 1.1854e+01 (1.1312e+01)	Loss_cse 3.6217e+00 (2.9884e+00)	Loss_cdist_sup 2.1110e+02 (2.1780e+02)	Loss_cdist_unsup 2.1796e+02 (2.1793e+02)	loss_smx_s_bce 5.1983e-01 (5.2582e-01)	loss_smx_us_ent 5.4629e-01 (5.5896e-01)	Acc@1  28.12 ( 36.70)	Acc@5  46.88 ( 62.37)
+Test: [1999/2000]	Time  0.018 ( 0.019)	Loss 2.8703e+00 (3.2945e+00)	Acc@1  34.38 ( 30.86)	Acc@5  50.00 ( 56.28)
+ * Acc@1 30.858 Acc@5 56.284
+Epoch: [556][1999/2000]	Time  0.167 ( 0.170)	Data  0.000 ( 0.001)	Loss 1.0968e+01 (1.0820e+01)	Loss_cse 2.9891e+00 (2.9747e+00)	Loss_cdist_sup 2.2700e+02 (2.2509e+02)	Loss_cdist_unsup 2.2941e+02 (2.2517e+02)	loss_smx_s_bce 5.0140e-01 (4.9302e-01)	loss_smx_us_ent 5.2138e-01 (5.3855e-01)	Acc@1  40.62 ( 36.67)	Acc@5  62.50 ( 62.34)
+Test: [1999/2000]	Time  0.018 ( 0.019)	Loss 3.3079e+00 (3.2988e+00)	Acc@1  28.12 ( 30.77)	Acc@5  56.25 ( 56.33)
+ * Acc@1 30.767 Acc@5 56.331
+Epoch: [557][1999/2000]	Time  0.167 ( 0.171)	Data  0.000 ( 0.001)	Loss 1.1043e+01 (1.0534e+01)	Loss_cse 3.1236e+00 (2.9723e+00)	Loss_cdist_sup 2.2721e+02 (2.2841e+02)	Loss_cdist_unsup 2.2945e+02 (2.2828e+02)	loss_smx_s_bce 4.9742e-01 (4.7370e-01)	loss_smx_us_ent 5.1955e-01 (5.2452e-01)	Acc@1  46.88 ( 36.58)	Acc@5  62.50 ( 62.51)
+Test: [1999/2000]	Time  0.019 ( 0.019)	Loss 3.1340e+00 (3.3061e+00)	Acc@1  31.25 ( 30.90)	Acc@5  56.25 ( 56.22)
+ * Acc@1 30.897 Acc@5 56.220
+Epoch: [558][1999/2000]	Time  0.168 ( 0.171)	Data  0.000 ( 0.001)	Loss 1.0211e+01 (1.0331e+01)	Loss_cse 2.9652e+00 (2.9811e+00)	Loss_cdist_sup 2.3110e+02 (2.2928e+02)	Loss_cdist_unsup 2.3120e+02 (2.2961e+02)	loss_smx_s_bce 4.5224e-01 (4.5940e-01)	loss_smx_us_ent 5.0647e-01 (5.1407e-01)	Acc@1  31.25 ( 36.55)	Acc@5  56.25 ( 62.17)
+Test: [1999/2000]	Time  0.019 ( 0.019)	Loss 3.5631e+00 (3.3112e+00)	Acc@1  28.12 ( 30.76)	Acc@5  53.12 ( 56.05)
+ * Acc@1 30.761 Acc@5 56.047
+Epoch: [559][1999/2000]	Time  0.169 ( 0.171)	Data  0.000 ( 0.001)	Loss 9.7245e+00 (1.0172e+01)	Loss_cse 2.8136e+00 (2.9873e+00)	Loss_cdist_sup 2.4603e+02 (2.2966e+02)	Loss_cdist_unsup 2.2540e+02 (2.2967e+02)	loss_smx_s_bce 4.3037e-01 (4.4838e-01)	loss_smx_us_ent 5.1378e-01 (5.0654e-01)	Acc@1  37.50 ( 36.13)	Acc@5  75.00 ( 62.16)
+Test: [1999/2000]	Time  0.018 ( 0.019)	Loss 2.9235e+00 (3.3179e+00)	Acc@1  34.38 ( 30.73)	Acc@5  50.00 ( 56.00)
+ * Acc@1 30.730 Acc@5 56.000
+Epoch: [560][1999/2000]	Time  0.169 ( 0.170)	Data  0.000 ( 0.001)	Loss 9.7542e+00 (9.9973e+00)	Loss_cse 2.8705e+00 (2.9611e+00)	Loss_cdist_sup 2.2598e+02 (2.3028e+02)	Loss_cdist_unsup 2.2784e+02 (2.3034e+02)	loss_smx_s_bce 4.2856e-01 (4.3837e-01)	loss_smx_us_ent 4.8653e-01 (5.0035e-01)	Acc@1  40.62 ( 36.68)	Acc@5  71.88 ( 62.71)
+Test: [1999/2000]	Time  0.018 ( 0.019)	Loss 3.3399e+00 (3.2990e+00)	Acc@1  28.12 ( 31.02)	Acc@5  56.25 ( 56.45)
+ * Acc@1 31.017 Acc@5 56.452
+Epoch: [561][1999/2000]	Time  0.170 ( 0.170)	Data  0.000 ( 0.001)	Loss 1.0520e+01 (9.8982e+00)	Loss_cse 3.7389e+00 (2.9699e+00)	Loss_cdist_sup 2.2561e+02 (2.3075e+02)	Loss_cdist_unsup 2.2781e+02 (2.3084e+02)	loss_smx_s_bce 4.2172e-01 (4.3111e-01)	loss_smx_us_ent 5.0161e-01 (4.9485e-01)	Acc@1  25.00 ( 36.45)	Acc@5  43.75 ( 62.27)
+Test: [1999/2000]	Time  0.018 ( 0.019)	Loss 3.3385e+00 (3.3068e+00)	Acc@1  37.50 ( 30.86)	Acc@5  65.62 ( 56.22)
+ * Acc@1 30.863 Acc@5 56.222
+start_epoch: 0
+epochs: 130
+arch: resnet18
+version: v66_r18
+weights_version_load: wv61_r18_best
+weights_version_save: wv66_r18
+set_optimizer: sgd
+lr: 0.0003
+weight_decay: 1e-05
+focal_loss: 0
+print_freq: 2000
+num_of_workers: 6
+hpc: prince
+user: sk7685
+num_of_clusters: 2000
+cdist_multiplier: 0.002
+cdist_loss_schedule: 0
+drop_prob: 0.33
+drop_2d: 1
+hier_softmax_entropy: 1
+entropy_multiplier: 0.0
+hier_smx_mult: 8.0
+
+
+ => loading checkpoint wv61_r18_best
+ => loaded checkpoint wv61_r18_best
