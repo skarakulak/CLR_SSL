@@ -1,5 +1,5 @@
 import argparse
-from model import *
+from model16 import *
 
 
 parser = argparse.ArgumentParser(description='Trains semi-supervised model on the given dataset')
@@ -11,17 +11,30 @@ parser.add_argument('-w','--weights-version-load', type=str, default='v0', help=
 parser.add_argument('-x','--weights-version-save', type=str, default='v0', help='version of the model weight checkpoint to load')
 parser.add_argument('-o','--set-optimizer', type=str, default='adam', help="optimizer ('adam' or 'sgd')")
 parser.add_argument('-l','--lr', type=float, default=0.01, help='learning rate')
-parser.add_argument('-d','--dropout', type=float, default=0.2, help='dropout probability for uncertainty loss')
-parser.add_argument('-m','--coef-uncertainty-loss', type=float, default=1, help='multiplier for the  uncertainty loss')
-parser.add_argument('-c','--coef-unsup-ent-loss', type=float, default=1, help='multiplier for the entropy loss')
-parser.add_argument('-p','--print-freq', type=int, default=100, help='multiplier for the variance loss')
-parser.add_argument('-n','--num-of-workers', type=int, default=3, help='number of workers for the dataprep')
-parser.add_argument('-C','--hpc', type=str, default='prince', help='prince/cassio/bigpurple')
-parser.add_argument('-u','--user', type=str, default='sk7685', help='hpc username to be used when determining paths')
+parser.add_argument('-d','--weight-decay', type=float, default=0.0, help='weight decay')
+parser.add_argument('-F','--focal-loss', type=int, default=0, help='give 1 for focal loss')
+parser.add_argument('-p','--print-freq', type=int, default=2000, help='multiplier for the variance loss')
+parser.add_argument('-W','--num-of-workers', type=int, default=4, help='number of workers for the dataprep')
+parser.add_argument('-C','--hpc', type=str, default='cassio', help='prince/cassio/bigpurple')
+parser.add_argument('-U','--user', type=str, default='sk7685', help='hpc username to be used when determining paths')
+parser.add_argument('-n','--num-of-clusters', type=int, default=2000, help='number of clusters')
+parser.add_argument('-c','--cdist-multiplier', type=float, default=1.0, help='multiplier for the kl-div')
+parser.add_argument('-S','--cdist-loss-schedule', type=int, default=1, help='gradually increase the multiplier of cdist loss')
+parser.add_argument('-D','--drop_prob', type=float, default=0.0, help='dropout probability at the last layer')
+parser.add_argument('-R','--drop-2d', type=int, default=0, help='insert dropout inbetween resnet modules')
+parser.add_argument('-E','--hier-softmax-entropy', type=int, default=0, help='use entropy of the unlabeled set')
+parser.add_argument('-b','--entropy-multiplier', type=float, default=0, help='multiplier for entropy of unsup set')
+parser.add_argument('-i','--hier-smx-mult', type=float, default=0, help='multiplier for loss of the hierarchical softmax')
+parser.add_argument('-t','--unsup-p-threshold', type=float, default=0.66, help='probability threshold to select the path for entropy loss')
+parser.add_argument('-f','--path-clusters', type=str, default='../clusters', help='path to the clusters file')
+parser.add_argument('-Z','--freeze-epoch', type=int, default=0, help='num of epoch the weights of the resnet module would be frozen while hiersoftmax trains')
+parser.add_argument('-u','--train-subset', type=int, default=64, help='train with n images per class')
+
+
+
 
 args = parser.parse_args()
 print('\nversion name: ' + args.version +'\n')
 
 train_and_val(args)
-
 
