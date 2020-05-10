@@ -1,5 +1,5 @@
 # Clustering Latent Representations for Semi-Supervised Learning
-[Final Report](https://drive.google.com/open?id=1asLwfSbhum7zl_qfLQiJ9RStQF5IuzBD) | [Slides](https://drive.google.com/open?id=1XfpmknrjER2isSSaikX1eAYrwhpw8ajk) | [Video](https://drive.google.com/open?id=15JvtquQE2YYWSpPvByxiRVn7PM9z4IXy)
+[Final Report](https://drive.google.com/file/d/1eopWAn0TbMRw-Lk3Gz5xSnJmCfkPx2r8) | [Slides](https://drive.google.com/file/d/1SyglGUhVqO3dHjL9lyVg7orZuqIwR32R) | [Video](https://drive.google.com/file/d/1sZk0VWSrgK9xZeF0B7iYqmNXmG4eJ4U9)
 
 Our entry that won the third place award in the semi-supervised learning competition of Yann Lecun's Deep Learning class. It also came in first among the entries that do not use ensembles.
 
